@@ -73,7 +73,7 @@ button{font-family:inherit;}
   transition:transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
 }
 .cell:hover{
-  transform:scale(1.02) translateZ(0);
+  transform:scale(1.035) translateZ(0);
   box-shadow:0 20px 60px rgba(0,0,0,.5), 0 0 0 1px rgba(201,168,76,.25);
   z-index:2;
 }
@@ -101,7 +101,7 @@ button{font-family:inherit;}
   position:absolute;inset:0;background-size:cover;background-position:center;
   opacity:.35;transition:opacity .5s, transform .6s cubic-bezier(.16,1,.3,1);
 }
-.cell:hover .photo-bg{opacity:.5;transform:scale(1.04);}
+.cell:hover .photo-bg{opacity:.5;transform:scale(1.055);}
 
 /* Typography */
 .cell-tag{font-size:.44rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;}
@@ -297,7 +297,7 @@ button{font-family:inherit;}
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important;}
-  #pcanvas,#cin-progress,#cin-zoom,.cin-flash,#cur,#cur-ring{display:none!important;}
+  #pcanvas,#cin-progress,.cin-flash,#cur,#cur-ring{display:none!important;}
   .cell{opacity:1!important;transform:none!important;}
   .photo-bg{transform:none!important;}
 }
@@ -344,7 +344,7 @@ nav{z-index:620!important;}
 }
 /* keep hover scale on top of base state */
 .cell.cin-ready:hover{
-  transform:scale(1.02) translateZ(0)!important;
+  transform:scale(1.035) translateZ(0)!important;
 }
 
 /* ── VIVID PHOTOS — remove translucency ── */
@@ -355,7 +355,7 @@ nav{z-index:620!important;}
 }
 .cell:hover .photo-bg{
   opacity:1!important;
-  transform:scale(1.04);
+  transform:scale(1.055);
 }
 
 /* Text-protection gradient so labels remain readable over bright photos.
@@ -962,126 +962,5 @@ document.querySelectorAll('.cell').forEach(cell => {
 });
 </script>
 
-<!-- ══════════════════════════════════════════════════
-     CINEMATIC ZOOM TRANSITION
-     The clicked mosaic cell comes forward smoothly,
-     then reveals the overlay content.
-══════════════════════════════════════════════════ -->
-<style>
-#cin-zoom-backdrop{
-  position:fixed;inset:0;z-index:817;
-  background:rgba(6,16,30,.22);
-  backdrop-filter:blur(0);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity .75s cubic-bezier(.16,1,.3,1), backdrop-filter .75s cubic-bezier(.16,1,.3,1);
-}
-.cin-zoom-backdrop-on{
-  opacity:1;
-  backdrop-filter:blur(12px);
-}
-.cin-cell-zoom{
-  position:fixed;
-  z-index:819;
-  margin:0!important;
-  opacity:1!important;
-  will-change:left,top,width,height,opacity,border-radius,box-shadow;
-  pointer-events:none;
-  box-shadow:0 36px 110px rgba(0,0,0,.62),0 0 0 1px rgba(201,168,76,.28);
-  transition:
-    left .95s cubic-bezier(.16,1,.3,1),
-    top .95s cubic-bezier(.16,1,.3,1),
-    width .95s cubic-bezier(.16,1,.3,1),
-    height .95s cubic-bezier(.16,1,.3,1),
-    opacity .42s ease,
-    border-radius .95s cubic-bezier(.16,1,.3,1),
-    box-shadow .95s cubic-bezier(.16,1,.3,1);
-}
-.cin-cell-zoom .click-hint{opacity:0!important;}
-.cin-cell-zoom .photo-bg{opacity:1!important;}
-.cin-cell-zoom-out{opacity:0!important;}
-@media(max-width:580px){
-  .cin-cell-zoom{box-shadow:0 24px 70px rgba(0,0,0,.55),0 0 0 1px rgba(201,168,76,.24);}
-}
-</style>
-
-<script>
-(function(){
-  /* ── Track clicked cell ── */
-  let _cell = null;
-  let _cellClickAt = 0;
-  document.querySelectorAll('.cell').forEach(c => {
-    c.addEventListener('click', function(){
-      _cell = this;
-      _cellClickAt = performance.now();
-    }, true);
-  });
-
-  /* ── Soft backdrop layer ── */
-  const backdrop = document.createElement('div');
-  backdrop.id = 'cin-zoom-backdrop';
-  document.body.appendChild(backdrop);
-
-  /* ── Cache reference AFTER original script has run ── */
-  const _origOpen  = window.openCell;
-  const _origClose = window.closeOverlay;
-
-  /* ── Override openCell ── */
-  window.openCell = function(key){
-    const cell = performance.now() - _cellClickAt < 180 ? _cell : null;
-
-    /* If no cell recorded from the current click, fall back */
-    if(!cell){ _origOpen(key); return; }
-
-    const rect = cell.getBoundingClientRect();
-    const clone = cell.cloneNode(true);
-    clone.classList.add('cin-cell-zoom');
-    clone.removeAttribute('onclick');
-    clone.style.left = rect.left + 'px';
-    clone.style.top = rect.top + 'px';
-    clone.style.width = rect.width + 'px';
-    clone.style.height = rect.height + 'px';
-    clone.style.borderRadius = '3px';
-    document.body.appendChild(clone);
-
-    const targetW = Math.min(window.innerWidth * .92, 1180);
-    const targetH = Math.min(window.innerHeight * .86, 760);
-    const targetX = (window.innerWidth - targetW) / 2;
-    const targetY = (window.innerHeight - targetH) / 2;
-
-    backdrop.classList.add('cin-zoom-backdrop-on');
-    cell.style.visibility = 'hidden';
-    clone.getBoundingClientRect();
-    clone.style.left = targetX + 'px';
-    clone.style.top = targetY + 'px';
-    clone.style.width = targetW + 'px';
-    clone.style.height = targetH + 'px';
-    clone.style.borderRadius = '0';
-    clone.style.boxShadow = '0 48px 140px rgba(0,0,0,.72),0 0 0 1px rgba(201,168,76,.38)';
-
-    /* Reveal overlay near the end of the forward movement. */
-    setTimeout(() => {
-      _origOpen(key);
-      clone.classList.add('cin-cell-zoom-out');
-    }, 680);
-
-    setTimeout(() => {
-      clone.remove();
-      cell.style.visibility = '';
-      backdrop.classList.remove('cin-zoom-backdrop-on');
-      _cell = null;
-    }, 1120);
-  };
-
-  /* ── Override closeOverlay ── */
-  window.closeOverlay = function(){
-    _origClose();
-    backdrop.classList.remove('cin-zoom-backdrop-on');
-    document.querySelectorAll('.cin-cell-zoom').forEach(el => el.remove());
-    document.querySelectorAll('.cell').forEach(el => el.style.visibility = '');
-    _cell = null;
-  };
-})();
-</script>
 </body>
 </html>
