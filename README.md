@@ -5,6 +5,8 @@ Site estatico pronto para publicacao.
 ## Arquivos
 
 - `index.html`: pagina principal do site.
+- `assets/camila-rocha.jpeg`: foto profissional da Camila.
+- `assets/roni-caro.jpeg`: foto profissional do Roni.
 
 ## Como publicar
 
@@ -17,6 +19,6 @@ Opcoes simples:
 
 ## Observacoes
 
-- O site usa imagens externas do Unsplash e algumas imagens embutidas no proprio HTML.
+- O site usa imagens externas do Unsplash e fotos locais na pasta `assets`.
 - O contato principal aponta para WhatsApp: `+55 11 94230-2344`.
 - O dominio/canonical configurado e `https://caroimage.com/`.
