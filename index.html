@@ -489,7 +489,7 @@ nav{z-index:620!important;}
     </div>
 
     <!-- 7: NÓS ENTENDEMOS -->
-    <div class="cell cell-mid" onclick="openCell('sobre')">
+    <div class="cell cell-mid" onclick="openCell('camila')">
       <div class="photo-bg" style="background-image:url('assets/camila-rocha.jpeg');background-position:center 18%;"></div>
       <div class="cc cc-bottom">
         <span class="badge">CA.RO</span>
@@ -508,7 +508,7 @@ nav{z-index:620!important;}
     </div>
 
     <!-- 9: FOTO RONI -->
-    <div class="cell" onclick="openCell('sobre')">
+    <div class="cell" onclick="openCell('roni')">
       <div class="photo-bg" style="background-image:url('assets/roni-caro.jpeg');background-position:center 18%;"></div>
       <div class="cc cc-bottom">
         <span class="badge">CA.RO</span>
@@ -713,11 +713,21 @@ const pages = {
     body:`A CA.RO nasceu da convicção de que marcas fortes são construídas através de percepção, estrutura e inteligência — não apenas de posts e campanhas.<br><br>
     <strong>Atuação nacional e internacional — França, Catar e Emirados Árabes.</strong><br><br>
     Uma metodologia própria que une sofisticação europeia à mais avançada engenharia digital.`,
-    extra:`<div class="ov-grid">
-      <div class="ov-item"><h4>Camila <em>Rocha</em></h4><p>Diretora estratégica. Refinamento, precisão e direção editorial. Fala e postura que transmitem autoridade silenciosa.</p></div>
-      <div class="ov-item"><h4>Roni <em>Caro</em></h4><p>Arquiteto tecnológico. Silencioso, técnico, observador. O domínio técnico que sustenta toda a operação.</p></div>
-    </div>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar</a>`
+    extra:`<a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar</a>`
+  },
+
+  camila:{
+    tag:'Camila Rocha',
+    title:'Camila Rocha.',
+    body:`Diretora estratégica. Refinamento, precisão e direção editorial. Fala e postura que transmitem autoridade silenciosa.`,
+    extra:`<a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar</a>`
+  },
+
+  roni:{
+    tag:'Roni',
+    title:'Roni.',
+    body:`Arquiteto tecnológico. Silencioso, técnico, observador. O domínio técnico que sustenta toda a operação.`,
+    extra:`<a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar</a>`
   },
 
   numeros:{
