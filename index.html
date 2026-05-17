@@ -79,9 +79,14 @@ button{font-family:inherit;}
   z-index:2;
 }
 .cell-2wide{grid-column:span 2;}
+.cell-full{grid-column:1/-1;}
 .cell-tall{grid-row:span 2;min-height:563px;}
 .cell-cream{background:var(--cream);color:var(--navy);}
 .cell-mid{background:var(--navy3);}
+.cell-arquitetos .cc{justify-content:space-between;text-align:left;}
+.cell-arquitetos .cell-h,
+.cell-arquitetos .cell-body{text-align:left!important;}
+.cell-arquitetos .gold-bar{margin:.8rem 0!important;}
 
 /* Hover shimmer */
 .cell::before{
@@ -533,7 +538,7 @@ nav{z-index:620!important;}
 
     <!-- 13: ARQUITETOS -->
     <div class="cell cell-arquitetos" onclick="openCell('studio')">
-      <div class="cc cc-center">
+      <div class="cc">
         <span class="cell-tag">CA.RO</span>
         <h2 class="cell-h" style="font-size:clamp(1.25rem,2vw,1.8rem);text-align:center;">Arquitetos de soluções.<br>Parceiros no <em>crescimento.</em></h2>
         <div class="gold-bar" style="margin:.8rem auto;"></div>
@@ -543,7 +548,7 @@ nav{z-index:620!important;}
     </div>
 
     <!-- 16: CONTATO CTA -->
-    <div class="cell cell-2wide cell-contato" style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);" onclick="openCell('contato')">
+    <div class="cell cell-full cell-contato" style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);" onclick="openCell('contato')">
       <div class="cc cc-center">
         <span class="cell-tag">Próximo passo</span>
         <h3 class="cell-h" style="text-align:center;font-size:clamp(1.8rem,3vw,2.8rem);">Vamos<br>construir<br><em>juntos.</em></h3>
