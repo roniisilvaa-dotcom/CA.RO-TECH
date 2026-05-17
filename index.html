@@ -57,6 +57,7 @@ button{font-family:inherit;}
   display:grid;
   grid-template-columns:repeat(4,1fr);
   grid-template-rows:auto;
+  grid-auto-flow:dense;
   gap:3px;
   max-width:1400px;
   margin:0 auto;
@@ -472,8 +473,27 @@ nav{z-index:620!important;}
       <span class="click-hint">Ver projetos</span>
     </div>
 
+    <!-- 7: NÓS ENTENDEMOS -->
+    <div class="cell cell-mid cell-camila" onclick="openCell('camila')">
+      <div class="photo-bg" style="background-image:url('assets/camila-rocha.jpeg');background-position:center 18%;"></div>
+      <div class="cc cc-bottom">
+        <span class="badge">CA.RO</span>
+      </div>
+      <span class="click-hint">Nossa história</span>
+    </div>
+
+    <!-- 9: FOTO RONI -->
+    <div class="cell cell-roni" onclick="openCell('roni')">
+      <div class="photo-bg" style="background-image:url('assets/roni-caro.jpeg');background-position:center 18%;"></div>
+      <div class="cc cc-bottom">
+        <span class="badge">CA.RO</span>
+        <p class="quote-txt" style="font-size:clamp(.85rem,1.4vw,1.1rem);">"Estratégia que<br>constrói valor real."</p>
+      </div>
+      <span class="click-hint">Equipe</span>
+    </div>
+
     <!-- 6: SERVIÇOS -->
-    <div class="cell" onclick="openCell('servicos')">
+    <div class="cell cell-servicos" onclick="openCell('servicos')">
       <div class="cc cc-top">
         <span class="cell-tag">O que fazemos</span>
         <div class="svc-list">
@@ -488,27 +508,8 @@ nav{z-index:620!important;}
       <span class="click-hint">Ver todos</span>
     </div>
 
-    <!-- 7: NÓS ENTENDEMOS -->
-    <div class="cell cell-mid" onclick="openCell('camila')">
-      <div class="photo-bg" style="background-image:url('assets/camila-rocha.jpeg');background-position:center 18%;"></div>
-      <div class="cc cc-bottom">
-        <span class="badge">CA.RO</span>
-      </div>
-      <span class="click-hint">Nossa história</span>
-    </div>
-
-    <!-- 9: FOTO RONI -->
-    <div class="cell" onclick="openCell('roni')">
-      <div class="photo-bg" style="background-image:url('assets/roni-caro.jpeg');background-position:center 18%;"></div>
-      <div class="cc cc-bottom">
-        <span class="badge">CA.RO</span>
-        <p class="quote-txt" style="font-size:clamp(.85rem,1.4vw,1.1rem);">"Estratégia que<br>constrói valor real."</p>
-      </div>
-      <span class="click-hint">Equipe</span>
-    </div>
-
     <!-- 11: NÚMEROS -->
-    <div class="cell" onclick="openCell('numeros')">
+    <div class="cell cell-numeros" onclick="openCell('numeros')">
       <div class="cc cc-top">
         <span class="cell-tag">Números que refletem estratégia</span>
         <div class="stats-g">
