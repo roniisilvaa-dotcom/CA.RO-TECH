@@ -778,6 +778,14 @@ const pages = {
     </div>
     <div class="ov-rule"></div>
     <a class="ov-cta" href="https://wa.me/5511942302344" target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a>`
+  },
+
+  saida:{
+    tag:'Antes de sair',
+    title:'Sua próxima etapa pode começar agora.',
+    body:`Presença forte não nasce por acaso. Ela começa quando estratégia, tecnologia e posicionamento entram na mesma conversa.<br><br>
+    <strong>Se a sua marca precisa ser lembrada, este é um bom momento para falar com a CA.RO.</strong>`,
+    extra:`<a class="ov-cta" href="https://wa.me/5511942302344" target="_blank" rel="noopener noreferrer">Conversar agora</a>`
   }
 };
 
@@ -807,6 +815,26 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeOverlay
 
 // Close on bg click
 document.getElementById('overlay-bg').addEventListener('click', closeOverlay);
+
+// Exit-intent prompt: one tasteful invitation per session.
+let exitPromptShown = sessionStorage.getItem('caroExitPromptShown') === '1';
+function showExitPrompt(){
+  if (exitPromptShown || document.getElementById('overlay').classList.contains('open')) return;
+  exitPromptShown = true;
+  sessionStorage.setItem('caroExitPromptShown', '1');
+  openCell('saida');
+}
+document.addEventListener('mouseout', e => {
+  if (e.clientY <= 0 && !e.relatedTarget) showExitPrompt();
+});
+if (window.matchMedia('(hover: none)').matches) {
+  let mobilePromptArmed = false;
+  setTimeout(() => { mobilePromptArmed = true; }, 18000);
+  window.addEventListener('scroll', () => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    if (mobilePromptArmed && maxScroll > 0 && window.scrollY / maxScroll > .6) showExitPrompt();
+  }, { passive:true });
+}
 
 /* ═══════════════════════════════════════════════════
    CINEMATIC ENGINE
