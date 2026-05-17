@@ -838,10 +838,11 @@ document.addEventListener('mouseout', e => {
 });
 if (window.matchMedia('(hover: none)').matches) {
   let mobilePromptArmed = false;
-  setTimeout(() => { mobilePromptArmed = true; }, 18000);
+  setTimeout(() => { mobilePromptArmed = true; }, 7000);
+  setTimeout(showExitPrompt, 14000);
   window.addEventListener('scroll', () => {
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    if (mobilePromptArmed && maxScroll > 0 && window.scrollY / maxScroll > .6) showExitPrompt();
+    if (mobilePromptArmed && maxScroll > 0 && window.scrollY / maxScroll > .3) showExitPrompt();
   }, { passive:true });
 }
 
