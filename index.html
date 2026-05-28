@@ -139,12 +139,12 @@ button{font-family:inherit;}
 .stats-g{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-top:.6rem;}
 .stat-n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--gold);display:block;line-height:1;}
 .stat-l{font-size:.4rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:.2rem;display:block;}
-.client-logo-label{display:block;margin-top:1rem;font-size:.38rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(201,168,76,.78);}
-.client-logo-strip{position:relative;overflow:hidden;margin-top:.45rem;padding:.45rem 0;max-width:100%;mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);}
-.client-logo-track{display:flex;align-items:center;gap:1rem;width:max-content;animation:clientLogoFlow 30s linear infinite;}
-.client-logo{flex:0 0 auto;width:calc(var(--w)*1px);height:calc(var(--h)*1px);background-image:url('assets/clientes-carol-transparente.png');background-size:432px 540px;background-position:calc(var(--x)*-1px) calc(var(--y)*-1px);background-repeat:no-repeat;opacity:.82;filter:drop-shadow(0 0 10px rgba(201,168,76,.1));animation:clientLogoPulse 5s ease-in-out infinite;}
+.client-logo-label{display:block;margin-top:1rem;font-size:.48rem;letter-spacing:.26em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+.client-logo-strip{position:relative;overflow:hidden;margin-top:.45rem;padding:.55rem 0 .7rem;min-height:72px;max-width:100%;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);}
+.client-logo-track{display:flex;align-items:center;gap:1.15rem;width:max-content;animation:clientLogoFlow 34s linear infinite;}
+.client-logo{flex:0 0 auto;width:calc(var(--w)*1px);height:calc(var(--h)*1px);background-image:url('assets/clientes-carol-transparente.png');background-size:432px 540px;background-position:calc(var(--x)*-1px) calc(var(--y)*-1px);background-repeat:no-repeat;opacity:1;filter:drop-shadow(0 8px 16px rgba(0,0,0,.26));animation:clientLogoPulse 5s ease-in-out infinite;}
 @keyframes clientLogoFlow{from{transform:translateX(0);}to{transform:translateX(calc(-50% - .5rem));}}
-@keyframes clientLogoPulse{0%,100%{opacity:.54;transform:translateY(2px);}45%,65%{opacity:.96;transform:translateY(0);}}
+@keyframes clientLogoPulse{0%,100%{transform:translateY(1px);}45%,65%{transform:translateY(0);}}
 .word-big{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;color:var(--white);line-height:1;}
 .word-big em{color:var(--gold);font-style:normal;}
 .tech-txt{font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;line-height:2.5;color:var(--gold);}
@@ -284,9 +284,9 @@ button{font-family:inherit;}
   .svc-item{font-size:.5rem!important;}
   .stat-n{font-size:1.6rem!important;}
   .stat-l{font-size:.42rem!important;}
-  .client-logo-label{margin-top:.75rem!important;font-size:.4rem!important;}
-  .client-logo-strip{margin-top:.35rem!important;padding:.25rem 0!important;}
-  .client-logo-track{gap:.7rem!important;animation-duration:24s!important;}
+  .client-logo-label{margin-top:.75rem!important;font-size:.48rem!important;letter-spacing:.22em!important;}
+  .client-logo-strip{margin-top:.35rem!important;padding:.45rem 0 .55rem!important;min-height:62px!important;}
+  .client-logo-track{gap:.9rem!important;animation-duration:28s!important;}
   .word-big{font-size:1.4rem!important;}
   .tech-txt{font-size:.5rem!important;}
   .cc{padding:1.2rem!important;}
@@ -541,33 +541,33 @@ nav{z-index:620!important;}
           <div><span class="stat-n">6</span><span class="stat-l">Países</span></div>
           <div><span class="stat-n">100%</span><span class="stat-l">Foco em resultados</span></div>
         </div>
-        <span class="client-logo-label">Nossos clientes</span>
+        <span class="client-logo-label">NOSSOS CLIENTES</span>
         <div class="client-logo-strip" aria-label="Clientes atendidos">
           <div class="client-logo-track" aria-hidden="true">
-            <span class="client-logo" style="--x:104;--y:152;--w:84;--h:32;"></span>
-            <span class="client-logo" style="--x:240;--y:142;--w:100;--h:44;"></span>
-            <span class="client-logo" style="--x:88;--y:202;--w:115;--h:28;"></span>
-            <span class="client-logo" style="--x:225;--y:203;--w:120;--h:30;"></span>
-            <span class="client-logo" style="--x:92;--y:239;--w:120;--h:40;"></span>
-            <span class="client-logo" style="--x:235;--y:251;--w:92;--h:28;"></span>
-            <span class="client-logo" style="--x:96;--y:304;--w:82;--h:30;"></span>
-            <span class="client-logo" style="--x:218;--y:300;--w:125;--h:34;"></span>
-            <span class="client-logo" style="--x:96;--y:340;--w:118;--h:50;"></span>
-            <span class="client-logo" style="--x:225;--y:357;--w:112;--h:40;"></span>
-            <span class="client-logo" style="--x:96;--y:413;--w:120;--h:28;"></span>
-            <span class="client-logo" style="--x:244;--y:414;--w:78;--h:35;"></span>
-            <span class="client-logo" style="--x:104;--y:152;--w:84;--h:32;"></span>
-            <span class="client-logo" style="--x:240;--y:142;--w:100;--h:44;"></span>
-            <span class="client-logo" style="--x:88;--y:202;--w:115;--h:28;"></span>
-            <span class="client-logo" style="--x:225;--y:203;--w:120;--h:30;"></span>
-            <span class="client-logo" style="--x:92;--y:239;--w:120;--h:40;"></span>
-            <span class="client-logo" style="--x:235;--y:251;--w:92;--h:28;"></span>
-            <span class="client-logo" style="--x:96;--y:304;--w:82;--h:30;"></span>
-            <span class="client-logo" style="--x:218;--y:300;--w:125;--h:34;"></span>
-            <span class="client-logo" style="--x:96;--y:340;--w:118;--h:50;"></span>
-            <span class="client-logo" style="--x:225;--y:357;--w:112;--h:40;"></span>
-            <span class="client-logo" style="--x:96;--y:413;--w:120;--h:28;"></span>
-            <span class="client-logo" style="--x:244;--y:414;--w:78;--h:35;"></span>
+            <span class="client-logo" style="--x:92;--y:136;--w:112;--h:56;"></span>
+            <span class="client-logo" style="--x:228;--y:132;--w:124;--h:64;"></span>
+            <span class="client-logo" style="--x:78;--y:194;--w:140;--h:46;"></span>
+            <span class="client-logo" style="--x:216;--y:192;--w:138;--h:54;"></span>
+            <span class="client-logo" style="--x:86;--y:232;--w:132;--h:54;"></span>
+            <span class="client-logo" style="--x:226;--y:240;--w:110;--h:52;"></span>
+            <span class="client-logo" style="--x:88;--y:292;--w:105;--h:56;"></span>
+            <span class="client-logo" style="--x:208;--y:288;--w:142;--h:58;"></span>
+            <span class="client-logo" style="--x:84;--y:332;--w:138;--h:72;"></span>
+            <span class="client-logo" style="--x:216;--y:346;--w:130;--h:64;"></span>
+            <span class="client-logo" style="--x:84;--y:404;--w:142;--h:48;"></span>
+            <span class="client-logo" style="--x:232;--y:402;--w:104;--h:58;"></span>
+            <span class="client-logo" style="--x:92;--y:136;--w:112;--h:56;"></span>
+            <span class="client-logo" style="--x:228;--y:132;--w:124;--h:64;"></span>
+            <span class="client-logo" style="--x:78;--y:194;--w:140;--h:46;"></span>
+            <span class="client-logo" style="--x:216;--y:192;--w:138;--h:54;"></span>
+            <span class="client-logo" style="--x:86;--y:232;--w:132;--h:54;"></span>
+            <span class="client-logo" style="--x:226;--y:240;--w:110;--h:52;"></span>
+            <span class="client-logo" style="--x:88;--y:292;--w:105;--h:56;"></span>
+            <span class="client-logo" style="--x:208;--y:288;--w:142;--h:58;"></span>
+            <span class="client-logo" style="--x:84;--y:332;--w:138;--h:72;"></span>
+            <span class="client-logo" style="--x:216;--y:346;--w:130;--h:64;"></span>
+            <span class="client-logo" style="--x:84;--y:404;--w:142;--h:48;"></span>
+            <span class="client-logo" style="--x:232;--y:402;--w:104;--h:58;"></span>
           </div>
         </div>
       </div>
