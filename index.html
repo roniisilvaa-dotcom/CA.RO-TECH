@@ -139,6 +139,11 @@ button{font-family:inherit;}
 .stats-g{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-top:.6rem;}
 .stat-n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--gold);display:block;line-height:1;}
 .stat-l{font-size:.4rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:.2rem;display:block;}
+.client-logo-strip{position:relative;overflow:hidden;margin-top:1rem;padding:.4rem 0;max-width:100%;mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);}
+.client-logo-track{display:flex;align-items:center;gap:1rem;width:max-content;animation:clientLogoFlow 30s linear infinite;}
+.client-logo{flex:0 0 auto;width:calc(var(--w)*1px);height:calc(var(--h)*1px);background-image:url('assets/clientes-carol.png');background-size:432px 540px;background-position:calc(var(--x)*-1px) calc(var(--y)*-1px);background-repeat:no-repeat;opacity:.78;filter:drop-shadow(0 0 10px rgba(201,168,76,.08));animation:clientLogoPulse 5s ease-in-out infinite;}
+@keyframes clientLogoFlow{from{transform:translateX(0);}to{transform:translateX(calc(-50% - .5rem));}}
+@keyframes clientLogoPulse{0%,100%{opacity:.54;transform:translateY(2px);}45%,65%{opacity:.96;transform:translateY(0);}}
 .word-big{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;color:var(--white);line-height:1;}
 .word-big em{color:var(--gold);font-style:normal;}
 .tech-txt{font-size:.48rem;letter-spacing:.22em;text-transform:uppercase;line-height:2.5;color:var(--gold);}
@@ -249,6 +254,7 @@ button{font-family:inherit;}
   .cell-2wide{grid-column:span 2!important;}
   .cell-tall{grid-row:span 1!important;min-height:220px!important;}
   .cell{min-height:220px!important;}
+  .cell-numeros{min-height:260px!important;}
   nav{padding:0 1.2rem;}
   .nav-links,.nav-cta{display:none;}
   .logo{font-size:1.4rem;}
@@ -266,6 +272,7 @@ button{font-family:inherit;}
   .cell-2wide{grid-column:span 2!important;}
   .cell-tall{grid-row:span 1!important;min-height:180px!important;}
   .cell{min-height:180px!important;}
+  .cell-numeros{min-height:250px!important;}
 
   /* Typography scale-up for mobile */
   .cell-tag{font-size:.55rem!important;}
@@ -276,6 +283,8 @@ button{font-family:inherit;}
   .svc-item{font-size:.5rem!important;}
   .stat-n{font-size:1.6rem!important;}
   .stat-l{font-size:.42rem!important;}
+  .client-logo-strip{margin-top:.75rem!important;padding:.25rem 0!important;}
+  .client-logo-track{gap:.7rem!important;animation-duration:24s!important;}
   .word-big{font-size:1.4rem!important;}
   .tech-txt{font-size:.5rem!important;}
   .cc{padding:1.2rem!important;}
@@ -491,7 +500,7 @@ nav{z-index:620!important;}
       <div class="cc cc-bottom">
         <span class="badge">CA.RO</span>
       </div>
-      <span class="click-hint">Nossa história</span>
+      <span class="click-hint">Equipe</span>
     </div>
 
     <!-- 9: FOTO RONI -->
@@ -529,6 +538,34 @@ nav{z-index:620!important;}
           <div><span class="stat-n">+50</span><span class="stat-l">Empresas atendidas</span></div>
           <div><span class="stat-n">6</span><span class="stat-l">Países</span></div>
           <div><span class="stat-n">100%</span><span class="stat-l">Foco em resultados</span></div>
+        </div>
+        <div class="client-logo-strip" aria-label="Clientes atendidos">
+          <div class="client-logo-track" aria-hidden="true">
+            <span class="client-logo" style="--x:104;--y:152;--w:84;--h:32;"></span>
+            <span class="client-logo" style="--x:240;--y:142;--w:100;--h:44;"></span>
+            <span class="client-logo" style="--x:88;--y:202;--w:115;--h:28;"></span>
+            <span class="client-logo" style="--x:225;--y:203;--w:120;--h:30;"></span>
+            <span class="client-logo" style="--x:92;--y:239;--w:120;--h:40;"></span>
+            <span class="client-logo" style="--x:235;--y:251;--w:92;--h:28;"></span>
+            <span class="client-logo" style="--x:96;--y:304;--w:82;--h:30;"></span>
+            <span class="client-logo" style="--x:218;--y:300;--w:125;--h:34;"></span>
+            <span class="client-logo" style="--x:96;--y:340;--w:118;--h:50;"></span>
+            <span class="client-logo" style="--x:225;--y:357;--w:112;--h:40;"></span>
+            <span class="client-logo" style="--x:96;--y:413;--w:120;--h:28;"></span>
+            <span class="client-logo" style="--x:244;--y:414;--w:78;--h:35;"></span>
+            <span class="client-logo" style="--x:104;--y:152;--w:84;--h:32;"></span>
+            <span class="client-logo" style="--x:240;--y:142;--w:100;--h:44;"></span>
+            <span class="client-logo" style="--x:88;--y:202;--w:115;--h:28;"></span>
+            <span class="client-logo" style="--x:225;--y:203;--w:120;--h:30;"></span>
+            <span class="client-logo" style="--x:92;--y:239;--w:120;--h:40;"></span>
+            <span class="client-logo" style="--x:235;--y:251;--w:92;--h:28;"></span>
+            <span class="client-logo" style="--x:96;--y:304;--w:82;--h:30;"></span>
+            <span class="client-logo" style="--x:218;--y:300;--w:125;--h:34;"></span>
+            <span class="client-logo" style="--x:96;--y:340;--w:118;--h:50;"></span>
+            <span class="client-logo" style="--x:225;--y:357;--w:112;--h:40;"></span>
+            <span class="client-logo" style="--x:96;--y:413;--w:120;--h:28;"></span>
+            <span class="client-logo" style="--x:244;--y:414;--w:78;--h:35;"></span>
+          </div>
         </div>
       </div>
       <span class="click-hint">Ver resultados</span>
