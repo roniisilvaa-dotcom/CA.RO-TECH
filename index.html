@@ -28,9 +28,11 @@
 html,body{width:100%;min-height:100%;background:var(--navy);color:var(--white);font-family:'Montserrat',sans-serif;overflow-x:hidden;cursor:none;}
 
 /* CURSOR */
-#cur{position:fixed;width:8px;height:8px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);}
-#cur-ring{position:fixed;width:38px;height:38px;border:1px solid rgba(201,168,76,.45);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .25s,height .25s,border-color .25s;}
-.cur-expand #cur-ring{width:58px;height:58px;border-color:rgba(201,168,76,.9);}
+#cur{position:fixed;width:7px;height:7px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:0 0 12px rgba(226,201,122,.55);transition:width .18s,height .18s,box-shadow .18s;}
+.cur-expand #cur{width:10px;height:10px;box-shadow:0 0 22px rgba(226,201,122,.8);}
+.cursor-spark{position:fixed;left:0;top:0;width:10px;height:10px;border-radius:999px;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,255,255,.95) 0 12%,rgba(226,201,122,.78) 24%,rgba(201,168,76,.32) 52%,rgba(201,168,76,0) 76%);filter:blur(.25px);mix-blend-mode:screen;animation:cursorSparkFade .72s ease-out forwards;}
+.cursor-spark::after{content:"";position:absolute;inset:35% -90%;background:linear-gradient(90deg,rgba(226,201,122,0),rgba(226,201,122,.45),rgba(255,255,255,.28),rgba(226,201,122,0));border-radius:999px;transform:rotate(var(--spark-rot,0deg));}
+@keyframes cursorSparkFade{0%{opacity:.95;transform:translate(-50%,-50%) scale(.45);}55%{opacity:.62;}100%{opacity:0;transform:translate(calc(-50% + var(--spark-x,0px)),calc(-50% + var(--spark-y,0px))) scale(1.9);}}
 
 /* NAV */
 nav{
@@ -300,7 +302,7 @@ button{font-family:inherit;}
 
 /* Hide desktop cursor on touch devices */
 @media(hover:none){
-  #cur,#cur-ring{display:none!important;}
+  #cur,.cursor-spark{display:none!important;}
   body{cursor:auto!important;}
   /* Make cells always show content (no hover-only content) */
   .cell .cc{opacity:1!important;}
@@ -309,7 +311,7 @@ button{font-family:inherit;}
 
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important;}
-  #pcanvas,#cin-progress,.cin-flash,#cur,#cur-ring{display:none!important;}
+  #pcanvas,#cin-progress,.cin-flash,#cur,.cursor-spark{display:none!important;}
   .cell{opacity:1!important;transform:none!important;}
   .photo-bg{transform:none!important;}
 }
@@ -329,7 +331,7 @@ button{font-family:inherit;}
 #mosaic-page{position:relative;z-index:1;}
 nav{z-index:620!important;}
 #overlay{z-index:820!important;}
-#cur,#cur-ring{z-index:9999!important;}
+#cur{z-index:9999!important;}
 #bottom-nav{z-index:520!important;}
 
 /* Scroll progress bar */
@@ -405,7 +407,6 @@ nav{z-index:620!important;}
 <canvas id="pcanvas"></canvas>
 
 <div id="cur"></div>
-<div id="cur-ring"></div>
 
 <nav aria-label="Navegação principal">
   <a class="logo" href="/" aria-label="CA.RO Tech">CA<em>.</em>RO</a>
@@ -580,11 +581,44 @@ nav{z-index:620!important;}
 
 <script>
 // CURSOR
-const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
+const cur=document.getElementById('cur');
+let mx=0,my=0,lastSpark=0,sparkCount=0,lastTrailX=0,lastTrailY=0;
+function makeCursorSpark(x,y,dx,dy,strong=false){
+  if(!cur || window.matchMedia('(hover: none)').matches || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if(sparkCount>70) return;
+  const spark=document.createElement('span');
+  const size=(strong?12:8)+Math.random()*9;
+  const driftX=(-dx*.28)+(Math.random()-.5)*34;
+  const driftY=(-dy*.28)+(Math.random()-.5)*34;
+  spark.className='cursor-spark';
+  spark.style.left=x+(Math.random()-.5)*8+'px';
+  spark.style.top=y+(Math.random()-.5)*8+'px';
+  spark.style.width=size+'px';
+  spark.style.height=size+'px';
+  spark.style.setProperty('--spark-x',driftX.toFixed(1)+'px');
+  spark.style.setProperty('--spark-y',driftY.toFixed(1)+'px');
+  spark.style.setProperty('--spark-rot',(Math.atan2(dy,dx)*180/Math.PI+(Math.random()-.5)*42).toFixed(1)+'deg');
+  document.body.appendChild(spark);
+  sparkCount++;
+  spark.addEventListener('animationend',()=>{spark.remove();sparkCount--;},{once:true});
+}
 document.addEventListener('mousemove',e=>{
+  const dx=e.clientX-mx;
+  const dy=e.clientY-my;
   mx=e.clientX;my=e.clientY;
   cur.style.left=mx+'px';cur.style.top=my+'px';
+  const now=performance.now();
+  if(now-lastSpark>20){
+    makeCursorSpark(mx,my,dx,dy,document.body.classList.contains('cur-expand'));
+    if(document.body.classList.contains('cur-expand')) makeCursorSpark(mx,my,dx,dy,true);
+    lastSpark=now;
+    lastTrailX=mx;
+    lastTrailY=my;
+  }else if(Math.hypot(mx-lastTrailX,my-lastTrailY)>42){
+    makeCursorSpark(mx,my,dx,dy);
+    lastTrailX=mx;
+    lastTrailY=my;
+  }
   // Mouse shimmer on cells
   document.querySelectorAll('.cell').forEach(cell=>{
     const rect=cell.getBoundingClientRect();
@@ -594,11 +628,6 @@ document.addEventListener('mousemove',e=>{
     cell.style.setProperty('--my',y+'%');
   });
 });
-(function animC(){
-  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
-  ring.style.left=rx+'px';ring.style.top=ry+'px';
-  requestAnimationFrame(animC);
-})();
 document.querySelectorAll('.cell,a,button').forEach(el=>{
   el.addEventListener('mouseenter',()=>document.body.classList.add('cur-expand'));
   el.addEventListener('mouseleave',()=>document.body.classList.remove('cur-expand'));
