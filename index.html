@@ -225,6 +225,10 @@ button{font-family:inherit;}
 .ov-stat{padding:2.5rem 1.5rem;text-align:center;background:var(--navy2);}
 .ov-stat-n{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--gold);display:block;line-height:1;}
 .ov-stat-l{font-size:.45rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:.8rem;display:block;}
+.ov-client-section{margin-top:2rem;padding:2rem;background:rgba(12,26,46,.45);border:1px solid rgba(201,168,76,.08);}
+.ov-client-title{display:block;margin-bottom:1.4rem;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:500;}
+.ov-client-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem 1.35rem;align-items:center;}
+.ov-client-logo{justify-self:center;width:calc(var(--w)*1.15px);height:calc(var(--h)*1.15px);background-image:url('assets/clientes-carol-transparente.png');background-size:496.8px 621px;background-position:calc(var(--x)*-1.15px) calc(var(--y)*-1.15px);background-repeat:no-repeat;filter:drop-shadow(0 8px 18px rgba(0,0,0,.26));}
 .ov-cta{display:inline-block;margin-top:3rem;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:1.1rem 3rem;text-decoration:none;border-radius:1px;transition:background .3s;}
 .ov-cta:hover{background:var(--gold2);}
 
@@ -306,6 +310,9 @@ button{font-family:inherit;}
   .ov-body{font-size:.62rem!important;line-height:2.2!important;}
   .ov-grid{grid-template-columns:1fr!important;gap:1.2rem!important;}
   .ov-stats{grid-template-columns:1fr 1fr!important;}
+  .ov-client-section{padding:1.2rem!important;margin-top:1.5rem!important;}
+  .ov-client-grid{grid-template-columns:1fr 1fr!important;gap:1rem .75rem!important;}
+  .ov-client-logo{transform:scale(.88);transform-origin:center;}
   .ov-rule{margin:1.2rem 0!important;}
   .ov-cta{padding:.9rem 2rem!important;font-size:.5rem!important;}
   #overlay-close{top:1rem!important;right:1rem!important;width:38px!important;height:38px!important;}
@@ -780,6 +787,23 @@ const pages = {
       <div class="ov-stat"><span class="ov-stat-n">+50</span><span class="ov-stat-l">Parceiros estratégicos</span></div>
       <div class="ov-stat"><span class="ov-stat-n">6</span><span class="ov-stat-l">Países de atuação</span></div>
       <div class="ov-stat"><span class="ov-stat-n">100%</span><span class="ov-stat-l">Foco em resultado</span></div>
+    </div>
+    <div class="ov-client-section">
+      <span class="ov-client-title">NOSSOS CLIENTES</span>
+      <div class="ov-client-grid" aria-label="Clientes atendidos pela CA.RO">
+        <span class="ov-client-logo" style="--x:92;--y:136;--w:112;--h:56;" title="Kagiva"></span>
+        <span class="ov-client-logo" style="--x:228;--y:132;--w:124;--h:64;" title="Novas Vestes"></span>
+        <span class="ov-client-logo" style="--x:78;--y:194;--w:140;--h:46;" title="Camila Rocha"></span>
+        <span class="ov-client-logo" style="--x:216;--y:192;--w:138;--h:54;" title="Mona Modas"></span>
+        <span class="ov-client-logo" style="--x:86;--y:232;--w:132;--h:54;" title="Supersol Energia Solar"></span>
+        <span class="ov-client-logo" style="--x:226;--y:240;--w:110;--h:52;" title="Rainha"></span>
+        <span class="ov-client-logo" style="--x:88;--y:292;--w:105;--h:56;" title="Topper"></span>
+        <span class="ov-client-logo" style="--x:208;--y:288;--w:142;--h:58;" title="Giselly Ramos"></span>
+        <span class="ov-client-logo" style="--x:84;--y:332;--w:138;--h:72;" title="Marlene Oliveira"></span>
+        <span class="ov-client-logo" style="--x:216;--y:346;--w:130;--h:64;" title="Geração do Estilo"></span>
+        <span class="ov-client-logo" style="--x:84;--y:404;--w:142;--h:48;" title="Origin Chem"></span>
+        <span class="ov-client-logo" style="--x:232;--y:402;--w:104;--h:58;" title="Mundi TKR"></span>
+      </div>
     </div>
     <div class="ov-rule"></div>
     <p class="ov-body"><strong>Alphaville · São Paulo · Campinas · Jundiaí · Indaiatuba</strong><br>França · Catar · Emirados Árabes</p>
