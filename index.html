@@ -415,6 +415,20 @@ nav{z-index:620!important;}
   opacity:0;transition:opacity .5s;pointer-events:none;z-index:0;
 }
 .cell.cin-ready:not(.cin-pulse):hover::after{opacity:1;}
+
+/* i18n: language toggle */
+html:not(.lang-en) [data-lang="en"]{display:none;}
+html.lang-en [data-lang="pt"]{display:none;}
+#lang-toggle{
+  display:inline-flex;align-items:center;gap:.35rem;
+  border:1px solid rgba(255,255,255,.25);border-radius:999px;
+  padding:.3rem .7rem;font-size:.62rem;letter-spacing:.08em;
+  color:rgba(255,255,255,.75);cursor:pointer;background:transparent;
+  font-family:inherit;text-transform:uppercase;
+}
+#lang-toggle:hover{border-color:rgba(255,255,255,.5);color:#fff;}
+#lang-toggle .lt-opt{opacity:.4;}
+#lang-toggle .lt-opt.active{opacity:1;color:var(--gold);}
 </style>
 </head>
 <body>
@@ -429,13 +443,16 @@ nav{z-index:620!important;}
 <nav aria-label="Navegação principal">
   <a class="logo" href="/" aria-label="CA.RO Tech">CA<em>.</em>RO</a>
   <ul class="nav-links">
-    <li><a href="#sobre" onclick="openCell('logo');return false;">Sobre</a></li>
-    <li><a href="#studio" onclick="openCell('studio');return false;">Studio</a></li>
-    <li><a href="#tech" onclick="openCell('tech');return false;">Tech</a></li>
-    <li><a href="#posicionamento" onclick="openCell('posicionamento');return false;">Posicionamento</a></li>
-    <li><a href="#contato" onclick="openCell('contato');return false;">Contato</a></li>
+    <li><a href="#sobre" onclick="openCell('logo');return false;"><span data-lang="pt">Sobre</span><span data-lang="en">About</span></a></li>
+    <li><a href="#studio" onclick="openCell('studio');return false;"><span data-lang="pt">Studio</span><span data-lang="en">Studio</span></a></li>
+    <li><a href="#tech" onclick="openCell('tech');return false;"><span data-lang="pt">Tech</span><span data-lang="en">Tech</span></a></li>
+    <li><a href="#posicionamento" onclick="openCell('posicionamento');return false;"><span data-lang="pt">Posicionamento</span><span data-lang="en">Positioning</span></a></li>
+    <li><a href="#contato" onclick="openCell('contato');return false;"><span data-lang="pt">Contato</span><span data-lang="en">Contact</span></a></li>
   </ul>
-  <a class="nav-cta" href="https://wa.me/5511942302344" target="_blank" rel="noopener noreferrer">Conversar</a>
+  <button id="lang-toggle" type="button" onclick="toggleLang()" aria-label="Toggle language / Alternar idioma">
+    <span class="lt-opt" data-lt="pt">PT</span><span aria-hidden="true">/</span><span class="lt-opt" data-lt="en">EN</span>
+  </button>
+  <a class="nav-cta" href="https://wa.me/5511942302344" target="_blank" rel="noopener noreferrer"><span data-lang="pt">Conversar</span><span data-lang="en">Talk to us</span></a>
 </nav>
 
 <!-- FULLSCREEN OVERLAY -->
@@ -456,7 +473,7 @@ nav{z-index:620!important;}
         <div class="gold-bar" style="margin:.8rem auto;"></div>
         <div class="cell-logo-sub">Technology, Design<br>& Positioning</div>
       </div>
-      <span class="click-hint">Sobre nós</span>
+      <span class="click-hint"><span data-lang="pt">Sobre nós</span><span data-lang="en">About us</span></span>
     </div>
 
     <!-- 2: PHOTO DESK -->
@@ -465,31 +482,31 @@ nav{z-index:620!important;}
       <div class="cc cc-bottom">
         <span class="badge">CA.RO</span>
         <span class="cell-tag">CA.RO Studio</span>
-        <h3 class="cell-h">Arquitetura<br>de <em>Presença</em></h3>
+        <h3 class="cell-h"><span data-lang="pt">Arquitetura<br>de <em>Presença</em></span><span data-lang="en">Presence<br><em>Architecture</em></span></h3>
       </div>
-      <span class="click-hint">Descobrir</span>
+      <span class="click-hint"><span data-lang="pt">Descobrir</span><span data-lang="en">Discover</span></span>
     </div>
 
     <!-- 3: HEADLINE PRINCIPAL (2 wide) -->
     <div class="cell cell-2wide" onclick="openCell('manifesto')">
       <div class="cc cc-top">
         <span class="cell-tag">CA.RO</span>
-        <h2 class="cell-h">Desenvolvemos presença,<br>percepção e <em>inteligência digital.</em></h2>
+        <h2 class="cell-h"><span data-lang="pt">Desenvolvemos presença,<br>percepção e <em>inteligência digital.</em></span><span data-lang="en">We build presence,<br>perception and <em>digital intelligence.</em></span></h2>
         <div class="gold-bar"></div>
-        <p class="cell-body">Estrategistas sofisticados que dominam tecnologia.</p>
+        <p class="cell-body"><span data-lang="pt">Estrategistas sofisticados que dominam tecnologia.</span><span data-lang="en">Sophisticated strategists who master technology.</span></p>
       </div>
-      <span class="click-hint">Manifesto</span>
+      <span class="click-hint"><span data-lang="pt">Manifesto</span><span data-lang="en">Manifesto</span></span>
     </div>
 
     <!-- 4: TECNOLOGIA COM REFINAMENTO (cream) -->
     <div class="cell cell-cream" onclick="openCell('tech')">
       <div class="cc cc-bottom">
         <span class="cell-tag cell-tag-dark">CA.RO Tech</span>
-        <h3 class="cell-h dark">Tecnologia<br>com <em>refinamento.</em></h3>
+        <h3 class="cell-h dark"><span data-lang="pt"><span data-lang="pt">Tecnologia</span><span data-lang="en">Technology</span><br>com <em>refinamento.</em></span><span data-lang="en">Technology<br>with <em>refinement.</em></span></h3>
         <div class="gold-bar"></div>
-        <p class="cell-body dark">Resultados com elegância,<br>estratégia e propósito.</p>
+        <p class="cell-body dark"><span data-lang="pt">Resultados com elegância,<br>estratégia e propósito.</span><span data-lang="en">Results with elegance,<br>strategy and purpose.</span></p>
       </div>
-      <span class="click-hint" style="color:rgba(6,16,30,.4);">Ver Tech</span>
+      <span class="click-hint" style="color:rgba(6,16,30,.4);"><span data-lang="pt">Ver Tech</span><span data-lang="en">See Tech</span></span>
     </div>
 
     <!-- 5: PHOTO BUILDING -->
@@ -497,11 +514,11 @@ nav{z-index:620!important;}
       <div class="photo-bg" style="background-image:url('assets/projetos-nossa-arquitetura.png');background-position:center center;"></div>
       <div class="cc cc-bottom">
         <span class="badge">CA.RO</span>
-        <span class="cell-tag">Portfólio</span>
-        <h3 class="cell-h">Nossa <em>arquitetura</em></h3>
-        <p style="font-size:.65rem;letter-spacing:.02em;opacity:.75;margin-top:6px;">Produto próprio: <strong>Prontia</strong>, consultoria de estilo por IA no WhatsApp</p>
+        <span class="cell-tag"><span data-lang="pt">Portfólio</span><span data-lang="en">Portfolio</span></span>
+        <h3 class="cell-h"><span data-lang="pt">Nossa <em>arquitetura</em></span><span data-lang="en">Our <em>architecture</em></span></h3>
+        <p style="font-size:.65rem;letter-spacing:.02em;opacity:.75;margin-top:6px;"><span data-lang="pt">Produto próprio: <strong>PRONTIA</strong>, consultoria de estilo por IA no WhatsApp</span><span data-lang="en">Own product: <strong>PRONTIA</strong>, AI style consulting on WhatsApp</span></p>
       </div>
-      <span class="click-hint">Ver portfólio</span>
+      <span class="click-hint"><span data-lang="pt">Ver portfólio</span><span data-lang="en">See portfolio</span></span>
     </div>
 
     <!-- 7: NÓS ENTENDEMOS -->
@@ -510,7 +527,7 @@ nav{z-index:620!important;}
       <div class="cc cc-bottom">
         <span class="badge">CA.RO</span>
       </div>
-      <span class="click-hint">Equipe</span>
+      <span class="click-hint"><span data-lang="pt">Equipe</span><span data-lang="en">Team</span></span>
     </div>
 
     <!-- 9: FOTO RONI -->
@@ -518,38 +535,38 @@ nav{z-index:620!important;}
       <div class="photo-bg" style="background-image:url('assets/roni-caro.jpeg');background-position:center 18%;"></div>
       <div class="cc cc-bottom">
         <span class="badge">CA.RO</span>
-        <p class="quote-txt" style="font-size:clamp(.85rem,1.4vw,1.1rem);">"Estratégia que<br>constrói valor real."</p>
+        <p class="quote-txt" style="font-size:clamp(.85rem,1.4vw,1.1rem);"><span data-lang="pt">"Estratégia que<br>constrói valor real."</span><span data-lang="en">"Strategy that<br>builds real value."</span></p>
       </div>
-      <span class="click-hint">Equipe</span>
+      <span class="click-hint"><span data-lang="pt">Equipe</span><span data-lang="en">Team</span></span>
     </div>
 
     <!-- 6: SERVIÇOS -->
     <div class="cell cell-servicos" onclick="openCell('servicos')">
       <div class="cc cc-top">
-        <span class="cell-tag">O que fazemos</span>
+        <span class="cell-tag"><span data-lang="pt">O que fazemos</span><span data-lang="en">What we do</span></span>
         <div class="svc-list">
-          <div class="svc-item">Arquitetura de marca</div>
-          <div class="svc-item">Experiência digital</div>
-          <div class="svc-item">Sistemas inteligentes</div>
-          <div class="svc-item">Performance estratégica</div>
-          <div class="svc-item">Infraestrutura digital</div>
-          <div class="svc-item">Soluções proprietárias</div>
+          <div class="svc-item"><span data-lang="pt">Arquitetura de marca</span><span data-lang="en">Brand architecture</span></div>
+          <div class="svc-item"><span data-lang="pt">Experiência digital</span><span data-lang="en">Digital experience</span></div>
+          <div class="svc-item"><span data-lang="pt">Sistemas inteligentes</span><span data-lang="en">Intelligent systems</span></div>
+          <div class="svc-item"><span data-lang="pt">Performance estratégica</span><span data-lang="en">Strategic performance</span></div>
+          <div class="svc-item"><span data-lang="pt">Infraestrutura digital</span><span data-lang="en">Digital infrastructure</span></div>
+          <div class="svc-item"><span data-lang="pt">Soluções proprietárias</span><span data-lang="en">Proprietary solutions</span></div>
         </div>
       </div>
-      <span class="click-hint">Ver todos</span>
+      <span class="click-hint"><span data-lang="pt">Ver todos</span><span data-lang="en">See all</span></span>
     </div>
 
     <!-- 11: NÚMEROS -->
     <div class="cell cell-numeros" onclick="openCell('numeros')">
       <div class="cc cc-top">
-        <span class="cell-tag">Números que refletem estratégia</span>
+        <span class="cell-tag"><span data-lang="pt">Números que refletem estratégia</span><span data-lang="en">Numbers that reflect strategy</span></span>
         <div class="stats-g">
-          <div><span class="stat-n">+120</span><span class="stat-l">Projetos entregues</span></div>
-          <div><span class="stat-n">+50</span><span class="stat-l">Empresas atendidas</span></div>
-          <div><span class="stat-n">6</span><span class="stat-l">Países</span></div>
-          <div><span class="stat-n">100%</span><span class="stat-l">Foco em resultados</span></div>
+          <div><span class="stat-n">+120</span><span class="stat-l"><span data-lang="pt">Projetos entregues</span><span data-lang="en">Projects delivered</span></span></div>
+          <div><span class="stat-n">+50</span><span class="stat-l"><span data-lang="pt">Empresas atendidas</span><span data-lang="en">Companies served</span></span></div>
+          <div><span class="stat-n">6</span><span class="stat-l"><span data-lang="pt">Países</span><span data-lang="en">Countries</span></span></div>
+          <div><span class="stat-n">100%</span><span class="stat-l"><span data-lang="pt">Foco em resultados</span><span data-lang="en">Focus on results</span></span></div>
         </div>
-        <span class="client-logo-label">NOSSOS CLIENTES</span>
+        <span class="client-logo-label"><span data-lang="pt">NOSSOS CLIENTES</span><span data-lang="en">OUR CLIENTS</span></span>
         <div class="client-logo-strip" aria-label="Clientes atendidos">
           <div class="client-logo-track" aria-hidden="true">
             <span class="client-logo" style="--x:92;--y:136;--w:112;--h:56;"></span>
@@ -579,7 +596,7 @@ nav{z-index:620!important;}
           </div>
         </div>
       </div>
-      <span class="click-hint">Ver resultados</span>
+      <span class="click-hint"><span data-lang="pt">Ver resultados</span><span data-lang="en">See results</span></span>
     </div>
 
     <!-- 12: PHOTO COLLAB -->
@@ -588,60 +605,60 @@ nav{z-index:620!important;}
       <div class="cc cc-bottom">
         <span class="badge">CA.RO</span>
       </div>
-      <span class="click-hint">Bastidores</span>
+      <span class="click-hint"><span data-lang="pt">Bastidores</span><span data-lang="en">Behind the scenes</span></span>
     </div>
 
     <!-- 13: ARQUITETOS -->
     <div class="cell cell-arquitetos" onclick="openCell('studio')">
       <div class="cc">
         <span class="cell-tag">CA.RO</span>
-        <h2 class="cell-h" style="font-size:clamp(1.25rem,2vw,1.8rem);text-align:center;">Arquitetos de soluções.<br>Parceiros no <em>crescimento.</em></h2>
+        <h2 class="cell-h" style="font-size:clamp(1.25rem,2vw,1.8rem);text-align:center;"><span data-lang="pt">Arquitetos de soluções.<br>Parceiros no <em>crescimento.</em></span><span data-lang="en">Architects of solutions.<br>Partners in <em>growth.</em></span></h2>
         <div class="gold-bar" style="margin:.8rem auto;"></div>
-        <p class="cell-body" style="text-align:center;">Tecnologia. Design. Estratégia. Resultados.</p>
+        <p class="cell-body" style="text-align:center;"><span data-lang="pt">Tecnologia. Design. Estratégia. Resultados.</span><span data-lang="en">Technology. Design. Strategy. Results.</span></p>
       </div>
       <span class="click-hint">CA.RO Studio</span>
-    </div>
-
-    <!-- 17: PRODUTO PRONTIA -->
-    <div class="cell cell-mid" onclick="openCell('prontia_produto')">
-      <div class="cc cc-bottom">
-        <span class="cell-tag">Produto próprio CA.RO</span>
-        <h3 class="cell-h">Prontia.</h3>
-        <div class="gold-bar"></div>
-        <p class="cell-body">Consultoria de estilo por IA,<br>direto no WhatsApp.</p>
-      </div>
-      <span class="click-hint">Ver produto</span>
-    </div>
-
-    <!-- 18: PRODUTO CAROZAP -->
-    <div class="cell cell-cream" onclick="openCell('carozap_produto')">
-      <div class="cc cc-bottom">
-        <span class="cell-tag cell-tag-dark">Produto próprio CA.RO</span>
-        <h3 class="cell-h dark">CaroZap.</h3>
-        <div class="gold-bar"></div>
-        <p class="cell-body dark">CRM com IA para atendimento<br>via WhatsApp em escala.</p>
-      </div>
-      <span class="click-hint" style="color:rgba(6,16,30,.4);">Ver produto</span>
     </div>
 
     <!-- 19: PRODUTO CARO CLINIC OS -->
     <div class="cell cell-mid" onclick="openCell('clinicos_produto')">
       <div class="cc cc-bottom">
-        <span class="cell-tag">Produto próprio CA.RO</span>
-        <h3 class="cell-h">Caro Clinic OS.</h3>
+        <span class="cell-tag"><span data-lang="pt">Produto próprio CA.RO</span><span data-lang="en">A CA.RO product</span></span>
+        <h3 class="cell-h"><span data-lang="pt">Caro Clinic OS.</span><span data-lang="en">Caro Clinic OS.</span></h3>
         <div class="gold-bar"></div>
-        <p class="cell-body">Gestão inteligente para clínicas<br>de estética e tricologia.</p>
+        <p class="cell-body"><span data-lang="pt">Gestão inteligente para clínicas<br>de estética e tricologia.</span><span data-lang="en">Smart management for<br>aesthetics and trichology clinics.</span></p>
       </div>
-      <span class="click-hint">Ver produto</span>
+      <span class="click-hint"><span data-lang="pt">Ver produto</span><span data-lang="en">See product</span></span>
+    </div>
+
+    <!-- 18: PRODUTO CAROZAP -->
+    <div class="cell cell-cream cell-2wide" onclick="openCell('carozap_produto')">
+      <div class="cc cc-bottom">
+        <span class="cell-tag cell-tag-dark"><span data-lang="pt">Produto próprio CA.RO</span><span data-lang="en">A CA.RO product</span></span>
+        <h3 class="cell-h dark"><span data-lang="pt">CaroZap.</span><span data-lang="en">CaroZap.</span></h3>
+        <div class="gold-bar"></div>
+        <p class="cell-body dark"><span data-lang="pt">CRM com IA para atendimento<br>via WhatsApp em escala.</span><span data-lang="en">AI-powered CRM for<br>WhatsApp support at scale.</span></p>
+      </div>
+      <span class="click-hint" style="color:rgba(6,16,30,.4);"><span data-lang="pt">Ver produto</span><span data-lang="en">See product</span></span>
+    </div>
+
+    <!-- 17: PRODUTO PRONTIA -->
+    <div class="cell cell-mid" onclick="openCell('prontia_produto')">
+      <div class="cc cc-bottom">
+        <span class="cell-tag"><span data-lang="pt">Produto próprio CA.RO</span><span data-lang="en">A CA.RO product</span></span>
+        <h3 class="cell-h"><span data-lang="pt">PRONTIA.</span><span data-lang="en">PRONTIA.</span></h3>
+        <div class="gold-bar"></div>
+        <p class="cell-body"><span data-lang="pt">Consultoria de estilo por IA,<br>direto no WhatsApp.</span><span data-lang="en">AI style consulting,<br>right on WhatsApp.</span></p>
+      </div>
+      <span class="click-hint"><span data-lang="pt">Ver produto</span><span data-lang="en">See product</span></span>
     </div>
 
     <!-- 16: CONTATO CTA -->
     <div class="cell cell-full cell-contato" style="background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);" onclick="openCell('contato')">
       <div class="cc cc-center">
-        <span class="cell-tag">Próximo passo</span>
-        <h3 class="cell-h" style="font-size:clamp(1.8rem,3vw,2.8rem);">Vamos<br>construir<br><em>juntos.</em></h3>
+        <span class="cell-tag"><span data-lang="pt">Próximo passo</span><span data-lang="en">Next step</span></span>
+        <h3 class="cell-h" style="font-size:clamp(1.8rem,3vw,2.8rem);"><span data-lang="pt">Vamos<br>construir<br><em>juntos.</em></span><span data-lang="en">Let's<br>build<br><em>together.</em></span></h3>
         <div class="gold-bar"></div>
-        <p class="cell-body" style="font-size:.5rem;">Iniciar conversa →</p>
+        <p class="cell-body" style="font-size:.5rem;"><span data-lang="pt">Iniciar conversa →</span><span data-lang="en">Start a conversation →</span></p>
       </div>
     </div>
 
@@ -650,17 +667,35 @@ nav{z-index:620!important;}
 
 <!-- BOTTOM NAV -->
 <div id="bottom-nav" aria-label="Atalhos principais">
-  <a class="bn" href="#sobre" onclick="openCell('logo');return false;"><div class="bn-icon" style="font-family:'Cormorant Garamond',serif;font-size:.7rem;font-weight:500;letter-spacing:.1em;">CA</div><span class="bn-label">Sobre nós</span></a>
-  <a class="bn" href="#servicos" onclick="openCell('servicos');return false;"><div class="bn-icon">⊞</div><span class="bn-label">Serviços</span></a>
-  <a class="bn" href="#projetos" onclick="openCell('projetos');return false;"><div class="bn-icon">▣</div><span class="bn-label">Projetos</span></a>
-  <a class="bn" href="#tech" onclick="openCell('tech');return false;"><div class="bn-icon" style="font-size:.65rem;">&lt;/&gt;</div><span class="bn-label">Tecnologia</span></a>
-  <a class="bn" href="#numeros" onclick="openCell('numeros');return false;"><div class="bn-icon">↗</div><span class="bn-label">Resultados</span></a>
-  <a class="bn" href="#bastidores" onclick="openCell('sobre');return false;"><div class="bn-icon">◎</div><span class="bn-label">Bastidores</span></a>
-  <a class="bn" href="#manifesto" onclick="openCell('manifesto');return false;"><div class="bn-icon">✦</div><span class="bn-label">Propósito</span></a>
-  <a class="bn" href="#contato" onclick="openCell('contato');return false;"><div class="bn-icon">♡</div><span class="bn-label">Contato</span></a>
+  <a class="bn" href="#sobre" onclick="openCell('logo');return false;"><div class="bn-icon" style="font-family:'Cormorant Garamond',serif;font-size:.7rem;font-weight:500;letter-spacing:.1em;">CA</div><span class="bn-label"><span data-lang="pt">Sobre nós</span><span data-lang="en">About us</span></span></a>
+  <a class="bn" href="#servicos" onclick="openCell('servicos');return false;"><div class="bn-icon">⊞</div><span class="bn-label"><span data-lang="pt">Serviços</span><span data-lang="en">Services</span></span></a>
+  <a class="bn" href="#projetos" onclick="openCell('projetos');return false;"><div class="bn-icon">▣</div><span class="bn-label"><span data-lang="pt">Projetos</span><span data-lang="en">Projects</span></span></a>
+  <a class="bn" href="#tech" onclick="openCell('tech');return false;"><div class="bn-icon" style="font-size:.65rem;">&lt;/&gt;</div><span class="bn-label"><span data-lang="pt">Tecnologia</span><span data-lang="en">Technology</span></span></a>
+  <a class="bn" href="#numeros" onclick="openCell('numeros');return false;"><div class="bn-icon">↗</div><span class="bn-label"><span data-lang="pt">Resultados</span><span data-lang="en">Results</span></span></a>
+  <a class="bn" href="#bastidores" onclick="openCell('sobre');return false;"><div class="bn-icon">◎</div><span class="bn-label"><span data-lang="pt">Bastidores</span><span data-lang="en">Behind the scenes</span></span></a>
+  <a class="bn" href="#manifesto" onclick="openCell('manifesto');return false;"><div class="bn-icon">✦</div><span class="bn-label"><span data-lang="pt">Propósito</span><span data-lang="en">Purpose</span></span></a>
+  <a class="bn" href="#contato" onclick="openCell('contato');return false;"><div class="bn-icon">♡</div><span class="bn-label"><span data-lang="pt">Contato</span><span data-lang="en">Contact</span></span></a>
 </div>
 
 <script>
+// I18N: language toggle (PT default, EN optional)
+function applyLang(lang){
+  document.documentElement.classList.toggle('lang-en', lang === 'en');
+  document.querySelectorAll('#lang-toggle .lt-opt').forEach(el=>{
+    el.classList.toggle('active', el.getAttribute('data-lt') === lang);
+  });
+  try{ localStorage.setItem('caro_lang', lang); }catch(e){}
+}
+function toggleLang(){
+  const current = document.documentElement.classList.contains('lang-en') ? 'en' : 'pt';
+  applyLang(current === 'en' ? 'pt' : 'en');
+}
+(function(){
+  let saved = 'pt';
+  try{ saved = localStorage.getItem('caro_lang') || 'pt'; }catch(e){}
+  applyLang(saved);
+})();
+
 // CURSOR
 const cur=document.getElementById('cur');
 let mx=0,my=0,lastSpark=0,sparkCount=0,lastTrailX=0,lastTrailY=0;
@@ -718,67 +753,96 @@ document.querySelectorAll('.cell,a,button').forEach(el=>{
 const pages = {
 
   logo:{
-    tag:'CA.RO — Technology, Design & Positioning',
-    title:'Quem somos.',
-    body:`A CA.RO é um estúdio de tecnologia, posicionamento e inteligência digital.<br><br>
+    tag:'<span data-lang="pt">CA.RO — Technology, Design & Positioning</span><span data-lang="en">CA.RO — Technology, Design & Positioning</span>',
+    title:'<span data-lang="pt">Quem somos.</span><span data-lang="en">Who we are.</span>',
+    body:`<span data-lang="pt">A CA.RO é um estúdio de tecnologia, posicionamento e inteligência digital.<br><br>
     <strong>Não somos uma agência.</strong> Não somos uma software house genérica.<br><br>
-    Somos estrategistas sofisticados que dominam tecnologia — construindo presença, percepção e inteligência digital para marcas que exigem coerência, elegância e resultado.`,
-    extra:`<div class="ov-grid">
-      <div class="ov-item"><h4>CA.RO <em>Studio</em></h4><p>Posicionamento, branding, experiência digital e ecossistema de presença para marcas premium.</p></div>
-      <div class="ov-item"><h4>CA.RO <em>Tech</em></h4><p>Sistemas inteligentes, aplicativos, dashboards, automação e soluções proprietárias.</p></div>
+    Somos estrategistas sofisticados que dominam tecnologia — construindo presença, percepção e inteligência digital para marcas que exigem coerência, elegância e resultado.</span><span data-lang="en">CA.RO is a technology, positioning and digital intelligence studio.<br><br>
+    <strong>We are not an agency.</strong> We are not a generic software house.<br><br>
+    We are sophisticated strategists who master technology — building presence, perception and digital intelligence for brands that demand coherence, elegance and results.</span>`,
+    extra:`<span data-lang="pt"><div class="ov-grid">
+      <div class="ov-item"><h4>CA.RO <em><span data-lang="pt">Studio</span><span data-lang="en">Studio</span></em></h4><p>Posicionamento, branding, experiência digital e ecossistema de presença para marcas premium.</p></div>
+      <div class="ov-item"><h4>CA.RO <em><span data-lang="pt">Tech</span><span data-lang="en">Tech</span></em></h4><p>Sistemas inteligentes, aplicativos, dashboards, automação e soluções proprietárias.</p></div>
     </div>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Iniciar conversa</a>`
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Iniciar conversa</a></span><span data-lang="en"><div class="ov-grid">
+      <div class="ov-item"><h4>CA.RO <em>Studio</em></h4><p>Positioning, branding, digital experience and presence ecosystem for premium brands.</p></div>
+      <div class="ov-item"><h4>CA.RO <em>Tech</em></h4><p>Intelligent systems, applications, dashboards, automation and proprietary solutions.</p></div>
+    </div>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Start a conversation</a></span>`
   },
 
   manifesto:{
-    tag:'Manifesto CA.RO',
-    title:'Ser visto é comum. Ser lembrado é estratégico.',
-    body:`"A maioria das empresas acredita que presença digital significa apenas aparecer.<br><br>
+    tag:'<span data-lang="pt">Manifesto CA.RO</span><span data-lang="en">CA.RO Manifesto</span>',
+    title:'<span data-lang="pt">Ser visto é comum. Ser lembrado é estratégico.</span><span data-lang="en">Being seen is common. Being remembered is strategic.</span>',
+    body:`<span data-lang="pt">"A maioria das empresas acredita que presença digital significa apenas aparecer.<br><br>
     <strong>Ser visto é comum. Ser lembrado é estratégico.</strong><br><br>
     Acreditamos que marcas fortes são construídas através de percepção, estrutura e inteligência.<br><br>
-    Porque quando uma empresa é percebida da maneira correta… <strong>Tudo muda.</strong>"`,
-    extra:`<div class="ov-rule"></div>
+    Porque quando uma empresa é percebida da maneira correta… <strong>Tudo muda.</strong>"</span><span data-lang="en">"Most companies believe digital presence just means showing up.<br><br>
+    <strong>Being seen is common. Being remembered is strategic.</strong><br><br>
+    We believe strong brands are built through perception, structure and intelligence.<br><br>
+    Because when a company is perceived the right way… <strong>everything changes.</strong>"</span>`,
+    extra:`<span data-lang="pt"><div class="ov-rule"></div>
     <p class="ov-body">"Quando uma marca possui posicionamento, estrutura e presença — ela começa a atrair as pessoas certas. As oportunidades certas. Os projetos certos.<br><br><strong>Percepção muda crescimento.</strong>"</p>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Construir juntos</a>`
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Construir juntos</a></span><span data-lang="en"><div class="ov-rule"></div>
+    <p class="ov-body">"When a brand has positioning, structure and presence — it starts attracting the right people. The right opportunities. The right projects.<br><br><strong>Perception changes growth.</strong>"</p>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Build together</a></span>`
   },
 
   studio:{
-    tag:'CA.RO Studio',
-    title:'Arquitetura de Presença.',
-    body:`Posicionamento, branding e ecossistema digital com estética atemporal e visão estratégica refinada.<br><br>
-    <strong>Para marcas que entendem que sofisticação não é detalhe — é estratégia.</strong>`,
-    extra:`<div class="ov-list">
-      <div class="ov-list-item">Arquitetura de marca</div>
+    tag:'<span data-lang="pt">CA.RO Studio</span><span data-lang="en">CA.RO Studio</span>',
+    title:'<span data-lang="pt">Arquitetura de Presença.</span><span data-lang="en">Presence Architecture.</span>',
+    body:`<span data-lang="pt">Posicionamento, branding e ecossistema digital com estética atemporal e visão estratégica refinada.<br><br>
+    <strong>Para marcas que entendem que sofisticação não é detalhe — é estratégia.</strong></span><span data-lang="en">Positioning, branding and digital ecosystem with timeless aesthetics and refined strategic vision.<br><br>
+    <strong>For brands that understand sophistication is not a detail — it is a strategy.</strong></span>`,
+    extra:`<span data-lang="pt"><div class="ov-list">
+      <div class="ov-list-item"><span data-lang="pt">Arquitetura de marca</span><span data-lang="en">Brand architecture</span></div>
       <div class="ov-list-item">Experiência visual estratégica</div>
       <div class="ov-list-item">Ecossistema digital</div>
       <div class="ov-list-item">Performance e aquisição estratégica</div>
       <div class="ov-list-item">Direção visual e posicionamento</div>
       <div class="ov-list-item">Gestão de presença premium</div>
     </div>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Quero o Studio</a>`
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Quero o Studio</a></span><span data-lang="en"><div class="ov-list">
+      <div class="ov-list-item">Brand architecture</div>
+      <div class="ov-list-item">Strategic visual experience</div>
+      <div class="ov-list-item">Digital ecosystem</div>
+      <div class="ov-list-item">Strategic performance and acquisition</div>
+      <div class="ov-list-item">Visual direction and positioning</div>
+      <div class="ov-list-item">Premium presence management</div>
+    </div>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">I want Studio</a></span>`
   },
 
   tech:{
-    tag:'CA.RO Tech',
-    title:'Arquitetura Tecnológica.',
-    body:`Sistemas inteligentes, soluções proprietárias e infraestrutura digital com domínio técnico e elegância.<br><br>
+    tag:'<span data-lang="pt">CA.RO Tech</span><span data-lang="en">CA.RO Tech</span>',
+    title:'<span data-lang="pt">Arquitetura Tecnológica.</span><span data-lang="en">Technology Architecture.</span>',
+    body:`<span data-lang="pt">Sistemas inteligentes, soluções proprietárias e infraestrutura digital com domínio técnico e elegância.<br><br>
     <strong>Tecnologia que não apenas automatiza — organiza, fortalece e simplifica.</strong><br><br>
-    Empresas sofisticadas crescem porque operam melhor.`,
-    extra:`<div class="ov-list">
-      <div class="ov-list-item">Sistemas inteligentes</div>
+    Empresas sofisticadas crescem porque operam melhor.</span><span data-lang="en">Intelligent systems, proprietary solutions and digital infrastructure with technical mastery and elegance.<br><br>
+    <strong>Technology that does not just automate — it organizes, strengthens and simplifies.</strong><br><br>
+    Sophisticated companies grow because they operate better.</span>`,
+    extra:`<span data-lang="pt"><div class="ov-list">
+      <div class="ov-list-item"><span data-lang="pt">Sistemas inteligentes</span><span data-lang="en">Intelligent systems</span></div>
       <div class="ov-list-item">Dashboards e automação</div>
-      <div class="ov-list-item">Infraestrutura digital</div>
+      <div class="ov-list-item"><span data-lang="pt">Infraestrutura digital</span><span data-lang="en">Digital infrastructure</span></div>
       <div class="ov-list-item">Aplicativos e produtos digitais</div>
       <div class="ov-list-item">Soluções industriais e corporativas</div>
     </div>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Quero o Tech</a>`
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Quero o Tech</a></span><span data-lang="en"><div class="ov-list">
+      <div class="ov-list-item">Intelligent systems</div>
+      <div class="ov-list-item">Dashboards and automation</div>
+      <div class="ov-list-item">Digital infrastructure</div>
+      <div class="ov-list-item">Applications and digital products</div>
+      <div class="ov-list-item">Industrial and corporate solutions</div>
+    </div>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">I want Tech</a></span>`
   },
 
   servicos:{
-    tag:'O que desenvolvemos',
-    title:'Seis pilares. Uma visão.',
-    body:`Cada serviço é desenvolvido com precisão estratégica, estética atemporal e foco absoluto em resultado e percepção de valor.`,
-    extra:`<div class="ov-grid">
+    tag:'<span data-lang="pt">O que desenvolvemos</span><span data-lang="en">What we build</span>',
+    title:'<span data-lang="pt">Seis pilares. Uma visão.</span><span data-lang="en">Six pillars. One vision.</span>',
+    body:`<span data-lang="pt">Cada serviço é desenvolvido com precisão estratégica, estética atemporal e foco absoluto em resultado e percepção de valor.</span><span data-lang="en">Each service is developed with strategic precision, timeless aesthetics and absolute focus on results and perceived value.</span>`,
+    extra:`<span data-lang="pt"><div class="ov-grid">
       <div class="ov-item"><h4>01 — Arquitetura de <em>Marca</em></h4><p>Identidade estratégica com precisão. Posicionamento que gera percepção premium e diferenciação autêntica.</p></div>
       <div class="ov-item"><h4>02 — Infraestrutura <em>Digital</em></h4><p>Sites, plataformas e ecossistemas com estética atemporal e performance técnica irrepreensível.</p></div>
       <div class="ov-item"><h4>03 — Sistemas <em>Inteligentes</em></h4><p>Apps, dashboards e automação que organizam operações e fortalecem posicionamento.</p></div>
@@ -786,44 +850,54 @@ const pages = {
       <div class="ov-item"><h4>05 — Experiência <em>Visual</em></h4><p>Direção criativa que transmite sofisticação, autoridade e elegância contemporânea.</p></div>
       <div class="ov-item"><h4>06 — Soluções <em>Proprietárias</em></h4><p>Produtos digitais exclusivos para marcas que exigem tecnologia com classe e visão de longo prazo.</p></div>
     </div>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Iniciar conversa</a>`
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Iniciar conversa</a></span><span data-lang="en"><div class="ov-grid">
+      <div class="ov-item"><h4>01 — Brand <em>Architecture</em></h4><p>Precise strategic identity. Positioning that generates premium perception and authentic differentiation.</p></div>
+      <div class="ov-item"><h4>02 — Digital <em>Infrastructure</em></h4><p>Websites, platforms and ecosystems with timeless aesthetics and flawless technical performance.</p></div>
+      <div class="ov-item"><h4>03 — Intelligent <em>Systems</em></h4><p>Apps, dashboards and automation that organize operations and strengthen positioning.</p></div>
+      <div class="ov-item"><h4>04 — Strategic <em>Performance</em></h4><p>Intelligent acquisition and growth. Every investment connected to perception and expansion.</p></div>
+      <div class="ov-item"><h4>05 — Visual <em>Experience</em></h4><p>Creative direction that conveys sophistication, authority and contemporary elegance.</p></div>
+      <div class="ov-item"><h4>06 — Proprietary <em>Solutions</em></h4><p>Exclusive digital products for brands that demand technology with class and long-term vision.</p></div>
+    </div>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Start a conversation</a></span>`
   },
 
   sobre:{
-    tag:'Equipe & Propósito',
-    title:'Estrategistas que resolvem.',
-    body:`A CA.RO nasceu da convicção de que marcas fortes são construídas através de percepção, estrutura e inteligência — não apenas de posts e campanhas.<br><br>
+    tag:'<span data-lang="pt">Equipe & Propósito</span><span data-lang="en">Team & Purpose</span>',
+    title:'<span data-lang="pt">Estrategistas que resolvem.</span><span data-lang="en">Strategists who solve.</span>',
+    body:`<span data-lang="pt">A CA.RO nasceu da convicção de que marcas fortes são construídas através de percepção, estrutura e inteligência — não apenas de posts e campanhas.<br><br>
     <strong>Atuação nacional e internacional — França, Catar e Emirados Árabes.</strong><br><br>
-    Uma metodologia própria que une sofisticação europeia à mais avançada engenharia digital.`,
-    extra:`<a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar</a>`
+    Uma metodologia própria que une sofisticação europeia à mais avançada engenharia digital.</span><span data-lang="en">CA.RO was born from the conviction that strong brands are built through perception, structure and intelligence — not just posts and campaigns.<br><br>
+    <strong>National and international operations — France, Qatar and the United Arab Emirates.</strong><br><br>
+    A proprietary methodology that unites European sophistication with the most advanced digital engineering.</span>`,
+    extra:`<span data-lang="pt"><a class="ov-cta" onclick="closeOverlay();openCell('contato')"><span data-lang="pt">Conversar</span><span data-lang="en">Talk to us</span></a></span><span data-lang="en"><a class="ov-cta" onclick="closeOverlay();openCell('contato')">Talk to us</a></span>`
   },
 
   camila:{
-    tag:'Camila Rocha',
-    title:'Camila Rocha.',
-    body:`Diretora estratégica. Refinamento, precisão e direção editorial. Fala e postura que transmitem autoridade silenciosa.`,
-    extra:`<a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar</a>`
+    tag:'<span data-lang="pt">Camila Rocha</span><span data-lang="en">Camila Rocha</span>',
+    title:'<span data-lang="pt">Camila Rocha.</span><span data-lang="en">Camila Rocha.</span>',
+    body:`<span data-lang="pt">Diretora estratégica. Refinamento, precisão e direção editorial. Fala e postura que transmitem autoridade silenciosa.</span><span data-lang="en">Strategic director. Refinement, precision and editorial direction. A voice and presence that convey quiet authority.</span>`,
+    extra:`<span data-lang="pt"><a class="ov-cta" onclick="closeOverlay();openCell('contato')"><span data-lang="pt">Conversar</span><span data-lang="en">Talk to us</span></a></span><span data-lang="en"><a class="ov-cta" onclick="closeOverlay();openCell('contato')">Talk to us</a></span>`
   },
 
   roni:{
-    tag:'Roni',
-    title:'Roni.',
-    body:`Arquiteto tecnológico. Silencioso, técnico, observador. O domínio técnico que sustenta toda a operação.`,
-    extra:`<a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar</a>`
+    tag:'<span data-lang="pt">Roni</span><span data-lang="en">Roni</span>',
+    title:'<span data-lang="pt">Roni.</span><span data-lang="en">Roni.</span>',
+    body:`<span data-lang="pt">Arquiteto tecnológico. Silencioso, técnico, observador. O domínio técnico que sustenta toda a operação.</span><span data-lang="en">Technology architect. Quiet, technical, observant. The technical mastery that sustains the entire operation.</span>`,
+    extra:`<span data-lang="pt"><a class="ov-cta" onclick="closeOverlay();openCell('contato')"><span data-lang="pt">Conversar</span><span data-lang="en">Talk to us</span></a></span><span data-lang="en"><a class="ov-cta" onclick="closeOverlay();openCell('contato')">Talk to us</a></span>`
   },
 
   numeros:{
-    tag:'Números que refletem estratégia e execução',
-    title:'Resultado',
-    body:`Não acreditamos em vaidade de métricas. Cada número aqui reflete uma decisão estratégica, um projeto entregue com precisão e um parceiro que cresceu.`,
-    extra:`<div class="ov-stats">
-      <div class="ov-stat"><span class="ov-stat-n">+120</span><span class="ov-stat-l">Projetos entregues</span></div>
+    tag:'<span data-lang="pt">Números que refletem estratégia e execução</span><span data-lang="en">Numbers that reflect strategy and execution</span>',
+    title:'<span data-lang="pt">Resultado</span><span data-lang="en">Results</span>',
+    body:`<span data-lang="pt">Não acreditamos em vaidade de métricas. Cada número aqui reflete uma decisão estratégica, um projeto entregue com precisão e um parceiro que cresceu.</span><span data-lang="en">We do not believe in vanity metrics. Every number here reflects a strategic decision, a project delivered with precision, and a partner that grew.</span>`,
+    extra:`<span data-lang="pt"><div class="ov-stats">
+      <div class="ov-stat"><span class="ov-stat-n">+120</span><span class="ov-stat-l"><span data-lang="pt">Projetos entregues</span><span data-lang="en">Projects delivered</span></span></div>
       <div class="ov-stat"><span class="ov-stat-n">+50</span><span class="ov-stat-l">Parceiros estratégicos</span></div>
       <div class="ov-stat"><span class="ov-stat-n">6</span><span class="ov-stat-l">Países de atuação</span></div>
       <div class="ov-stat"><span class="ov-stat-n">100%</span><span class="ov-stat-l">Foco em resultado</span></div>
     </div>
     <div class="ov-client-section">
-      <span class="ov-client-title">NOSSOS CLIENTES</span>
+      <span class="ov-client-title"><span data-lang="pt">NOSSOS CLIENTES</span><span data-lang="en">OUR CLIENTS</span></span>
       <div class="ov-client-grid" aria-label="Clientes atendidos pela CA.RO">
         <span class="ov-client-logo" style="--x:92;--y:136;--w:112;--h:56;" title="Kagiva"></span>
         <span class="ov-client-logo" style="--x:228;--y:132;--w:124;--h:64;" title="Novas Vestes"></span>
@@ -841,28 +915,60 @@ const pages = {
     </div>
     <div class="ov-rule"></div>
     <p class="ov-body"><strong>Alphaville · São Paulo · Campinas · Jundiaí · Indaiatuba</strong><br>França · Catar · Emirados Árabes</p>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Ser o próximo</a>`
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Ser o próximo</a></span><span data-lang="en"><div class="ov-stats">
+      <div class="ov-stat"><span class="ov-stat-n">+120</span><span class="ov-stat-l">Projects delivered</span></div>
+      <div class="ov-stat"><span class="ov-stat-n">+50</span><span class="ov-stat-l">Strategic partners</span></div>
+      <div class="ov-stat"><span class="ov-stat-n">6</span><span class="ov-stat-l">Countries of operation</span></div>
+      <div class="ov-stat"><span class="ov-stat-n">100%</span><span class="ov-stat-l">Focus on results</span></div>
+    </div>
+    <div class="ov-client-section">
+      <span class="ov-client-title">OUR CLIENTS</span>
+      <div class="ov-client-grid" aria-label="Clients served by CA.RO">
+        <span class="ov-client-logo" style="--x:92;--y:136;--w:112;--h:56;" title="Kagiva"></span>
+        <span class="ov-client-logo" style="--x:228;--y:132;--w:124;--h:64;" title="Novas Vestes"></span>
+        <span class="ov-client-logo" style="--x:78;--y:194;--w:140;--h:46;" title="Camila Rocha"></span>
+        <span class="ov-client-logo" style="--x:216;--y:192;--w:138;--h:54;" title="Mona Modas"></span>
+        <span class="ov-client-logo" style="--x:86;--y:232;--w:132;--h:54;" title="Supersol Energia Solar"></span>
+        <span class="ov-client-logo" style="--x:226;--y:240;--w:110;--h:52;" title="Rainha"></span>
+        <span class="ov-client-logo" style="--x:88;--y:292;--w:105;--h:56;" title="Topper"></span>
+        <span class="ov-client-logo" style="--x:208;--y:288;--w:142;--h:58;" title="Giselly Ramos"></span>
+        <span class="ov-client-logo" style="--x:84;--y:332;--w:138;--h:72;" title="Marlene Oliveira"></span>
+        <span class="ov-client-logo" style="--x:216;--y:346;--w:130;--h:64;" title="Geração do Estilo"></span>
+        <span class="ov-client-logo" style="--x:84;--y:404;--w:142;--h:48;" title="Origin Chem"></span>
+        <span class="ov-client-logo" style="--x:232;--y:402;--w:104;--h:58;" title="Mundi TKR"></span>
+      </div>
+    </div>
+    <div class="ov-rule"></div>
+    <p class="ov-body"><strong>Alphaville · São Paulo · Campinas · Jundiaí · Indaiatuba</strong><br>France · Qatar · United Arab Emirates</p>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Be the next one</a></span>`
   },
 
   projetos:{
-    tag:'Portfólio CA.RO',
-    title:'Projetos que combinam estética e performance.',
-    body:`Cada projeto é uma arquitetura digital construída com intenção, elegância e resultado.`,
-    extra:`<div class="ov-grid">
-      <div class="ov-item"><h4><em>Prontia</em></h4><p>Consultora de estilo por inteligência artificial no WhatsApp, com o método de Camila Rocha. Produto próprio CA.RO TECH. <a href="https://www.prontia.ia.br" target="_blank" rel="noopener">prontia.ia.br &rarr;</a></p></div>
+    tag:'<span data-lang="pt">Portfólio CA.RO</span><span data-lang="en">CA.RO Portfolio</span>',
+    title:'<span data-lang="pt">Projetos que combinam estética e performance.</span><span data-lang="en">Projects that combine aesthetics and performance.</span>',
+    body:`<span data-lang="pt">Cada projeto é uma arquitetura digital construída com intenção, elegância e resultado.</span><span data-lang="en">Every project is a digital architecture built with intention, elegance and results.</span>`,
+    extra:`<span data-lang="pt"><div class="ov-grid">
+      <div class="ov-item"><h4><em>PRONTIA</em></h4><p>Consultora de estilo por inteligência artificial no WhatsApp, com o método de Camila Rocha. Produto próprio CA.RO TECH. <a href="https://www.prontia.ia.br" target="_blank" rel="noopener">prontia.ia.br &rarr;</a></p></div>
       <div class="ov-item"><h4><em>Websites</em> Institucionais</h4><p>Presença digital estratégica que posiciona, converte e reflete autoridade da marca.</p></div>
       <div class="ov-item"><h4><em>Sistemas</em> & Apps</h4><p>Soluções proprietárias desenvolvidas com elegância técnica e visão de crescimento.</p></div>
       <div class="ov-item"><h4><em>Branding</em> Premium</h4><p>Identidade visual e posicionamento estratégico para marcas que exigem diferenciação real.</p></div>
       <div class="ov-item"><h4><em>Performance</em> Estratégica</h4><p>Campanhas e aquisição com inteligência aplicada e foco absoluto em resultado.</p></div>
     </div>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Iniciar projeto</a>`
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Iniciar projeto</a></span><span data-lang="en"><div class="ov-grid">
+      <div class="ov-item"><h4><em>PRONTIA</em></h4><p>AI style consultant on WhatsApp, using Camila Rocha's method. A CA.RO TECH product. <a href="https://www.prontia.ia.br" target="_blank" rel="noopener">prontia.ia.br &rarr;</a></p></div>
+      <div class="ov-item"><h4><em>Corporate</em> Websites</h4><p>Strategic digital presence that positions, converts and reflects brand authority.</p></div>
+      <div class="ov-item"><h4><em>Systems</em> & Apps</h4><p>Proprietary solutions developed with technical elegance and growth vision.</p></div>
+      <div class="ov-item"><h4>Premium <em>Branding</em></h4><p>Visual identity and strategic positioning for brands that demand real differentiation.</p></div>
+      <div class="ov-item"><h4>Strategic <em>Performance</em></h4><p>Campaigns and acquisition with applied intelligence and absolute focus on results.</p></div>
+    </div>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Start a project</a></span>`
   },
 
   posicionamento:{
-    tag:'Dicionário CA.RO',
-    title:'A linguagem da sofisticação.',
-    body:`Marcas premium constroem percepção também pela forma como se comunicam. Cada palavra escolhida é uma decisão estratégica.`,
-    extra:`<div class="ov-dic">
+    tag:'<span data-lang="pt">Dicionário CA.RO</span><span data-lang="en">CA.RO Dictionary</span>',
+    title:'<span data-lang="pt">A linguagem da sofisticação.</span><span data-lang="en">The language of sophistication.</span>',
+    body:`<span data-lang="pt">Marcas premium constroem percepção também pela forma como se comunicam. Cada palavra escolhida é uma decisão estratégica.</span><span data-lang="en">Premium brands also build perception through how they communicate. Every word chosen is a strategic decision.</span>`,
+    extra:`<span data-lang="pt"><div class="ov-dic">
       <div class="ov-dic-col avoid">
         <span class="ov-dic-label">Não utilizamos</span>
         <div class="ov-dic-item">Agência digital</div>
@@ -880,90 +986,149 @@ const pages = {
         <div class="ov-dic-item">Technology Studio</div>
         <div class="ov-dic-item">Construímos presença digital</div>
         <div class="ov-dic-item">Arquitetura de presença</div>
-        <div class="ov-dic-item">Arquitetura de marca</div>
+        <div class="ov-dic-item"><span data-lang="pt">Arquitetura de marca</span><span data-lang="en">Brand architecture</span></div>
         <div class="ov-dic-item">Arquiteto tecnológico</div>
-        <div class="ov-dic-item">Infraestrutura digital</div>
-        <div class="ov-dic-item">Performance estratégica</div>
+        <div class="ov-dic-item"><span data-lang="pt">Infraestrutura digital</span><span data-lang="en">Digital infrastructure</span></div>
+        <div class="ov-dic-item"><span data-lang="pt">Performance estratégica</span><span data-lang="en">Strategic performance</span></div>
         <div class="ov-dic-item">Parceiro estratégico</div>
         <div class="ov-dic-item">Investimento estratégico</div>
       </div>
     </div>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Construir juntos</a>`
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Construir juntos</a></span><span data-lang="en"><div class="ov-dic">
+      <div class="ov-dic-col avoid">
+        <span class="ov-dic-label">We do not use</span>
+        <div class="ov-dic-item">Digital agency</div>
+        <div class="ov-dic-item">We make posts</div>
+        <div class="ov-dic-item">Instagram management</div>
+        <div class="ov-dic-item">Logo creation</div>
+        <div class="ov-dic-item">Programmer</div>
+        <div class="ov-dic-item">Corporate website</div>
+        <div class="ov-dic-item">Digital marketing</div>
+        <div class="ov-dic-item">Client</div>
+        <div class="ov-dic-item">Price</div>
+      </div>
+      <div class="ov-dic-col use">
+        <span class="ov-dic-label">Our language</span>
+        <div class="ov-dic-item">Technology Studio</div>
+        <div class="ov-dic-item">We build digital presence</div>
+        <div class="ov-dic-item">Presence architecture</div>
+        <div class="ov-dic-item">Brand architecture</div>
+        <div class="ov-dic-item">Technology architect</div>
+        <div class="ov-dic-item">Digital infrastructure</div>
+        <div class="ov-dic-item">Strategic performance</div>
+        <div class="ov-dic-item">Strategic partner</div>
+        <div class="ov-dic-item">Strategic investment</div>
+      </div>
+    </div>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Build together</a></span>`
   },
 
   dicionario:{
-    tag:'Posicionamento CA.RO',
-    title:'Presença que transforma.',
-    body:`<strong>"Tecnologia com refinamento. Onde tecnologia encontra sofisticação."</strong><br><br>
+    tag:'<span data-lang="pt">Posicionamento CA.RO</span><span data-lang="en">CA.RO Positioning</span>',
+    title:'<span data-lang="pt">Presença que transforma.</span><span data-lang="en">Presence that transforms.</span>',
+    body:`<span data-lang="pt"><strong>"Tecnologia com refinamento. Onde tecnologia encontra sofisticação."</strong><br><br>
     A CA.RO não deve parecer uma agência comum ou uma startup barulhenta.<br><br>
-    A CA.RO deve parecer: <strong>estrategistas sofisticados que dominam tecnologia.</strong>`,
-    extra:`<div class="ov-rule"></div>
+    A CA.RO deve parecer: <strong>estrategistas sofisticados que dominam tecnologia.</strong></span><span data-lang="en"><strong>"Technology with refinement. Where technology meets sophistication."</strong><br><br>
+    CA.RO should not look like a common agency or a noisy startup.<br><br>
+    CA.RO should look like: <strong>sophisticated strategists who master technology.</strong></span>`,
+    extra:`<span data-lang="pt"><div class="ov-rule"></div>
     <p class="ov-body">A marca transmite: <strong>inteligência silenciosa · sofisticação europeia · domínio técnico · discrição · estética editorial · elegância contemporânea.</strong></p>
     <div class="ov-rule"></div>
     <p class="ov-body"><em>"Sistemas inteligentes com estética atemporal. Arquitetura digital para marcas sofisticadas. Tecnologia elegante para empresas modernas."</em></p>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Fazer parte</a>`
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Fazer parte</a></span><span data-lang="en"><div class="ov-rule"></div>
+    <p class="ov-body">The brand conveys: <strong>quiet intelligence · European sophistication · technical mastery · discretion · editorial aesthetics · contemporary elegance.</strong></p>
+    <div class="ov-rule"></div>
+    <p class="ov-body"><em>"Intelligent systems with timeless aesthetics. Digital architecture for sophisticated brands. Elegant technology for modern companies."</em></p>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Be part of it</a></span>`
   },
 
   contato:{
-    tag:'Iniciar conversa',
-    title:'Vamos construir juntos.',
-    body:`Atendemos empresas, executivos e marcas que compreendem valor, discrição e posicionamento sólido como fundamentos de crescimento sustentável.<br><br>
-    <strong>Alphaville · São Paulo · Internacional</strong>`,
-    extra:`<div class="ov-rule"></div>
+    tag:'<span data-lang="pt">Iniciar conversa</span><span data-lang="en">Start a conversation</span>',
+    title:'<span data-lang="pt">Vamos construir juntos.</span><span data-lang="en">Let us build together.</span>',
+    body:`<span data-lang="pt">Atendemos empresas, executivos e marcas que compreendem valor, discrição e posicionamento sólido como fundamentos de crescimento sustentável.<br><br>
+    <strong>Alphaville · São Paulo · Internacional</strong></span><span data-lang="en">We work with companies, executives and brands that understand value, discretion and solid positioning as foundations for sustainable growth.<br><br>
+    <strong>Alphaville · São Paulo · International</strong></span>`,
+    extra:`<span data-lang="pt"><div class="ov-rule"></div>
     <div class="ov-list">
       <div class="ov-list-item"><strong style="color:var(--gold);font-weight:400;">WhatsApp</strong> — +55 11 94230-2344</div>
       <div class="ov-list-item"><strong style="color:var(--gold);font-weight:400;">Site</strong> — caroimage.com</div>
       <div class="ov-list-item"><strong style="color:var(--gold);font-weight:400;">Atuação</strong> — Nacional & Internacional</div>
     </div>
     <div class="ov-rule"></div>
-    <a class="ov-cta" href="https://wa.me/5511942302344" target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a>`
+    <a class="ov-cta" href="https://wa.me/5511942302344" target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a></span><span data-lang="en"><div class="ov-rule"></div>
+    <div class="ov-list">
+      <div class="ov-list-item"><strong style="color:var(--gold);font-weight:400;">WhatsApp</strong> — +55 11 94230-2344</div>
+      <div class="ov-list-item"><strong style="color:var(--gold);font-weight:400;">Website</strong> — caroimage.com</div>
+      <div class="ov-list-item"><strong style="color:var(--gold);font-weight:400;">Operations</strong> — National & International</div>
+    </div>
+    <div class="ov-rule"></div>
+    <a class="ov-cta" href="https://wa.me/5511942302344" target="_blank" rel="noopener noreferrer">Open WhatsApp</a></span>`
   },
 
   prontia_produto:{
-    tag:'Produto próprio CA.RO',
-    title:'Prontia.',
-    body:`Consultora de estilo por inteligência artificial, direto no WhatsApp — com o método de consultoria de imagem da Camila Rocha.<br><br>
-    A cliente conta a ocasião e o que já tem no guarda-roupa; a IA monta a combinação usando peças reais, sem inventar looks do zero.`,
-    extra:`<div class="ov-list">
+    tag:'<span data-lang="pt">Produto próprio CA.RO</span><span data-lang="en">A CA.RO product</span>',
+    title:'<span data-lang="pt">PRONTIA.</span><span data-lang="en">PRONTIA.</span>',
+    body:`<span data-lang="pt">Consultora de estilo por inteligência artificial, direto no WhatsApp — com o método de consultoria de imagem da Camila Rocha.<br><br>
+    A cliente conta a ocasião e o que já tem no guarda-roupa; a IA monta a combinação usando peças reais, sem inventar looks do zero.</span><span data-lang="en">AI-powered style consultant, right on WhatsApp — using Camila Rocha's image consulting method.<br><br>
+    The client shares the occasion and what she already has in her wardrobe; the AI puts together the outfit using real pieces, never inventing looks from scratch.</span>`,
+    extra:`<span data-lang="pt"><div class="ov-list">
       <div class="ov-list-item">Consultoria de estilo 24/7 no WhatsApp</div>
       <div class="ov-list-item">Baseado no método real da Camila Rocha</div>
       <div class="ov-list-item">Guarda-roupa da cliente cadastrado por foto</div>
     </div>
-    <a class="ov-cta" href="https://www.prontia.ia.br" target="_blank" rel="noopener">prontia.ia.br &rarr;</a>`
+    <a class="ov-cta" href="https://www.prontia.ia.br" target="_blank" rel="noopener">prontia.ia.br &rarr;</a></span><span data-lang="en"><div class="ov-list">
+      <div class="ov-list-item">24/7 style consulting on WhatsApp</div>
+      <div class="ov-list-item">Based on Camila Rocha's real method</div>
+      <div class="ov-list-item">Client's wardrobe registered by photo</div>
+    </div>
+    <a class="ov-cta" href="https://www.prontia.ia.br" target="_blank" rel="noopener">prontia.ia.br &rarr;</a></span>`
   },
 
   carozap_produto:{
-    tag:'Produto próprio CA.RO',
-    title:'CaroZap.',
-    body:`Plataforma de atendimento via WhatsApp com inteligência artificial — CRM, agentes de IA e automação de conversas em um só lugar.<br><br>
-    Feita para empresas que precisam responder em escala sem perder o tom humano do atendimento.`,
-    extra:`<div class="ov-list">
+    tag:'<span data-lang="pt">Produto próprio CA.RO</span><span data-lang="en">A CA.RO product</span>',
+    title:'<span data-lang="pt">CaroZap.</span><span data-lang="en">CaroZap.</span>',
+    body:`<span data-lang="pt">Plataforma de atendimento via WhatsApp com inteligência artificial — CRM, agentes de IA e automação de conversas em um só lugar.<br><br>
+    Feita para empresas que precisam responder em escala sem perder o tom humano do atendimento.</span><span data-lang="en">AI-powered WhatsApp support platform — CRM, AI agents and conversation automation in one place.<br><br>
+    Built for companies that need to respond at scale without losing the human tone of service.</span>`,
+    extra:`<span data-lang="pt"><div class="ov-list">
       <div class="ov-list-item">Múltiplos números e canais por empresa</div>
       <div class="ov-list-item">Agentes de IA configuráveis por tom de voz</div>
       <div class="ov-list-item">Painel de gestão de conversas e leads</div>
     </div>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar sobre o CaroZap</a>`
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar sobre o CaroZap</a></span><span data-lang="en"><div class="ov-list">
+      <div class="ov-list-item">Multiple numbers and channels per company</div>
+      <div class="ov-list-item">AI agents configurable by tone of voice</div>
+      <div class="ov-list-item">Conversation and lead management panel</div>
+    </div>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Talk about CaroZap</a></span>`
   },
 
   clinicos_produto:{
-    tag:'Produto próprio CA.RO',
-    title:'Caro Clinic OS.',
-    body:`Sistema de gestão para clínicas de estética e tricologia — agenda, prontuário, financeiro e relacionamento com a paciente em uma única plataforma.<br><br>
-    Pensado para clínicas que precisam de organização sem perder o cuidado no atendimento.`,
-    extra:`<div class="ov-list">
+    tag:'<span data-lang="pt">Produto próprio CA.RO</span><span data-lang="en">A CA.RO product</span>',
+    title:'<span data-lang="pt">Caro Clinic OS.</span><span data-lang="en">Caro Clinic OS.</span>',
+    body:`<span data-lang="pt">Sistema de gestão para clínicas de estética e tricologia — agenda, prontuário, financeiro e relacionamento com a paciente em uma única plataforma.<br><br>
+    Pensado para clínicas que precisam de organização sem perder o cuidado no atendimento.</span><span data-lang="en">Management system for aesthetics and trichology clinics — scheduling, patient records, finance and patient relationship in a single platform.<br><br>
+    Built for clinics that need organization without losing the care in patient service.</span>`,
+    extra:`<span data-lang="pt"><div class="ov-list">
       <div class="ov-list-item">Agenda e prontuário integrados</div>
       <div class="ov-list-item">Gestão financeira da clínica</div>
       <div class="ov-list-item">Relacionamento e follow-up de pacientes</div>
     </div>
-    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar sobre o Caro Clinic OS</a>`
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar sobre o Caro Clinic OS</a></span><span data-lang="en"><div class="ov-list">
+      <div class="ov-list-item">Integrated scheduling and patient records</div>
+      <div class="ov-list-item">Clinic financial management</div>
+      <div class="ov-list-item">Patient relationship and follow-up</div>
+    </div>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Talk about Caro Clinic OS</a></span>`
   },
 
   saida:{
-    tag:'Antes de sair',
-    title:'Sua próxima etapa pode começar agora.',
-    body:`Presença forte não nasce por acaso. Ela começa quando estratégia, tecnologia e posicionamento entram na mesma conversa.<br><br>
-    <strong>Se a sua marca precisa ser lembrada, este é um bom momento para falar com a CA.RO.</strong>`,
-    extra:`<a class="ov-cta" href="https://wa.me/5511942302344" target="_blank" rel="noopener noreferrer">Conversar agora</a>`
+    tag:'<span data-lang="pt">Antes de sair</span><span data-lang="en">Before you go</span>',
+    title:'<span data-lang="pt">Sua próxima etapa pode começar agora.</span><span data-lang="en">Your next step can start now.</span>',
+    body:`<span data-lang="pt">Presença forte não nasce por acaso. Ela começa quando estratégia, tecnologia e posicionamento entram na mesma conversa.<br><br>
+    <strong>Se a sua marca precisa ser lembrada, este é um bom momento para falar com a CA.RO.</strong></span><span data-lang="en">Strong presence does not happen by chance. It begins when strategy, technology and positioning enter the same conversation.<br><br>
+    <strong>If your brand needs to be remembered, this is a good time to talk to CA.RO.</strong></span>`,
+    extra:`<span data-lang="pt"><a class="ov-cta" href="https://wa.me/5511942302344" target="_blank" rel="noopener noreferrer">Conversar agora</a></span><span data-lang="en"><a class="ov-cta" href="https://wa.me/5511942302344" target="_blank" rel="noopener noreferrer">Talk now</a></span>`
   }
 };
 
