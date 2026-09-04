@@ -499,6 +499,7 @@ nav{z-index:620!important;}
         <span class="badge">CA.RO</span>
         <span class="cell-tag">Portfólio</span>
         <h3 class="cell-h">Nossa <em>arquitetura</em></h3>
+        <p style="font-size:.65rem;letter-spacing:.02em;opacity:.75;margin-top:6px;">Produto próprio: <strong>Prontia</strong>, consultoria de estilo por IA no WhatsApp</p>
       </div>
       <span class="click-hint">Ver portfólio</span>
     </div>
@@ -599,6 +600,39 @@ nav{z-index:620!important;}
         <p class="cell-body" style="text-align:center;">Tecnologia. Design. Estratégia. Resultados.</p>
       </div>
       <span class="click-hint">CA.RO Studio</span>
+    </div>
+
+    <!-- 17: PRODUTO PRONTIA -->
+    <div class="cell cell-mid" onclick="openCell('prontia_produto')">
+      <div class="cc cc-bottom">
+        <span class="cell-tag">Produto próprio CA.RO</span>
+        <h3 class="cell-h">Prontia.</h3>
+        <div class="gold-bar"></div>
+        <p class="cell-body">Consultoria de estilo por IA,<br>direto no WhatsApp.</p>
+      </div>
+      <span class="click-hint">Ver produto</span>
+    </div>
+
+    <!-- 18: PRODUTO CAROZAP -->
+    <div class="cell cell-cream" onclick="openCell('carozap_produto')">
+      <div class="cc cc-bottom">
+        <span class="cell-tag cell-tag-dark">Produto próprio CA.RO</span>
+        <h3 class="cell-h dark">CaroZap.</h3>
+        <div class="gold-bar"></div>
+        <p class="cell-body dark">CRM com IA para atendimento<br>via WhatsApp em escala.</p>
+      </div>
+      <span class="click-hint" style="color:rgba(6,16,30,.4);">Ver produto</span>
+    </div>
+
+    <!-- 19: PRODUTO CARO CLINIC OS -->
+    <div class="cell cell-mid" onclick="openCell('clinicos_produto')">
+      <div class="cc cc-bottom">
+        <span class="cell-tag">Produto próprio CA.RO</span>
+        <h3 class="cell-h">Caro Clinic OS.</h3>
+        <div class="gold-bar"></div>
+        <p class="cell-body">Gestão inteligente para clínicas<br>de estética e tricologia.</p>
+      </div>
+      <span class="click-hint">Ver produto</span>
     </div>
 
     <!-- 16: CONTATO CTA -->
@@ -815,7 +849,7 @@ const pages = {
     title:'Projetos que combinam estética e performance.',
     body:`Cada projeto é uma arquitetura digital construída com intenção, elegância e resultado.`,
     extra:`<div class="ov-grid">
-      <div class="ov-item"><h4><em>Iara Stylist</em></h4><p>Consultora de estilo por inteligência artificial no WhatsApp, com o método de Camila Rocha. Produto próprio CA.RO TECH. <a href="https://www.prontia.ia.br" target="_blank" rel="noopener">prontia.ia.br &rarr;</a></p></div>
+      <div class="ov-item"><h4><em>Prontia</em></h4><p>Consultora de estilo por inteligência artificial no WhatsApp, com o método de Camila Rocha. Produto próprio CA.RO TECH. <a href="https://www.prontia.ia.br" target="_blank" rel="noopener">prontia.ia.br &rarr;</a></p></div>
       <div class="ov-item"><h4><em>Websites</em> Institucionais</h4><p>Presença digital estratégica que posiciona, converte e reflete autoridade da marca.</p></div>
       <div class="ov-item"><h4><em>Sistemas</em> & Apps</h4><p>Soluções proprietárias desenvolvidas com elegância técnica e visão de crescimento.</p></div>
       <div class="ov-item"><h4><em>Branding</em> Premium</h4><p>Identidade visual e posicionamento estratégico para marcas que exigem diferenciação real.</p></div>
@@ -883,6 +917,45 @@ const pages = {
     </div>
     <div class="ov-rule"></div>
     <a class="ov-cta" href="https://wa.me/5511942302344" target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a>`
+  },
+
+  prontia_produto:{
+    tag:'Produto próprio CA.RO',
+    title:'Prontia.',
+    body:`Consultora de estilo por inteligência artificial, direto no WhatsApp — com o método de consultoria de imagem da Camila Rocha.<br><br>
+    A cliente conta a ocasião e o que já tem no guarda-roupa; a IA monta a combinação usando peças reais, sem inventar looks do zero.`,
+    extra:`<div class="ov-list">
+      <div class="ov-list-item">Consultoria de estilo 24/7 no WhatsApp</div>
+      <div class="ov-list-item">Baseado no método real da Camila Rocha</div>
+      <div class="ov-list-item">Guarda-roupa da cliente cadastrado por foto</div>
+    </div>
+    <a class="ov-cta" href="https://www.prontia.ia.br" target="_blank" rel="noopener">prontia.ia.br &rarr;</a>`
+  },
+
+  carozap_produto:{
+    tag:'Produto próprio CA.RO',
+    title:'CaroZap.',
+    body:`Plataforma de atendimento via WhatsApp com inteligência artificial — CRM, agentes de IA e automação de conversas em um só lugar.<br><br>
+    Feita para empresas que precisam responder em escala sem perder o tom humano do atendimento.`,
+    extra:`<div class="ov-list">
+      <div class="ov-list-item">Múltiplos números e canais por empresa</div>
+      <div class="ov-list-item">Agentes de IA configuráveis por tom de voz</div>
+      <div class="ov-list-item">Painel de gestão de conversas e leads</div>
+    </div>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar sobre o CaroZap</a>`
+  },
+
+  clinicos_produto:{
+    tag:'Produto próprio CA.RO',
+    title:'Caro Clinic OS.',
+    body:`Sistema de gestão para clínicas de estética e tricologia — agenda, prontuário, financeiro e relacionamento com a paciente em uma única plataforma.<br><br>
+    Pensado para clínicas que precisam de organização sem perder o cuidado no atendimento.`,
+    extra:`<div class="ov-list">
+      <div class="ov-list-item">Agenda e prontuário integrados</div>
+      <div class="ov-list-item">Gestão financeira da clínica</div>
+      <div class="ov-list-item">Relacionamento e follow-up de pacientes</div>
+    </div>
+    <a class="ov-cta" onclick="closeOverlay();openCell('contato')">Conversar sobre o Caro Clinic OS</a>`
   },
 
   saida:{
