@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="pt-BR">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CA.RO · Tecnologia Estratégica</title>
+<link rel="canonical" href="https://caroimage.com/bio/">
+<meta name="description" content="Estúdio de tecnologia, posicionamento e inteligência digital.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+/* CA.RO link-in-bio: same identity as caroimage.com — deep navy, antique gold, Cormorant Garamond + Montserrat.
+   Refined, quiet motion; the smart brief (chat) sends everything to WhatsApp. */
+:root{
+  --bg:#06101e;
+  --panel:#0b1829;
+  --panel-2:#0e1f36;
+  --gold:#c9a84c;
+  --gold-2:#e6cf8f;
+  --gold-dk:#8a6f2e;
+  --line:#c9a84c2e;
+  --line-soft:#ffffff12;
+  --text:#ffffff;
+  --text-2:#ffffffb3;
+  --text-3:#ffffff70;
+  --wa:#25D366;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input{font-family:inherit}
+.serif{font-family:'Cormorant Garamond',Georgia,serif}
+.gold{color:var(--gold)}
+
+/* ============ ATMOSPHERE ============ */
+.bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:var(--bg)}
+.bg::before{content:'';position:absolute;width:90vw;height:90vw;max-width:760px;max-height:760px;left:50%;top:-30%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,#c9a84c22,transparent 65%);filter:blur(30px)}
+.bg::after{content:'';position:absolute;inset:0;background:
+  linear-gradient(#ffffff04 1px,transparent 1px) 0 0/56px 56px,
+  linear-gradient(90deg,#ffffff04 1px,transparent 1px) 0 0/56px 56px;
+  -webkit-mask:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 75%);mask:radial-gradient(ellipse at 50% 0%,#000 20%,transparent 75%)}
+#dust{position:fixed;inset:0;z-index:-1;pointer-events:none}
+
+/* ============ LAYOUT ============ */
+.page{max-width:480px;margin-inline:auto;padding:44px 20px 110px}
+@media (min-width:1024px){
+  .page{max-width:1120px;display:grid;grid-template-columns:400px minmax(0,1fr);column-gap:72px;align-items:start;padding-top:72px}
+  .id-col{position:sticky;top:72px}
+  .content-col{max-width:600px}
+  .content-col > .label:first-child{margin-top:6px}
+}
+
+.rv{opacity:0;transform:translateY(16px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
+@media (prefers-reduced-motion: reduce){ .rv{opacity:1;transform:none;transition:none} }
+
+/* ============ IDENTITY ============ */
+.id-col{text-align:center}
+.mark{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:3.6rem;letter-spacing:.14em;line-height:1;color:var(--gold);padding-left:.14em}
+.mark i{font-style:normal;display:inline-block;width:.14em;height:.14em;border-radius:50%;background:var(--gold);vertical-align:.18em;margin:0 .02em 0 -.06em;box-shadow:0 0 14px var(--gold)}
+.mark-sub{margin-top:12px;font-size:.58rem;letter-spacing:.34em;color:var(--text-3);font-weight:600}
+.rule{width:44px;height:1px;background:var(--gold);margin:22px auto;opacity:.7}
+.headline{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:2.05rem;line-height:1.08;letter-spacing:.005em}
+.headline em{font-style:italic;color:var(--gold)}
+.sub{margin-top:12px;font-size:.84rem;line-height:1.6;color:var(--text-2);max-width:32ch;margin-inline:auto}
+
+.icons{display:flex;justify-content:center;gap:12px;margin-top:24px}
+.ic-btn{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);color:var(--gold);background:#c9a84c0a;transition:background .25s ease,border-color .25s ease,transform .2s ease;cursor:pointer}
+.ic-btn:hover{background:#c9a84c1f;border-color:var(--gold)}
+.ic-btn:active{transform:scale(.94)}
+.ic-btn svg{width:19px;height:19px}
+
+.cta{margin-top:26px;display:flex;flex-direction:column;gap:10px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:17px 22px;border-radius:2px;border:0;cursor:pointer;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;transition:transform .2s ease,box-shadow .25s ease,background .25s ease}
+.btn svg{width:15px;height:15px}
+.btn-gold{position:relative;overflow:hidden;background:var(--gold);color:var(--bg);box-shadow:0 12px 30px #c9a84c30}
+.btn-gold::after{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,#ffffff70,transparent);transform:skewX(-20deg)}
+@media (prefers-reduced-motion: no-preference){ .btn-gold::after{animation:sheen 4.5s ease-in-out infinite} }
+@keyframes sheen{0%,70%{left:-60%}100%{left:130%}}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 40px #c9a84c45}
+.btn-line{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn-line:hover{border-color:var(--gold);color:var(--gold)}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:30px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{padding:18px 6px;text-align:center}
+.stat + .stat{border-left:1px solid var(--line)}
+.stat b{display:block;font-family:'Cormorant Garamond',serif;font-weight:500;font-size:2.2rem;line-height:1;color:var(--gold);font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:6px;font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--text-3);font-weight:600}
+
+/* flags marquee */
+.flags{margin-top:18px;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);mask:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+.flags-track{display:flex;gap:14px;width:max-content}
+@media (prefers-reduced-motion: no-preference){ .flags-track{animation:flags 40s linear infinite} .flags:hover .flags-track{animation-play-state:paused} }
+@keyframes flags{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.flag{display:flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border:1px solid var(--line);border-radius:100px;background:#c9a84c08;flex:none}
+.flag img{width:26px;height:18px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px #ffffff20}
+.flag span{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-2);font-weight:600;white-space:nowrap}
+
+/* ============ CONTENT ============ */
+.label{display:flex;align-items:center;gap:12px;margin:46px 0 16px;font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.label::after{content:'';flex:1;height:1px;background:var(--line)}
+.label .n{color:var(--text-3)}
+h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.9rem;line-height:1.1;margin:0}
+h2 em{font-style:italic;color:var(--gold)}
+
+.services{list-style:none;margin:6px 0 0;padding:0}
+.services li{display:flex;align-items:center;gap:16px;padding:16px 2px;border-bottom:1px solid var(--line-soft);transition:padding .3s ease}
+.services li:hover{padding-left:10px}
+.services .i{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold);width:24px;flex:none}
+.services b{font-weight:600;font-size:.86rem;letter-spacing:.02em}
+.services small{display:block;font-size:.72rem;color:var(--text-3);margin-top:3px;font-weight:500}
+.services .go{margin-left:auto;color:var(--gold);opacity:.6;transition:opacity .2s ease,transform .2s ease}
+.services li:hover .go{opacity:1;transform:translateX(3px)}
+.services .go svg{width:14px;height:14px;display:block}
+
+.products{display:grid;gap:12px;margin-top:6px}
+@media (min-width:640px){ .products{grid-template-columns:repeat(2,1fr)} }
+.product{position:relative;padding:22px 18px 18px;background:linear-gradient(170deg,var(--panel-2),var(--panel));border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s ease,transform .3s ease}
+.product:hover{border-color:var(--gold);transform:translateY(-3px)}
+.product::before{content:'';position:absolute;right:-40px;top:-40px;width:120px;height:120px;border-radius:50%;background:radial-gradient(circle,#c9a84c30,transparent 70%)}
+.product .k{font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;color:var(--text-3);font-weight:600}
+.product h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.55rem;margin:10px 0 0;color:#fff}
+.product p{font-size:.76rem;line-height:1.55;color:var(--text-2);margin:8px 0 0;flex:1}
+.product button{margin-top:16px;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:none;border:0;border-bottom:1px solid var(--gold);padding:0 0 4px;color:var(--gold);font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+.product button svg{width:12px;height:12px}
+
+.cases{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin-top:18px;padding-bottom:6px}
+.cases::-webkit-scrollbar{height:3px}.cases::-webkit-scrollbar-thumb{background:var(--gold-dk)}
+.case{position:relative;flex:none;width:86%;max-width:340px;scroll-snap-align:start;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--line);background:#0a1628}
+@media (min-width:1024px){ .case{width:calc(50% - 6px);max-width:none} }
+.case .deliv{flex:1;align-content:flex-start}
+.case-mono{width:52px;height:52px;border-radius:50%;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.35rem;letter-spacing:.06em;color:#fff;background:#0b1829;box-shadow:0 10px 24px #00000080}
+.case .row .link{display:inline-flex;align-items:center;gap:8px;background:none;border:0;border-bottom:1px solid var(--gold);padding:0 0 4px;color:var(--gold);font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+.case .row .link svg{width:12px;height:12px}
+.case-foot{margin-top:14px;text-align:center}
+.case .top{position:relative;padding:22px 20px;background:linear-gradient(135deg,#1c3fd6 0%,#0d1420 55%,#e3202f 130%)}
+.case .shot{position:relative;aspect-ratio:16/10;overflow:hidden;background:#0a1628;border-bottom:1px solid var(--line)}
+.case .shot{clip-path:inset(0 0 -40px 0)}
+.case .shot img:first-child{width:100%;height:100%;object-fit:cover;object-position:50% 0;display:block;transition:transform .8s ease}
+.case:hover .shot img:first-child{transform:scale(1.04)}
+.case .shot::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,#06101ecc)}
+.case .shot .case-logo,.case .shot .case-mono{position:absolute;left:16px;bottom:-1px;z-index:2;transform:translateY(40%)}
+.case .shot .case-logo{width:52px;height:52px;border-radius:14px;box-shadow:0 0 0 2px var(--gold),0 10px 24px #00000080;background:#000}
+.case .shot{overflow:visible}
+.case .shot img:first-child{border-radius:0}
+.case .top{padding-top:34px !important;min-height:176px}
+.case .top .k{font-size:.54rem;letter-spacing:.24em;text-transform:uppercase;color:#ffffffb0;font-weight:600}
+.case .top h3{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.8rem;margin:8px 0 0;color:#fff;line-height:1}
+.case .top p{font-size:.76rem;color:#ffffffc0;margin:8px 0 0;line-height:1.5}
+.case .deliv{display:flex;flex-wrap:wrap;gap:6px;padding:16px 20px 0}
+.case .deliv span{font-size:.62rem;font-weight:600;letter-spacing:.06em;padding:6px 10px;border:1px solid var(--line);color:var(--text-2)}
+.case .row{display:flex;align-items:center;flex-wrap:wrap;gap:18px;padding:16px 20px 20px}
+.case .row a{display:inline-flex;align-items:center;gap:8px;color:var(--gold);font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--gold);padding-bottom:4px}
+.case .row a svg{width:12px;height:12px}
+.coupon{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border:1px dashed var(--gold);background:#c9a84c10;font-size:.62rem;color:var(--text-2);cursor:pointer}
+.coupon b{color:var(--gold);letter-spacing:.2em;font-size:.72rem}
+
+.manifesto{margin-top:46px;padding:30px 22px;border:1px solid var(--line);text-align:center;background:radial-gradient(circle at 50% 0%,#c9a84c14,transparent 70%)}
+.manifesto q{display:block;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.7rem;line-height:1.2;quotes:'“' '”'}
+.manifesto span{display:block;margin-top:14px;font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.manifesto .btn{display:inline-flex;margin:22px auto 0}
+
+footer{margin-top:40px;text-align:center;font-size:.62rem;letter-spacing:.14em;color:var(--text-3)}
+footer a{color:var(--gold)}
+
+/* floating WhatsApp */
+.wa-float{position:fixed;right:18px;bottom:18px;z-index:40;width:56px;height:56px;border-radius:50%;border:0;cursor:pointer;background:var(--wa);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px #00000070}
+.wa-float svg{width:26px;height:26px}
+@media (prefers-reduced-motion: no-preference){ .wa-float{animation:wa-pulse 2.8s ease-in-out infinite} }
+@keyframes wa-pulse{0%,100%{box-shadow:0 10px 26px #00000070,0 0 0 0 #25d36655}50%{box-shadow:0 10px 26px #00000070,0 0 0 12px #25d36600}}
+
+/* ============ SMART BRIEF (chat) ============ */
+.sheet{position:fixed;inset:0;z-index:100;display:none;align-items:flex-end;justify-content:center;background:#02060ccc;backdrop-filter:blur(4px)}
+.sheet.open{display:flex}
+@media (min-width:640px){ .sheet{align-items:center} }
+.sheet-box{width:100%;max-width:440px;max-height:88vh;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-bottom:0;overflow:hidden}
+@media (min-width:640px){ .sheet-box{border-bottom:1px solid var(--line)} }
+@media (prefers-reduced-motion: no-preference){ .sheet-box{animation:up .35s cubic-bezier(.2,.7,.2,1)} }
+@keyframes up{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.sheet-head{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.sheet-head .av{width:38px;height:38px;border-radius:50%;border:1px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:.62rem;letter-spacing:.04em;flex:none}
+.sheet-head b{display:block;font-size:.82rem;letter-spacing:.02em}
+.sheet-head small{display:flex;align-items:center;gap:6px;font-size:.66rem;color:var(--text-3);margin-top:2px}
+.sheet-head small::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--wa)}
+.sheet-close{margin-left:auto;width:32px;height:32px;border-radius:50%;border:1px solid var(--line-soft);background:transparent;color:var(--text-2);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.sheet-close svg{width:14px;height:14px}
+.chat{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px}
+.bubble{max-width:86%;padding:11px 14px;font-size:.82rem;line-height:1.5;white-space:pre-line}
+@media (prefers-reduced-motion: no-preference){ .bubble,.opts,.brief-form{animation:pop .3s ease both} }
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.bubble.bot{align-self:flex-start;background:var(--panel-2);border:1px solid var(--line-soft);border-radius:2px 14px 14px 14px}
+.bubble.me{align-self:flex-end;background:var(--gold);color:var(--bg);font-weight:600;border-radius:14px 2px 14px 14px}
+.typing{align-self:flex-start;display:flex;gap:4px;padding:12px 14px;background:var(--panel-2);border:1px solid var(--line-soft);border-radius:2px 14px 14px 14px}
+.typing i{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.4}
+@media (prefers-reduced-motion: no-preference){ .typing i{animation:dot 1s infinite} .typing i:nth-child(2){animation-delay:.15s} .typing i:nth-child(3){animation-delay:.3s} }
+@keyframes dot{50%{opacity:1;transform:translateY(-3px)}}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{padding:10px 14px;border:1px solid var(--line);background:transparent;color:var(--text);font-size:.76rem;font-weight:600;cursor:pointer;transition:all .2s ease}
+.opt:hover{border-color:var(--gold);color:var(--gold);background:#c9a84c10}
+.brief-form{display:flex;flex-direction:column;gap:8px;align-self:stretch}
+.brief-form input{width:100%;padding:13px 14px;border:1px solid var(--line);background:#06101e;color:#fff;font-size:.86rem;outline:none;transition:border-color .2s ease}
+.brief-form input::placeholder{color:var(--text-3)}
+.brief-form input:focus{border-color:var(--gold)}
+.brief-form .err{font-size:.72rem;color:#ff8a8a;font-weight:600}
+.brief-form .btn{margin-top:4px}
+.btn-wa{background:var(--wa);color:#fff}
+</style>
+
+<div class="bg" aria-hidden="true"></div>
+<canvas id="dust" aria-hidden="true"></canvas>
+
+<div class="page">
+  <aside class="id-col">
+    <div class="mark rv" aria-label="CA.RO">CA<i></i>RO</div>
+    <div class="mark-sub rv d1">TECHNOLOGY, DESIGN &amp; POSITIONING</div>
+    <div class="rule rv d1"></div>
+    <h1 class="headline rv d2">Menos ruído.<br><em>Mais estrutura</em> e resultado.</h1>
+    <p class="sub rv d2">Estúdio de tecnologia, posicionamento e inteligência digital para empresas de todos os segmentos.</p>
+
+    <div class="icons rv d3">
+      <a class="ic-btn" href="https://www.instagram.com/carotechgroup/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="ic-btn" href="https://caroimage.com/" target="_blank" rel="noopener" aria-label="Site">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+      </a>
+      <button class="ic-btn" type="button" data-brief aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.8.83-3-.2-.32A8.2 8.2 0 1 1 12 20.2Z"/></svg>
+      </button>
+    </div>
+
+    <div class="cta rv d3">
+      <button class="btn btn-gold" type="button" data-brief>Iniciar meu projeto
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <a class="btn btn-line" href="https://caroimage.com/" target="_blank" rel="noopener">Conhecer o estúdio</a>
+    </div>
+
+    <div class="stats rv d4">
+      <div class="stat"><b data-count data-to="1200" data-prefix="+">+1.200</b><span>empresas atendidas</span></div>
+      <div class="stat"><b data-count data-to="15" data-prefix="+">+15</b><span>países</span></div>
+      <div class="stat"><b data-count data-to="100" data-suffix="%">100%</b><span>foco em resultado</span></div>
+    </div>
+    <div class="flags rv d4" id="flags" hidden><div class="flags-track" id="flags-track"></div></div>
+  </aside>
+
+  <main class="content-col">
+    <div class="label rv"><span class="n">01</span> O que fazemos</div>
+    <h2 class="rv">Arquitetura de <em>presença</em>.</h2>
+    <ul class="services rv d1" id="services"></ul>
+
+    <div class="label rv"><span class="n">02</span> Produtos próprios</div>
+    <h2 class="rv">Tecnologia com <em>refinamento</em>.</h2>
+    <div class="products" id="products" style="margin-top:18px"></div>
+
+    <div class="label rv"><span class="n">03</span> Cases</div>
+    <h2 class="rv">Projetos que já <em>entregamos</em>.</h2>
+    <div class="cases rv">
+      <article class="case">
+        <div class="shot"><img src="assets/case-tf.jpg" alt="Bio inteligente da TodaVidaFutsal" loading="lazy"><img class="case-logo" src="assets/tf-logo.jpg" alt="Logo TodaVidaFutsal"></div>
+        <div class="top" style="background:linear-gradient(135deg,#1c3fd6 0%,#0d1420 55%,#e3202f 130%)">
+          <div class="k">Esporte · Mídia</div>
+          <h3>TodaVidaFutsal</h3>
+          <p>Bio inteligente, mídia kit comercial e painel de leads para um canal com mais de 1,5 milhão de seguidores.</p>
+        </div>
+        <div class="deliv"><span>Bio inteligente</span><span>Mídia kit</span><span>Painel de leads</span><span>Domínio próprio</span></div>
+        <div class="row">
+          <a href="https://todavidafutsal.com.br/bio" target="_blank" rel="noopener">Ver a bio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <a href="https://todavidafutsal.com.br/midiakit" target="_blank" rel="noopener">Mídia kit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+      </article>
+      <article class="case">
+        <div class="shot"><img src="assets/case-mz.jpg" alt="Sistema MZ Clinic" loading="lazy"><span class="case-mono">MZ</span></div>
+        <div class="top" style="background:linear-gradient(135deg,#3a2c12 0%,#0d1420 60%,#8a6f2e 140%)">
+          <div class="k">Saúde · Sistema + IA</div>
+          <h3>MZ Clinic</h3>
+          <p>Sistema completo e atendimento com inteligência artificial para clínica de tricologia e estética com duas unidades.</p>
+        </div>
+        <div class="deliv"><span>Agenda multiunidade</span><span>Prontuário</span><span>IA copiloto</span><span>CRM</span><span>WhatsApp com IA</span></div>
+        <div class="row">
+          <button type="button" class="link" data-brief data-need="Sistema / CRM">Quero um sistema assim <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </article>
+      <article class="case">
+        <div class="shot"><img src="assets/case-cr.jpg" alt="Bio de links da Camila Rocha" loading="lazy"><span class="case-mono">CR</span></div>
+        <div class="top" style="background:linear-gradient(135deg,#6e4a5c 0%,#2a1c26 60%,#c9a84c 150%)">
+          <div class="k">Marca pessoal · Educação</div>
+          <h3>Camila Rocha</h3>
+          <p>Bio de links da Geração do Estilo: e-book, canal no YouTube, curso e consultoria em um só lugar.</p>
+        </div>
+        <div class="deliv"><span>Bio de links</span><span>Funil de produtos</span><span>WhatsApp</span></div>
+        <div class="row">
+          <a href="https://geracaodoestilo.eusoucamilarocha.com.br/links" target="_blank" rel="noopener">Ver a bio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+      </article>
+    </div>
+    <div class="case-foot rv">
+      <button class="coupon" type="button" id="coupon" aria-label="Copiar cupom CAROTF">Veio pela TodaVidaFutsal? Use o cupom <b>CAROTF</b></button>
+    </div>
+
+    <div class="manifesto rv">
+      <q>Estratégia que constrói valor real.</q>
+      <span>CA.RO · Tecnologia · Design · Estratégia</span>
+      <button class="btn btn-gold" type="button" data-brief>Vamos construir juntos</button>
+    </div>
+
+    <footer>© CA.RO Tech · <a href="https://caroimage.com/" target="_blank" rel="noopener">caroimage.com</a></footer>
+  </main>
+</div>
+
+<button class="wa-float" type="button" data-brief aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.15l-.3-.18-3.1.8.83-3-.2-.32A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.25-.12-1.45-.72-1.68-.8-.22-.08-.4-.12-.56.13-.17.24-.64.8-.79.96-.14.17-.29.19-.54.06-.25-.12-1.03-.38-1.96-1.2-.72-.65-1.2-1.44-1.35-1.69-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.4-.42-.56-.42h-.48c-.17 0-.43.06-.66.31s-.87.85-.87 2.08.89 2.41 1.02 2.58c.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.55.1.47-.07 1.45-.59 1.66-1.17.2-.57.2-1.06.14-1.17-.06-.1-.23-.17-.48-.29Z"/></svg>
+</button>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Iniciar projeto">
+  <div class="sheet-box">
+    <div class="sheet-head">
+      <span class="av">CA.RO</span>
+      <span><b>CA.RO · Atendimento</b><small>Responde no WhatsApp</small></span>
+      <button class="sheet-close" type="button" id="sheet-close" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    </div>
+    <div class="chat" id="chat"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var WA_NUMBER = '5511942302344';
+  var params = new URLSearchParams(location.search);
+  var couponFromUrl = (params.get('cupom') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 20);
+  function $(id){ return document.getElementById(id); }
+  function esc(v){ return String(v).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  /* ---------- content ---------- */
+  var SERVICES = [
+    ['Arquitetura de marca', 'Identidade, posicionamento e narrativa'],
+    ['Experiência digital', 'Sites, landing pages e bios inteligentes'],
+    ['Sistemas inteligentes', 'CRMs, painéis e automações com IA'],
+    ['Performance estratégica', 'Captação, métricas e conversão'],
+    ['Infraestrutura digital', 'Domínios, hospedagem e integrações'],
+    ['Soluções proprietárias', 'Produtos CA.RO prontos para escalar']
+  ];
+  $('services').innerHTML = SERVICES.map(function(s, i){
+    return '<li><span class="i">0' + (i + 1) + '</span><span><b>' + s[0] + '</b><small>' + s[1] + '</small></span>' +
+      '<button class="go" type="button" data-brief data-need="' + s[0] + '" aria-label="Quero ' + s[0] + '" style="background:none;border:0;padding:0;cursor:pointer">' + ARROW + '</button></li>';
+  }).join('');
+
+  var PRODUCTS = [
+    ['CRM + IA', 'CaroZap', 'CRM com IA para atendimento via WhatsApp em escala.'],
+    ['IA de estilo', 'PRONTIA', 'Consultoria de estilo por IA, direto no WhatsApp.']
+  ];
+  $('products').innerHTML = PRODUCTS.map(function(p, i){
+    return '<div class="product rv d' + (i + 1) + '"><span class="k">' + p[0] + '</span><h3>' + p[1] + '</h3><p>' + p[2] + '</p>' +
+      '<button type="button" data-brief data-need="' + p[1] + '">Quero conhecer ' + ARROW + '</button></div>';
+  }).join('');
+
+  /* ---------- countries marquee: [ISO code, name]. Only real countries served go here. ---------- */
+  var COUNTRIES = [['br','Brasil'],['pt','Portugal'],['fr','França'],['ae','Emirados Árabes'],['it','Itália'],['us','Estados Unidos'],['es','Espanha'],['gb','Reino Unido'],['de','Alemanha'],['ch','Suíça'],['ca','Canadá'],['ar','Argentina'],['uy','Uruguai'],['py','Paraguai'],['cl','Chile']];
+  if(COUNTRIES.length >= 3){
+    var one = COUNTRIES.map(function(c){ return '<span class="flag"><img src="https://flagcdn.com/w80/' + c[0] + '.png" alt="" loading="lazy"><span>' + c[1] + '</span></span>'; }).join('');
+    $('flags-track').innerHTML = one + one;
+    $('flags').hidden = false;
+  }
+
+  /* ---------- reveal + counts (start near the final value) ---------- */
+  function countUp(el){
+    var to = parseFloat(el.dataset.to), pre = el.dataset.prefix || '';
+    if(reduced){ el.textContent = pre + to.toLocaleString('pt-BR') + (el.dataset.suffix || ''); return; }
+    var start = null;
+    function f(ts){
+      if(!start) start = ts;
+      var p = Math.min((ts - start) / 1400, 1), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = pre + Math.round(to * (.8 + .2 * e)).toLocaleString('pt-BR') + (el.dataset.suffix || '');
+      if(p < 1) requestAnimationFrame(f);
+    }
+    requestAnimationFrame(f);
+  }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.classList.add('in');
+      e.target.querySelectorAll('[data-count]').forEach(countUp);
+      io.unobserve(e.target);
+    });
+  }, {threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+  requestAnimationFrame(function(){ document.querySelectorAll('.id-col .rv').forEach(function(el){ el.classList.add('in'); }); });
+
+  /* ---------- gold dust ---------- */
+  (function(){
+    var c = $('dust'), ctx = c.getContext('2d'), P = [], W, H;
+    function size(){
+      var d = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight;
+      c.width = W * d; c.height = H * d; c.style.width = W + 'px'; c.style.height = H + 'px'; ctx.setTransform(d, 0, 0, d, 0, 0);
+      P = []; for(var i = 0; i < Math.min(60, W * H / 18000); i++) P.push({x:Math.random() * W, y:Math.random() * H, r:Math.random() * 1.3 + .3, v:Math.random() * .25 + .05, a:Math.random() * 6.28});
+    }
+    size(); addEventListener('resize', size);
+    function f(){
+      if(document.hidden){ setTimeout(f, 500); return; }
+      ctx.clearRect(0, 0, W, H);
+      P.forEach(function(p){
+        if(!reduced){ p.y -= p.v; p.a += .02; if(p.y < -5){ p.y = H + 5; p.x = Math.random() * W; } }
+        ctx.globalAlpha = .25 + .35 * (Math.sin(p.a) + 1) / 2;
+        ctx.fillStyle = '#c9a84c'; ctx.beginPath(); ctx.arc(p.x + Math.sin(p.a) * 6, p.y, p.r, 0, 6.283); ctx.fill();
+      });
+      ctx.globalAlpha = 1;
+      if(!reduced) requestAnimationFrame(f);
+    }
+    f();
+  })();
+
+  /* ---------- coupon ---------- */
+  $('coupon').addEventListener('click', function(){
+    var b = this.querySelector('b');
+    function ok(){ b.textContent = 'COPIADO'; setTimeout(function(){ b.textContent = 'CAROTF'; }, 1600); }
+    if(navigator.clipboard){ navigator.clipboard.writeText('CAROTF').then(ok, ok); } else { ok(); }
+  });
+
+  /* ---------- smart brief: who you are -> what you need -> when -> contact -> WhatsApp ---------- */
+  var sheet = $('sheet'), chat = $('chat');
+  var STEPS = [
+    {key:'perfil', q:'Olá! ✦ Sou do time CA.RO. Pra começar: qual é o seu segmento?', opts:['Comércio e varejo', 'Serviços', 'Saúde e estética', 'Indústria', 'Educação', 'Imobiliário', 'Alimentação', 'Tecnologia', 'Marca pessoal', 'Esporte', 'Outro segmento']},
+    {key:'necessidade', q:'O que você precisa construir?', opts:['Site ou landing page', 'Bio inteligente', 'Sistema / CRM', 'Automação com IA no WhatsApp', 'Identidade e posicionamento', 'Ainda não sei']},
+    {key:'prazo', q:'E para quando?', opts:['Urgente', 'Próximos 30 dias', 'Em 2 a 3 meses', 'Só pesquisando']}
+  ];
+  var answers = {}, busy = false;
+
+  function scroll(){ chat.scrollTop = chat.scrollHeight; }
+  function bubble(text, who){ var b = document.createElement('div'); b.className = 'bubble ' + who; b.textContent = text; chat.appendChild(b); scroll(); }
+  function bot(text, then){
+    if(reduced){ bubble(text, 'bot'); then && then(); return; }
+    var t = document.createElement('div'); t.className = 'typing'; t.innerHTML = '<i></i><i></i><i></i>'; chat.appendChild(t); scroll();
+    setTimeout(function(){ t.remove(); bubble(text, 'bot'); then && then(); }, 650);
+  }
+  function ask(i){
+    var st = STEPS[i];
+    if(!st){ return askContact(); }
+    if(answers[st.key]){ return ask(i + 1); }
+    bot(st.q, function(){
+      var wrap = document.createElement('div'); wrap.className = 'opts';
+      st.opts.forEach(function(o){
+        var b = document.createElement('button'); b.type = 'button'; b.className = 'opt'; b.textContent = o;
+        b.addEventListener('click', function(){
+          wrap.remove();
+          if(o === 'Outro segmento'){ return askOther(st.key, i); }
+          answers[st.key] = o; bubble(o, 'me'); ask(i + 1);
+        });
+        wrap.appendChild(b);
+      });
+      chat.appendChild(wrap); scroll();
+    });
+  }
+  /* free-text answer when none of the options fits */
+  function askOther(key, i){
+    bot('Qual é o seu segmento?', function(){
+      var f = document.createElement('form'); f.className = 'brief-form'; f.noValidate = true;
+      f.innerHTML = '<input name="v" type="text" placeholder="Ex.: advocacia, moda, logística…" maxlength="60"><button class="btn btn-gold" type="submit">Continuar</button>';
+      f.addEventListener('submit', function(e){
+        e.preventDefault();
+        var v = f.v.value.trim(); if(!v){ f.v.focus(); return; }
+        f.remove(); answers[key] = v; bubble(v, 'me'); ask(i + 1);
+      });
+      chat.appendChild(f); scroll(); f.v.focus({preventScroll:true});
+    });
+  }
+  function askContact(){
+    bot('Perfeito. Deixa seu contato que já seguimos pelo WhatsApp:', function(){
+      var f = document.createElement('form'); f.className = 'brief-form'; f.noValidate = true;
+      f.innerHTML =
+        '<input name="nome" type="text" placeholder="Seu nome *" autocomplete="name" maxlength="120">' +
+        '<input name="empresa" type="text" placeholder="Empresa ou @ do Instagram" autocomplete="organization" maxlength="120">' +
+        '<input name="wa" type="tel" placeholder="WhatsApp com DDD *" autocomplete="tel" inputmode="tel" maxlength="30">' +
+        '<input name="cupom" type="text" placeholder="Cupom (opcional)" maxlength="20" value="' + esc(couponFromUrl) + '">' +
+        '<div class="err" hidden></div>' +
+        '<button class="btn btn-wa" type="submit">Enviar e abrir WhatsApp</button>';
+      var err = f.querySelector('.err');
+      f.addEventListener('submit', function(e){
+        e.preventDefault();
+        var nome = f.nome.value.trim(), emp = f.empresa.value.trim(), wa = f.wa.value.trim(), cup = f.cupom.value.trim().toUpperCase();
+        var msg = !nome ? 'Informe seu nome.' : wa.replace(/\D/g, '').length < 10 ? 'Informe um WhatsApp válido, com DDD.' : '';
+        if(msg){ err.textContent = msg; err.hidden = false; return; }
+        var lines = ['Olá, CA.RO! Vim pela bio e quero iniciar um projeto.', 'Nome: ' + nome];
+        if(emp) lines.push('Empresa: ' + emp);
+        lines.push('WhatsApp: ' + wa);
+        if(answers.perfil) lines.push('Perfil: ' + answers.perfil);
+        if(answers.necessidade) lines.push('Preciso de: ' + answers.necessidade);
+        if(answers.prazo) lines.push('Prazo: ' + answers.prazo);
+        if(cup) lines.push('Cupom: ' + cup);
+        var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
+        f.remove();
+        bubble([nome, emp, wa].filter(Boolean).join('\n'), 'me');
+        bubble('Tudo certo. Abrindo o WhatsApp…', 'bot');
+        var win = window.open(url, '_blank');
+        if(win){ win.opener = null; } else { window.location.href = url; }
+      });
+      chat.appendChild(f); scroll();
+      f.nome.focus({preventScroll:true});
+    });
+  }
+  function open(need){
+    answers = {};
+    if(need){
+      answers.necessidade = need;
+      if(/Clinic/.test(need)) answers.perfil = 'Saúde e estética';
+    }
+    chat.innerHTML = '';
+    sheet.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    if(need){ bubble('Tenho interesse em: ' + need, 'me'); }
+    ask(0);
+  }
+  function close(){ sheet.classList.remove('open'); document.body.style.overflow = ''; }
+  document.addEventListener('click', function(e){
+    var t = e.target.closest('[data-brief]');
+    if(t){ e.preventDefault(); open(t.getAttribute('data-need')); }
+  });
+  $('sheet-close').addEventListener('click', close);
+  sheet.addEventListener('click', function(e){ if(e.target === sheet) close(); });
+  addEventListener('keydown', function(e){ if(e.key === 'Escape' && sheet.classList.contains('open')) close(); });
+})();
+</script>
