@@ -99,6 +99,15 @@ button,input{font-family:inherit}
 .flag img{width:26px;height:18px;border-radius:3px;object-fit:cover;box-shadow:0 0 0 1px #ffffff20}
 .flag span{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-2);font-weight:600;white-space:nowrap}
 
+/* client logos marquee (subtle) */
+.logos{margin-top:20px;overflow:hidden;padding:18px 0;border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.logos-track{display:flex;align-items:center;gap:44px;width:max-content}
+.logos-track .dup{display:flex;align-items:center;gap:44px}
+.logos img{height:34px;width:auto;max-width:150px;object-fit:contain;opacity:.62;filter:grayscale(.35);transition:opacity .3s ease,filter .3s ease}
+.logos img:hover{opacity:1;filter:none}
+@media (prefers-reduced-motion: no-preference){ .logos-track{animation:logos 48s linear infinite} .logos:hover .logos-track{animation-play-state:paused} }
+@keyframes logos{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 22px))}}
+
 /* ============ CONTENT ============ */
 .label{display:flex;align-items:center;gap:12px;margin:46px 0 16px;font-size:.58rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:600}
 .label::after{content:'';flex:1;height:1px;background:var(--line)}
@@ -126,6 +135,10 @@ h2 em{font-style:italic;color:var(--gold)}
 .product p{font-size:.76rem;line-height:1.55;color:var(--text-2);margin:8px 0 0;flex:1}
 .product button{margin-top:16px;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;background:none;border:0;border-bottom:1px solid var(--gold);padding:0 0 4px;color:var(--gold);font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
 .product button svg{width:12px;height:12px}
+.product .acts{display:flex;flex-wrap:wrap;gap:18px;margin-top:16px}
+.product .acts button{margin-top:0}
+.product .acts a{display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid var(--gold);padding:0 0 4px;color:var(--gold);font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.product .acts a svg{width:12px;height:12px}
 
 .cases{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin-top:18px;padding-bottom:6px}
 .cases::-webkit-scrollbar{height:3px}.cases::-webkit-scrollbar-thumb{background:var(--gold-dk)}
@@ -272,14 +285,15 @@ footer a{color:var(--gold)}
         </div>
       </article>
       <article class="case">
-        <div class="shot"><img src="assets/case-mz.jpg" alt="Sistema MZ Clinic" loading="lazy"><span class="case-mono">MZ</span></div>
+        <div class="shot"><img src="assets/case-mzsite.jpg" alt="Site da clínica MZ" loading="lazy"><span class="case-mono">MZ</span></div>
         <div class="top" style="background:linear-gradient(135deg,#3a2c12 0%,#0d1420 60%,#8a6f2e 140%)">
-          <div class="k">Saúde · Sistema + IA</div>
+          <div class="k">Saúde · Site + Sistema + IA</div>
           <h3>MZ Clinic</h3>
-          <p>Sistema completo e atendimento com inteligência artificial para clínica de tricologia e estética com duas unidades.</p>
+          <p>Site, sistema completo e atendimento com inteligência artificial para clínica de tricologia e medicina estética com duas unidades.</p>
         </div>
-        <div class="deliv"><span>Agenda multiunidade</span><span>Prontuário</span><span>IA copiloto</span><span>CRM</span><span>WhatsApp com IA</span></div>
+        <div class="deliv"><span>Site</span><span>Agenda multiunidade</span><span>Prontuário</span><span>IA copiloto</span><span>WhatsApp com IA</span></div>
         <div class="row">
+          <a href="https://mariahzibetti.com.br/" target="_blank" rel="noopener">Ver o site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
           <button type="button" class="link" data-brief data-need="Sistema / CRM">Quero um sistema assim <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </div>
       </article>
@@ -288,17 +302,60 @@ footer a{color:var(--gold)}
         <div class="top" style="background:linear-gradient(135deg,#6e4a5c 0%,#2a1c26 60%,#c9a84c 150%)">
           <div class="k">Marca pessoal · Educação</div>
           <h3>Camila Rocha</h3>
-          <p>Bio de links da Geração do Estilo: e-book, canal no YouTube, curso e consultoria em um só lugar.</p>
+          <p>Bio de links da Geração do Estilo e site do workshop Novas Vestes: e-book, curso, consultoria e canal em um só lugar.</p>
         </div>
-        <div class="deliv"><span>Bio de links</span><span>Funil de produtos</span><span>WhatsApp</span></div>
+        <div class="deliv"><span>Bio de links</span><span>Site Novas Vestes</span><span>Funil de produtos</span></div>
         <div class="row">
           <a href="https://geracaodoestilo.eusoucamilarocha.com.br/links" target="_blank" rel="noopener">Ver a bio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <a href="https://novas-vestes.vercel.app/" target="_blank" rel="noopener">Novas Vestes <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+      </article>
+      <article class="case">
+        <div class="shot"><img src="assets/case-egm.jpg" alt="Site da EGM Energia Solar" loading="lazy"><span class="case-mono">EG</span></div>
+        <div class="top" style="background:linear-gradient(135deg,#1d4fd8 0%,#0d1420 60%,#f5b400 150%)">
+          <div class="k">Energia · Site</div>
+          <h3>EGM Energia Solar</h3>
+          <p>Site para empresa de energia solar focado em gerar orçamentos: serviços, instalações e contato direto.</p>
+        </div>
+        <div class="deliv"><span>Site institucional</span><span>Captação de orçamentos</span><span>WhatsApp</span></div>
+        <div class="row">
+          <a href="https://www.egmenergiasolar.com.br/" target="_blank" rel="noopener">Ver o site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <a href="https://www.instagram.com/egm.energiasolar/" target="_blank" rel="noopener">@egm.energiasolar <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+      </article>
+      <article class="case">
+        <div class="shot"><img src="assets/case-mona.jpg" alt="Site da Mona Modas" loading="lazy"><span class="case-mono">MO</span></div>
+        <div class="top" style="background:linear-gradient(135deg,#8a6f2e 0%,#0d1420 60%,#c9a84c 150%)">
+          <div class="k">Moda · Varejo</div>
+          <h3>Mona Modas</h3>
+          <p>Site para loja tradicional de Dourados (MS), no mercado desde 1974: história, coleção e contato.</p>
+        </div>
+        <div class="deliv"><span>Site institucional</span><span>História da marca</span><span>WhatsApp</span></div>
+        <div class="row">
+          <a href="https://www.modasmona.com.br/" target="_blank" rel="noopener">Ver o site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          <a href="https://www.instagram.com/mona.modasdourados/" target="_blank" rel="noopener">@mona.modasdourados <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        </div>
+      </article>
+      <article class="case">
+        <div class="shot"><img src="assets/case-mundi.jpg" alt="Site da Mundi TKR" loading="lazy"><span class="case-mono">MT</span></div>
+        <div class="top" style="background:linear-gradient(135deg,#e8672a 0%,#0d1420 60%,#e8672a 160%)">
+          <div class="k">Indústria · Esporte · Site</div>
+          <h3>Mundi TKR</h3>
+          <p>Site da distribuidora das bolas Kagiva, Topper e Rainha: produtos, catálogos e captação de distribuidores.</p>
+        </div>
+        <div class="deliv"><span>Site institucional</span><span>Catálogo de produtos</span><span>Captação B2B</span></div>
+        <div class="row">
+          <a href="https://mundimercantil.com.br/" target="_blank" rel="noopener">Ver o site <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
         </div>
       </article>
     </div>
     <div class="case-foot rv">
       <button class="coupon" type="button" id="coupon" aria-label="Copiar cupom CAROTF">Veio pela TodaVidaFutsal? Use o cupom <b>CAROTF</b></button>
     </div>
+
+    <div class="label rv"><span class="n">04</span> Clientes</div>
+    <h2 class="rv">Marcas que <em>confiam</em> na CA.RO.</h2>
+    <div class="logos rv" aria-label="Clientes da CA.RO"><div class="logos-track"><img src="assets/clients/c01.png" alt="Kagiva" loading="lazy"><img src="assets/clients/c02.png" alt="Novas Vestes" loading="lazy"><img src="assets/clients/c03.png" alt="Camila Rocha" loading="lazy"><img src="assets/clients/c04.png" alt="Mona Modas" loading="lazy"><img src="assets/clients/c05.png" alt="SuperSol Energia Solar" loading="lazy"><img src="assets/clients/c06.png" alt="Rainha" loading="lazy"><img src="assets/clients/c07.png" alt="Topper" loading="lazy"><img src="assets/clients/c08.png" alt="Giselly Ramos" loading="lazy"><img src="assets/clients/c09.png" alt="Marlene Oliveira" loading="lazy"><img src="assets/clients/c10.png" alt="Geração do Estilo" loading="lazy"><img src="assets/clients/c11.png" alt="Origin Chem" loading="lazy"><img src="assets/clients/c12.png" alt="Mundi TKR" loading="lazy"><span aria-hidden="true" class="dup"><img src="assets/clients/c01.png" alt="" data-alt="Kagiva" loading="lazy"><img src="assets/clients/c02.png" alt="" data-alt="Novas Vestes" loading="lazy"><img src="assets/clients/c03.png" alt="" data-alt="Camila Rocha" loading="lazy"><img src="assets/clients/c04.png" alt="" data-alt="Mona Modas" loading="lazy"><img src="assets/clients/c05.png" alt="" data-alt="SuperSol Energia Solar" loading="lazy"><img src="assets/clients/c06.png" alt="" data-alt="Rainha" loading="lazy"><img src="assets/clients/c07.png" alt="" data-alt="Topper" loading="lazy"><img src="assets/clients/c08.png" alt="" data-alt="Giselly Ramos" loading="lazy"><img src="assets/clients/c09.png" alt="" data-alt="Marlene Oliveira" loading="lazy"><img src="assets/clients/c10.png" alt="" data-alt="Geração do Estilo" loading="lazy"><img src="assets/clients/c11.png" alt="" data-alt="Origin Chem" loading="lazy"><img src="assets/clients/c12.png" alt="" data-alt="Mundi TKR" loading="lazy"></span></div></div>
 
     <div class="manifesto rv">
       <q>Estratégia que constrói valor real.</q>
@@ -350,12 +407,13 @@ footer a{color:var(--gold)}
   }).join('');
 
   var PRODUCTS = [
-    ['CRM + IA', 'CaroZap', 'CRM com IA para atendimento via WhatsApp em escala.'],
+    ['CRM + IA', 'CaroZap', 'CRM com IA para atendimento via WhatsApp em escala.', 'https://carozap.com.br/'],
     ['IA de estilo', 'PRONTIA', 'Consultoria de estilo por IA, direto no WhatsApp.']
   ];
   $('products').innerHTML = PRODUCTS.map(function(p, i){
     return '<div class="product rv d' + (i + 1) + '"><span class="k">' + p[0] + '</span><h3>' + p[1] + '</h3><p>' + p[2] + '</p>' +
-      '<button type="button" data-brief data-need="' + p[1] + '">Quero conhecer ' + ARROW + '</button></div>';
+      '<div class="acts"><button type="button" data-brief data-need="' + p[1] + '">Quero conhecer ' + ARROW + '</button>' +
+      (p[3] ? '<a href="' + p[3] + '" target="_blank" rel="noopener">Ver o site ' + ARROW + '</a>' : '') + '</div></div>';
   }).join('');
 
   /* ---------- countries marquee: [ISO code, name]. Only real countries served go here. ---------- */
