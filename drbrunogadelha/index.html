@@ -82,7 +82,7 @@ h1.name{margin-top:24px;font-size:2.15rem;line-height:1.05}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px;border:1px solid var(--line-soft);border-radius:16px;background:#ffffff06}
 .stat{padding:14px 6px}
 .stat + .stat{border-left:1px solid var(--line-soft)}
-.stat b{display:block;font-family:var(--serif);font-size:1.6rem;line-height:1;color:var(--ice-2);font-variant-numeric:tabular-nums}
+.stat b{display:block;font-family:var(--serif);font-size:clamp(1rem,4.2vw,1.25rem);line-height:1;color:var(--ice-2);font-variant-numeric:tabular-nums}
 .stat span{display:block;margin-top:6px;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
 .treat-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:16px}
 .treat-chips span{font-size:.68rem;font-weight:700;padding:6px 10px;border-radius:100px;background:#7fd3f214;border:1px solid var(--line);color:var(--ice-2)}
@@ -198,6 +198,13 @@ footer a{color:var(--ice-2)}
 .cform .err{font-size:.74rem;color:#d14343;font-weight:700}
 .cform button{padding:14px;border-radius:12px;border:0;background:var(--wa);color:#fff;font-weight:800;font-size:.86rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
 .cform button svg{width:18px;height:18px}
+.faq{display:grid;gap:8px;margin-top:16px}
+.faq details{border-radius:16px;background:#ffffff06;border:1px solid var(--line-soft);padding:0 16px}
+.faq summary{cursor:pointer;list-style:none;padding:15px 0;font-size:.88rem;font-weight:600;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--ice-2);font-size:1.1rem;line-height:1;transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{padding:0 0 15px;font-size:.8rem;color:var(--text-2);line-height:1.55}
 </style>
 
 <div class="bg" aria-hidden="true"></div>
@@ -221,9 +228,9 @@ footer a{color:var(--ice-2)}
       <a class="btn btn-line" href="#antes-depois">Ver antes e depois</a>
     </div>
     <div class="stats rv">
-      <div class="stat"><b data-count data-to="118" data-suffix=" mil">118 mil</b><span>seguidores</span></div>
-      <div class="stat"><b data-count data-to="1100" data-prefix="+">+1.100</b><span>conteúdos</span></div>
-      <div class="stat"><b>SP</b><span>clínica própria</span></div>
+      <div class="stat"><b>Sorriso</b><span>lentes e facetas</span></div>
+      <div class="stat"><b>Rosto</b><span>HOF e bichectomia</span></div>
+      <div class="stat"><b>Alinhamento</b><span>ortodontia</span></div>
     </div>
     <div class="treat-chips rv"><span>Lente de contato</span><span>Faceta em resina</span><span>Harmonização (HOF)</span><span>Bichectomia</span><span>Ortodontia</span></div>
   </aside>
@@ -255,6 +262,17 @@ footer a{color:var(--ice-2)}
     </section>
 
     <section class="sec rv">
+      <div class="sec-k">Dúvidas</div>
+      <h2>Perguntas <em>frequentes</em></h2>
+      <div class="faq">
+        <details><summary>Quanto custa o tratamento?</summary><p>O valor depende do planejamento de cada caso. Na avaliação, o Dr. Bruno explica as opções e você recebe o plano com o orçamento.</p></details>
+        <details><summary>Quanto tempo leva?</summary><p>Varia conforme o tratamento e o seu caso. O cronograma completo é definido na avaliação.</p></details>
+        <details><summary>Como funciona a avaliação?</summary><p>É uma consulta presencial na clínica, em São Paulo, para entender o que você quer e planejar o tratamento com segurança.</p></details>
+        <details><summary>Como agendar?</summary><p>Toque em "Agendar minha avaliação", responda 3 perguntas rápidas e a conversa abre no WhatsApp da equipe.</p></details>
+      </div>
+    </section>
+
+    <section class="sec rv">
       <div class="sec-k">A clínica</div>
       <h2>BG <em>Odontologia</em></h2>
       <div class="clinic">
@@ -263,6 +281,7 @@ footer a{color:var(--ice-2)}
         <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg><span>(11) 93072-3036 · (11) 99794-0202</span></div>
         <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg><span><a href="https://www.instagram.com/drbrunoamaral/" target="_blank" rel="noopener">@drbrunoamaral</a> · <a href="https://www.instagram.com/bgodontologia_/" target="_blank" rel="noopener">@bgodontologia_</a></span></div>
         <button class="btn btn-main" type="button" data-filter style="margin-top:18px;width:100%">Agendar minha avaliação</button>
+        <button class="btn btn-line" type="button" id="save-contact" style="margin-top:10px;width:100%">Salvar contato da clínica</button>
       </div>
     </section>
 
@@ -309,6 +328,16 @@ footer a{color:var(--ice-2)}
     lastGroup = t.group;
     return head + '<button type="button" class="treat" data-filter data-treat="' + esc(t.key) + '"><span class="ic">' + TOOTH + '</span><span><b>' + esc(t.key) + '</b><p>' + esc(t.desc) + '</p><span class="go">Agendar avaliação →</span></span></button>';
   }).join('');
+
+  /* ---------- save contact (vCard) ---------- */
+  $('save-contact').addEventListener('click', function(){
+    var v = ['BEGIN:VCARD','VERSION:3.0','N:Odontologia;BG;;;','FN:BG Odontologia · Dr. Bruno Gadelha','ORG:BG Odontologia','TITLE:Cirurgião-dentista · CRO-SP 133718',
+      'TEL;TYPE=CELL:+5511930723036','TEL;TYPE=WORK:+5511997940202','URL:https://www.instagram.com/bgodontologia_/','ADR;TYPE=WORK:;;;São Paulo;SP;;Brasil','END:VCARD'].join('\r\n');
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([v], {type:'text/vcard'}));
+    a.download = 'BG-Odontologia.vcf';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
 
   /* ---------- before / after (provisional slots until the real photos arrive) ---------- */
   var CASES = [];
