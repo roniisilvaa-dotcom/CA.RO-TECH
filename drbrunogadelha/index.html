@@ -192,6 +192,10 @@ footer a{color:var(--ice-2)}
 .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-self:stretch}
 .opts button{padding:12px 10px;border-radius:12px;border:1.5px solid #dfe6ee;background:#fff;color:#06111d;font-weight:700;font-size:.78rem;cursor:pointer;text-align:center;line-height:1.25}
 .opts button:hover{border-color:var(--ice-dk)}
+.opts button:last-child:nth-child(odd){grid-column:1/-1}
+.oform{display:flex;gap:8px;align-self:stretch}
+.oform input{flex:1;min-width:0;padding:12px 14px;border-radius:12px;border:1.5px solid #dfe6ee;font:inherit;font-size:.85rem;color:#06111d;background:#fff}
+.oform button{padding:0 16px;border:0;border-radius:12px;background:var(--ice-dk);color:#fff;font-weight:700;cursor:pointer}
 .cform{display:grid;gap:8px;align-self:stretch}
 .cform input{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid #dfe6ee;background:#fff;color:#06111d;font-size:.9rem;outline:none}
 .cform input:focus{border-color:var(--ice-dk)}
@@ -408,7 +412,7 @@ footer a{color:var(--ice-2)}
   /* ---------- smart filter -> WhatsApp ---------- */
   var sheet = $('sheet'), chat = $('chat'), prog = $('sh-prog');
   var STEPS = [
-    {key:'tratamento', label:'Tratamento', q:'Olá! 😊 Sou da equipe do Dr. Bruno. Qual tratamento você procura?', opts:['Lente de contato', 'Faceta em resina', 'Estética facial (HOF)', 'Bichectomia', 'Ortodontia', 'Avaliação geral']},
+    {key:'tratamento', label:'Tratamento', q:'Olá! 😊 Sou da equipe do Dr. Bruno. Qual tratamento você procura?', opts:['Lente de contato', 'Faceta em resina', 'Estética facial (HOF)', 'Bichectomia', 'Ortodontia', 'Avaliação geral', 'Outro']},
     {key:'paciente', label:'Paciente', q:'Você já é paciente da BG Odontologia?', opts:['Primeira consulta', 'Já sou paciente']},
     {key:'periodo', label:'Melhor período', q:'Qual o melhor período para você?', opts:['Manhã', 'Tarde', 'Noite', 'Sábado']}
   ];
@@ -430,10 +434,28 @@ footer a{color:var(--ice-2)}
       var w = document.createElement('div'); w.className = 'opts';
       st.opts.forEach(function(o){
         var b = document.createElement('button'); b.type = 'button'; b.textContent = o;
-        b.addEventListener('click', function(){ answers[st.key] = o; w.remove(); bub(o, 'u'); ask(i + 1); });
+        b.addEventListener('click', function(){
+          w.remove();
+          if(o === 'Outro') return other(st, i);
+          answers[st.key] = o; bub(o, 'u'); ask(i + 1);
+        });
         w.appendChild(b);
       });
       chat.appendChild(w); scroll();
+    });
+  }
+  /* "Outro": the patient types what they are looking for */
+  function other(st, i){
+    bub('Outro', 'u');
+    bot('Sem problemas! Qual tratamento você procura?', function(){
+      var f = document.createElement('form'); f.className = 'oform';
+      f.innerHTML = '<input name="o" type="text" placeholder="Ex.: clareamento, implante…" maxlength="80"><button type="submit">OK</button>';
+      f.addEventListener('submit', function(e){
+        e.preventDefault();
+        var v = f.o.value.trim(); if(!v){ f.o.focus(); return; }
+        answers[st.key] = 'Outro: ' + v; f.remove(); bub(v, 'u'); ask(i + 1);
+      });
+      chat.appendChild(f); scroll(); f.o.focus({preventScroll:true});
     });
   }
   function contact(){
