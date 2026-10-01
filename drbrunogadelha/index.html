@@ -102,23 +102,17 @@ h1.name{margin-top:24px;font-size:2.15rem;line-height:1.05}
 .ba-filter button.on{background:#fff;border-color:#fff;color:#06111d}
 .ba-row{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin-top:6px;padding:6px 2px 10px}
 .ba-row::-webkit-scrollbar{height:3px}.ba-row::-webkit-scrollbar-thumb{background:var(--ice-dk)}
-.ba{flex:none;width:82%;max-width:340px;scroll-snap-align:start;background:var(--panel);border:1px solid var(--line-soft);border-radius:20px;overflow:hidden}
+.ba{flex:none;width:max(230px,calc(var(--sh) * var(--ar)));max-width:86vw;scroll-snap-align:start;background:var(--panel);border:1px solid var(--line-soft);border-radius:20px;overflow:hidden;--sh:330px}
 .ba[hidden]{display:none}
-@media (min-width:1024px){ .ba{width:calc(50% - 6px);max-width:none} }
-.cmp{position:relative;aspect-ratio:4/3;overflow:hidden;user-select:none;touch-action:pan-y;cursor:ew-resize;--x:50%}
-.cmp .lay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:12px}
-.cmp img.lay{object-fit:cover;width:100%;height:100%;padding:0}
-.cmp .before{clip-path:inset(0 calc(100% - var(--x)) 0 0);z-index:2}
-.ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:#ffffff90;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-.ph svg{width:34px;height:34px;opacity:.7}
-.ph.b{background:repeating-linear-gradient(135deg,#1a2a3b 0 12px,#162434 12px 24px)}
-.ph.a{background:radial-gradient(circle at 50% 40%,#2b8fb855,transparent 60%),linear-gradient(160deg,#18405a,#0f2638)}
-.cmp .lbl{position:absolute;top:10px;z-index:3;font-size:.58rem;font-weight:800;letter-spacing:.14em;padding:5px 9px;border-radius:100px;background:#000000a0;color:#fff}
-.cmp .lbl.l{left:10px}.cmp .lbl.r{right:10px;background:var(--ice);color:#04121f}
-.cmp .bar{position:absolute;top:0;bottom:0;left:var(--x);z-index:4;width:2px;background:#fff;transform:translateX(-1px);box-shadow:0 0 12px #00000080}
-.cmp .knob{position:absolute;top:50%;left:50%;width:38px;height:38px;border-radius:50%;background:#fff;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;color:#06111d;box-shadow:0 6px 16px #00000070}
-.cmp .knob svg{width:18px;height:18px}
-.cmp input{position:absolute;inset:0;z-index:5;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+@media (min-width:1024px){ .ba{--sh:360px} }
+.shot{position:relative;height:var(--sh);background:#000;cursor:zoom-in}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.shot .tagc{position:absolute;left:10px;top:10px;font-size:.58rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:100px;background:#000000a8;color:#fff;backdrop-filter:blur(6px)}
+.ba-info a{color:var(--ice-2);font-size:.7rem;font-weight:700;text-decoration:none}
+.lb{position:fixed;inset:0;z-index:90;background:#000000e8;display:none;align-items:center;justify-content:center;padding:18px}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:100%;border-radius:12px}
+.lb button{position:absolute;top:14px;right:14px;width:40px;height:40px;border-radius:50%;border:0;background:#fff;color:#06111d;font-size:1rem;cursor:pointer}
 .ba-info{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px}
 .ba-info b{display:block;font-size:.86rem}
 .ba-info small{display:block;margin-top:2px;font-size:.7rem;color:var(--text-3)}
@@ -236,16 +230,17 @@ footer a{color:var(--ice-2)}
       <div class="stat"><b>Rosto</b><span>HOF e bichectomia</span></div>
       <div class="stat"><b>Alinhamento</b><span>ortodontia</span></div>
     </div>
-    <div class="treat-chips rv"><span>Lente de contato</span><span>Faceta em resina</span><span>Harmonização (HOF)</span><span>Bichectomia</span><span>Ortodontia</span></div>
+    <div class="treat-chips rv"><span>Lente de contato</span><span>Faceta em resina</span><span>Clareamento</span><span>Harmonização (HOF)</span><span>Bichectomia</span><span>Ortodontia</span></div>
   </aside>
 
   <main class="content-col">
     <section class="sec rv" id="antes-depois">
       <div class="sec-k">Antes e depois</div>
-      <h2>Arraste e veja a <em>transformação</em>.</h2>
-      <p class="lead">Casos reais de pacientes da BG Odontologia. Escolha o tratamento:</p>
+      <h2>Veja a <em>transformação</em>.</h2>
+      <p class="lead">33 casos reais da BG Odontologia. Escolha o tratamento e deslize:</p>
       <div class="ba-filter" id="ba-filter" role="group" aria-label="Filtrar por tratamento"></div>
       <div class="ba-row" id="ba-row"></div>
+      <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Foto ampliada"><button type="button" id="lb-x" aria-label="Fechar">✕</button><img id="lb-img" alt=""></div>
       <p class="legal">Imagens publicadas com autorização dos pacientes. Os resultados variam de acordo com cada caso e dependem de avaliação clínica.</p>
     </section>
 
@@ -323,7 +318,9 @@ footer a{color:var(--ice-2)}
     {key:'Faceta em resina', group:'Estética do sorriso', desc:'Sorriso renovado com resina composta, em menos sessões.'},
     {key:'Harmonização (HOF)', group:'Estética facial', desc:'Harmonização orofacial para equilíbrio e proporção do rosto.'},
     {key:'Bichectomia', group:'Estética facial', desc:'Procedimento que afina o contorno do rosto.'},
+    {key:'Clareamento', group:'Estética do sorriso', desc:'Dentes mais brancos com clareamento profissional e acompanhamento.'},
     {key:'Ortodontia', group:'Ortodontia', desc:'Aparelho e alinhamento para corrigir a posição dos dentes.'},
+    {key:'Implante e prótese', group:'Reabilitação', desc:'Implantes, protocolos e próteses para devolver função e estética.'},
     {key:'Avaliação geral', group:'Avaliação', desc:'Check-up completo e plano de tratamento para o seu caso.'}
   ];
   var lastGroup = '';
@@ -343,29 +340,17 @@ footer a{color:var(--ice-2)}
     document.body.appendChild(a); a.click(); a.remove();
   });
 
-  /* ---------- before / after (provisional slots until the real photos arrive) ---------- */
-  var CASES = [];
-  ['Lente de contato', 'Faceta em resina', 'Harmonização (HOF)', 'Bichectomia', 'Ortodontia'].forEach(function(t){
-    for(var i = 1; i <= 3; i++) CASES.push({treat:t, n:i, before:null, after:null});
-  });
-  var cats = ['Todos'].concat(TREATS.slice(0, 5).map(function(t){ return t.key; }));
+  /* ---------- before / after: real cases from the clinic's Instagram ---------- */
+  var CASES = [{"cat": "Lentes e facetas", "img": "assets/casos/024.jpg", "ar": 0.564, "url": "https://www.instagram.com/reel/DPSKM2RDRmk/"}, {"cat": "Lentes e facetas", "img": "assets/casos/063.jpg", "ar": 1.0, "url": "https://www.instagram.com/p/C7FMLPqOVq9/"}, {"cat": "Lentes e facetas", "img": "assets/casos/067.jpg", "ar": 1.0, "url": "https://www.instagram.com/p/C5WDq7orJdV/"}, {"cat": "Lentes e facetas", "img": "assets/casos/070.jpg", "ar": 1.0, "url": "https://www.instagram.com/reel/C297Zk5LlGc/"}, {"cat": "Lentes e facetas", "img": "assets/casos/073.jpg", "ar": 0.999, "url": "https://www.instagram.com/reel/C2NANUurUjQ/"}, {"cat": "Lentes e facetas", "img": "assets/casos/078.jpg", "ar": 1.0, "url": "https://www.instagram.com/reel/C1H_sXepNL1/"}, {"cat": "Lentes e facetas", "img": "assets/casos/084.jpg", "ar": 1.0, "url": "https://www.instagram.com/p/CzHCpz8upkR/"}, {"cat": "Lentes e facetas", "img": "assets/casos/086.jpg", "ar": 1.002, "url": "https://www.instagram.com/reel/CyyAXiHLoIG/"}, {"cat": "Lentes e facetas", "img": "assets/casos/045.jpg", "ar": 0.562, "url": "https://www.instagram.com/reel/DDpAXrqJ2TN/"}, {"cat": "Lentes e facetas", "img": "assets/casos/034.jpg", "ar": 0.563, "url": "https://www.instagram.com/reel/DIbjU9LR2Lm/"}, {"cat": "Lentes e facetas", "img": "assets/casos/010.jpg", "ar": 1.0, "url": "https://www.instagram.com/reel/DYp5iuwT_XZ/"}, {"cat": "Lentes e facetas", "img": "assets/casos/048.jpg", "ar": 0.75, "url": "https://www.instagram.com/reel/DC4TRzQJ2i_/"}, {"cat": "Clareamento", "img": "assets/casos/047.jpg", "ar": 1.0, "url": "https://www.instagram.com/reel/DC4dPjlpBWj/"}, {"cat": "Clareamento", "img": "assets/casos/055.jpg", "ar": 1.0, "url": "https://www.instagram.com/reel/C_N6FZ6p79x/"}, {"cat": "Clareamento", "img": "assets/casos/018.jpg", "ar": 1.0, "url": "https://www.instagram.com/p/DRsajBIkvmd/"}, {"cat": "Clareamento", "img": "assets/casos/019.jpg", "ar": 0.991, "url": "https://www.instagram.com/reel/DRml95UDZAp/"}, {"cat": "Clareamento", "img": "assets/casos/103.jpg", "ar": 1.0, "url": "https://www.instagram.com/reel/Cv3NZGhpo4R/"}, {"cat": "Clareamento", "img": "assets/casos/074.jpg", "ar": 0.999, "url": "https://www.instagram.com/reel/C2Io50fpk30/"}, {"cat": "Clareamento", "img": "assets/casos/128.jpg", "ar": 0.566, "url": "https://www.instagram.com/reel/Cl0-V15sgMJ/"}, {"cat": "Clareamento", "img": "assets/casos/122.jpg", "ar": 0.565, "url": "https://www.instagram.com/reel/CpyQjYepDda/"}, {"cat": "Lábios e face (HOF)", "img": "assets/casos/036.jpg", "ar": 1.0, "url": "https://www.instagram.com/reel/DHvRcBaxFy3/"}, {"cat": "Lábios e face (HOF)", "img": "assets/casos/038.jpg", "ar": 0.996, "url": "https://www.instagram.com/reel/DHgR0RZs6aj/"}, {"cat": "Lábios e face (HOF)", "img": "assets/casos/042.jpg", "ar": 1.0, "url": "https://www.instagram.com/reel/DHTbcWosIC0/"}, {"cat": "Lábios e face (HOF)", "img": "assets/casos/043.jpg", "ar": 0.997, "url": "https://www.instagram.com/reel/DHJc0v9psZ-/"}, {"cat": "Lábios e face (HOF)", "img": "assets/casos/124.jpg", "ar": 1.0, "url": "https://www.instagram.com/p/CnfYKsEpyNY/"}, {"cat": "Lábios e face (HOF)", "img": "assets/casos/080.jpg", "ar": 0.805, "url": "https://www.instagram.com/reel/C0zGQmdr9OM/"}, {"cat": "Reabilitação", "img": "assets/casos/032.jpg", "ar": 1.006, "url": "https://www.instagram.com/reel/DJTxtutxyuQ/"}, {"cat": "Reabilitação", "img": "assets/casos/021.jpg", "ar": 0.54, "url": "https://www.instagram.com/reel/DQFjzh7DfDr/"}, {"cat": "Reabilitação", "img": "assets/casos/053.jpg", "ar": 0.563, "url": "https://www.instagram.com/reel/C_3eUFJpJ6u/"}, {"cat": "Reabilitação", "img": "assets/casos/050.jpg", "ar": 1.0, "url": "https://www.instagram.com/reel/DBmI8sIJqqp/"}, {"cat": "Reabilitação", "img": "assets/casos/076.jpg", "ar": 1.0, "url": "https://www.instagram.com/reel/C12YcW8pYvE/"}, {"cat": "Reabilitação", "img": "assets/casos/077.jpg", "ar": 1.0, "url": "https://www.instagram.com/reel/C1uiVA7J_KG/"}, {"cat": "Reabilitação", "img": "assets/casos/102.jpg", "ar": 0.998, "url": "https://www.instagram.com/reel/CwDIFmduqS2/"}];
+  var CAT_TREAT = {'Lentes e facetas':'Faceta em resina', 'Clareamento':'Clareamento', 'Lábios e face (HOF)':'Harmonização (HOF)', 'Reabilitação':'Implante e prótese'};
+  var cats = ['Todos', 'Lentes e facetas', 'Clareamento', 'Lábios e face (HOF)', 'Reabilitação'];
   $('ba-filter').innerHTML = cats.map(function(c, i){ return '<button type="button"' + (i === 0 ? ' class="on"' : '') + ' data-cat="' + esc(c) + '">' + esc(c) + '</button>'; }).join('');
-  function layer(src, cls, label){
-    return src ? '<img class="lay ' + cls + '" src="' + src + '" alt="' + label + '" draggable="false">'
-      : '<div class="lay ph ' + (cls === 'before' ? 'b before' : 'a') + '">' + TOOTH + 'Foto ' + label.toLowerCase() + '</div>';
-  }
   $('ba-row').innerHTML = CASES.map(function(c){
-    return '<article class="ba" data-cat="' + esc(c.treat) + '">' +
-      '<div class="cmp">' + layer(c.after, 'after', 'Depois') + layer(c.before, 'before', 'Antes') +
-      '<span class="lbl l">ANTES</span><span class="lbl r">DEPOIS</span>' +
-      '<span class="bar"><span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></span>' +
-      '<input type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois · ' + esc(c.treat) + '"></div>' +
-      '<div class="ba-info"><span><b>' + esc(c.treat) + '</b><small>Caso ' + c.n + ' · arraste para comparar</small></span>' +
-      '<button type="button" data-filter data-treat="' + esc(c.treat) + '">Quero avaliar</button></div></article>';
+    return '<article class="ba" data-cat="' + esc(c.cat) + '" style="--ar:' + c.ar + '">' +
+      '<div class="shot" data-zoom="' + esc(c.img) + '"><img src="' + esc(c.img) + '" alt="Antes e depois · ' + esc(c.cat) + '" loading="lazy" decoding="async"><span class="tagc">' + esc(c.cat) + '</span></div>' +
+      '<div class="ba-info"><span><b>' + esc(c.cat) + '</b><a href="' + esc(c.url) + '" target="_blank" rel="noopener">Ver o vídeo do caso ↗</a></span>' +
+      '<button type="button" data-filter data-treat="' + esc(CAT_TREAT[c.cat]) + '">Quero avaliar</button></div></article>';
   }).join('');
-  document.querySelectorAll('.cmp input').forEach(function(r){
-    r.addEventListener('input', function(){ r.parentNode.style.setProperty('--x', r.value + '%'); });
-  });
   $('ba-filter').addEventListener('click', function(e){
     var b = e.target.closest('button'); if(!b) return;
     var c = b.getAttribute('data-cat');
@@ -373,15 +358,12 @@ footer a{color:var(--ice-2)}
     document.querySelectorAll('#ba-row .ba').forEach(function(a){ a.hidden = c !== 'Todos' && a.getAttribute('data-cat') !== c; });
     $('ba-row').scrollLeft = 0;
   });
-  /* gentle hint: the first slider sweeps once when it comes into view */
-  var firstCmp = document.querySelector('.cmp');
-  if(firstCmp && !reduced){
-    new IntersectionObserver(function(es, ob){
-      if(!es[0].isIntersecting) return; ob.disconnect();
-      var t0 = null;
-      (function f(ts){ if(!t0) t0 = ts; var p = Math.min((ts - t0) / 1600, 1); var v = 50 + Math.sin(p * Math.PI * 2) * 28; firstCmp.style.setProperty('--x', v + '%'); firstCmp.querySelector('input').value = v; if(p < 1) requestAnimationFrame(f); })(performance.now());
-    }, {threshold:.6}).observe(firstCmp);
-  }
+  var lb = $('lb');
+  $('ba-row').addEventListener('click', function(e){
+    var z = e.target.closest('[data-zoom]'); if(!z) return;
+    $('lb-img').src = z.getAttribute('data-zoom'); lb.classList.add('open');
+  });
+  lb.addEventListener('click', function(e){ if(e.target !== $('lb-img')) lb.classList.remove('open'); });
 
   /* ---------- reveal + counts (start near the final value) ---------- */
   function countUp(el){
@@ -412,7 +394,7 @@ footer a{color:var(--ice-2)}
   /* ---------- smart filter -> WhatsApp ---------- */
   var sheet = $('sheet'), chat = $('chat'), prog = $('sh-prog');
   var STEPS = [
-    {key:'tratamento', label:'Tratamento', q:'Olá! 😊 Sou da equipe do Dr. Bruno. Qual tratamento você procura?', opts:['Lente de contato', 'Faceta em resina', 'Estética facial (HOF)', 'Bichectomia', 'Ortodontia', 'Avaliação geral', 'Outro']},
+    {key:'tratamento', label:'Tratamento', q:'Olá! 😊 Sou da equipe do Dr. Bruno. Qual tratamento você procura?', opts:['Lente de contato', 'Faceta em resina', 'Clareamento', 'Estética facial (HOF)', 'Bichectomia', 'Implante e prótese', 'Ortodontia', 'Avaliação geral', 'Outro']},
     {key:'paciente', label:'Paciente', q:'Você já é paciente da BG Odontologia?', opts:['Primeira consulta', 'Já sou paciente']},
     {key:'periodo', label:'Melhor período', q:'Qual o melhor período para você?', opts:['Manhã', 'Tarde', 'Noite', 'Sábado']}
   ];
