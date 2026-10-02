@@ -125,16 +125,24 @@ h1.name{margin-top:24px;font-size:2.15rem;line-height:1.05}
 .thumbs button{flex:none;width:76px;height:52px;border-radius:12px;overflow:hidden;border:2px solid transparent;padding:0;background:#000;cursor:pointer;opacity:.55;transition:opacity .2s,border-color .2s,transform .2s;scroll-snap-align:start}
 .thumbs button img{width:100%;height:100%;object-fit:cover;display:block}
 .thumbs button.on{opacity:1;border-color:var(--ice);transform:translateY(-2px)}
-.thumbs button[hidden],.gal button[hidden]{display:none}
+.thumbs button[hidden]{display:none}
 .gal-h{display:flex;align-items:baseline;justify-content:space-between;margin-top:28px}
 .gal-h b{font-family:var(--serif);font-size:1.25rem;font-weight:400}
 .gal-h span{font-size:.66rem;color:var(--text-3);letter-spacing:.1em;text-transform:uppercase;font-weight:700}
-.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
-@media (min-width:700px){ .gal{grid-template-columns:repeat(3,1fr)} }
-.gal button{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;border:1px solid var(--line-soft);padding:0;background:#000;cursor:zoom-in}
+.gal{margin:12px -16px 0;display:grid;gap:8px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+@media (min-width:1024px){ .gal{margin:12px 0 0} }
+.track{display:flex;gap:8px;width:max-content;animation:loop var(--dur,60s) linear infinite}
+.track.rev{animation-direction:reverse}
+.gal:hover .track,.gal.hold .track{animation-play-state:paused}
+@keyframes loop{to{transform:translateX(calc(-50% - 4px))}}
+@media (prefers-reduced-motion: reduce){ .gal{overflow-x:auto} .track{animation:none} }
+.gal button{position:relative;flex:none;height:196px;width:calc(196px * var(--ar,.8));border-radius:16px;overflow:hidden;border:1px solid var(--line-soft);padding:0;background:#000;cursor:zoom-in}
+@media (min-width:1024px){ .gal button{height:226px;width:calc(226px * var(--ar,.8))} }
 .gal button img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
-.gal button:hover img{transform:scale(1.05)}
-.gal button span{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 9px;text-align:left;font-size:.66rem;font-weight:700;color:#fff;background:linear-gradient(transparent,#000c)}
+.gal button:hover img{transform:scale(1.06)}
+.gal button span{position:absolute;left:0;right:0;bottom:0;padding:22px 10px 9px;text-align:left;font-size:.64rem;font-weight:700;color:#fff;background:linear-gradient(transparent,#000c)}
+.stage-prog{height:2px;margin-top:10px;border-radius:2px;background:#ffffff14;overflow:hidden}
+.stage-prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ice-dk),var(--ice))}
 .lb{position:fixed;inset:0;z-index:90;background:#000000f0;display:none;align-items:center;justify-content:center;padding:56px 12px 24px}
 .lb.open{display:flex}
 .lb figure{margin:0;max-width:min(900px,100%);max-height:100%;display:flex;flex-direction:column;align-items:center;gap:12px}
@@ -254,7 +262,7 @@ footer a{color:var(--ice-2)}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
         Agendar minha avaliação
       </button>
-      <a class="btn btn-line" href="#antes-depois">Ver antes e depois (33 casos)</a>
+      <a class="btn btn-line" href="#antes-depois">Ver antes e depois (75 casos)</a>
     </div>
     <div class="stats rv">
       <div class="stat"><b>Sorriso</b><span>lentes e facetas</span></div>
@@ -268,7 +276,7 @@ footer a{color:var(--ice-2)}
     <section class="sec rv" id="antes-depois">
       <div class="sec-k">Antes e depois</div>
       <h2>Resultados <em>reais</em>.</h2>
-      <p class="lead">33 casos de pacientes da BG Odontologia. Arraste a linha para comparar.</p>
+      <p class="lead">75 casos de pacientes da BG Odontologia. Arraste a linha para comparar.</p>
       <div class="ba-filter" id="ba-filter" role="group" aria-label="Filtrar por tratamento"></div>
       <div class="stage-wrap" id="stage-wrap">
         <div class="stage" id="stage">
@@ -284,6 +292,7 @@ footer a{color:var(--ice-2)}
           <div><span class="cnt"><b id="st-n">01</b> / <span id="st-total">00</span></span><b id="st-title" class="st-title"></b><a id="st-video" href="#" target="_blank" rel="noopener">Ver o vídeo do caso ↗</a></div>
           <button type="button" class="btn btn-main st-cta" id="st-cta" data-filter>Quero um resultado assim</button>
         </div>
+        <div class="stage-prog"><i id="st-prog"></i></div>
         <div class="thumbs" id="thumbs"></div>
       </div>
       <div class="gal-h"><b>Mais resultados</b><span>toque para ampliar</span></div>
@@ -395,10 +404,10 @@ footer a{color:var(--ice-2)}
 
   /* ---------- before / after: real cases from the clinic's Instagram ---------- */
   var PAIRS = [{"id": "050", "cat": "Reabilitação", "t": "Reabilitação oral", "url": "https://www.instagram.com/reel/DBmI8sIJqqp/"}, {"id": "024", "cat": "Lentes e facetas", "t": "Lentes de contato", "url": "https://www.instagram.com/reel/DPSKM2RDRmk/"}, {"id": "010", "cat": "Clareamento", "t": "Clareamento + reanatomização", "url": "https://www.instagram.com/reel/DYp5iuwT_XZ/"}, {"id": "063", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/p/C7FMLPqOVq9/"}, {"id": "073", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/reel/C2NANUurUjQ/"}, {"id": "067", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/p/C5WDq7orJdV/"}, {"id": "048", "cat": "Lentes e facetas", "t": "Reanatomização do sorriso", "url": "https://www.instagram.com/reel/DC4TRzQJ2i_/"}, {"id": "070", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/reel/C297Zk5LlGc/"}, {"id": "078", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/reel/C1H_sXepNL1/"}, {"id": "086", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/reel/CyyAXiHLoIG/"}, {"id": "102", "cat": "Reabilitação", "t": "Reabilitação oral", "url": "https://www.instagram.com/reel/CwDIFmduqS2/"}];
-  var GAL = [{"id": "045", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/reel/DDpAXrqJ2TN/"}, {"id": "034", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/reel/DIbjU9LR2Lm/"}, {"id": "084", "cat": "Lentes e facetas", "t": "Clareamento + facetas em resina", "url": "https://www.instagram.com/p/CzHCpz8upkR/"}, {"id": "036", "cat": "Lábios e face (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/reel/DHvRcBaxFy3/"}, {"id": "038", "cat": "Lábios e face (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/reel/DHgR0RZs6aj/"}, {"id": "042", "cat": "Lábios e face (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/reel/DHTbcWosIC0/"}, {"id": "043", "cat": "Lábios e face (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/reel/DHJc0v9psZ-/"}, {"id": "124", "cat": "Lábios e face (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/p/CnfYKsEpyNY/"}, {"id": "080", "cat": "Lábios e face (HOF)", "t": "Rinomodelação", "url": "https://www.instagram.com/reel/C0zGQmdr9OM/"}, {"id": "018", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/p/DRsajBIkvmd/"}, {"id": "019", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/DRml95UDZAp/"}, {"id": "047", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/DC4dPjlpBWj/"}, {"id": "055", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/C_N6FZ6p79x/"}, {"id": "074", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/C2Io50fpk30/"}, {"id": "103", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/Cv3NZGhpo4R/"}, {"id": "122", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/CpyQjYepDda/"}, {"id": "128", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/Cl0-V15sgMJ/"}, {"id": "053", "cat": "Reabilitação", "t": "Reabilitação oral", "url": "https://www.instagram.com/reel/C_3eUFJpJ6u/"}, {"id": "021", "cat": "Reabilitação", "t": "Reabilitação oral", "url": "https://www.instagram.com/reel/DQFjzh7DfDr/"}, {"id": "032", "cat": "Reabilitação", "t": "Protocolo imediato", "url": "https://www.instagram.com/reel/DJTxtutxyuQ/"}, {"id": "076", "cat": "Reabilitação", "t": "Clareamento + prótese", "url": "https://www.instagram.com/reel/C12YcW8pYvE/"}, {"id": "077", "cat": "Reabilitação", "t": "Clareamento + prótese", "url": "https://www.instagram.com/reel/C1uiVA7J_KG/"}];
-  var CAT_TREAT = {'Lentes e facetas':'Faceta em resina', 'Clareamento':'Clareamento', 'Lábios e face (HOF)':'Harmonização (HOF)', 'Reabilitação':'Implante e prótese'};
-  var cats = ['Todos', 'Lentes e facetas', 'Clareamento', 'Lábios e face (HOF)', 'Reabilitação'];
-  var stage = $('stage'), range = $('st-range'), curCat = 'Todos', list = PAIRS, idx = 0, sweepRaf = 0;
+  var GAL = [{"id": "b254", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B16fHZ4Jtn_/", "ar": 1.0}, {"id": "b185", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/CLNMpfpp27d/", "ar": 1.0}, {"id": "b244", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B4kUDA7pQT4/", "ar": 1.0}, {"id": "b247", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B4SBoCDpy6u/", "ar": 1.0}, {"id": "b253", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B2NSgXZJaj0/", "ar": 1.0}, {"id": "b245", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B4iDUxDJL4C/", "ar": 1.0}, {"id": "b255", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B1pZXOhpyN5/", "ar": 1.0}, {"id": "b256", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B1Q_30JJKfy/", "ar": 1.0}, {"id": "b248", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B4Nsw6Np4Ry/", "ar": 1.0}, {"id": "b242", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B55cy0mptwz/", "ar": 1.0}, {"id": "b235", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/reel/B9rctUFJZP4/", "ar": 1.0}, {"id": "b259", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B0yOIP5Jsj2/", "ar": 1.0}, {"id": "b251", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B3CR9oKp7i2/", "ar": 1.0}, {"id": "b264", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B0OK8-yFx-V/", "ar": 1.0}, {"id": "b261", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/B0lO2igF1Ro/", "ar": 1.003}, {"id": "b267", "cat": "Bichectomia", "t": "Bichectomia", "url": "https://www.instagram.com/p/Bz0kxeiFtJW/", "ar": 1.0}, {"id": "b192", "cat": "Bichectomia", "t": "Bichectomia + preenchimento labial", "url": "https://www.instagram.com/p/CIyb_kPJnsR/", "ar": 1.0}, {"id": "045", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/reel/DDpAXrqJ2TN/", "ar": 0.62}, {"id": "034", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/reel/DIbjU9LR2Lm/", "ar": 0.62}, {"id": "084", "cat": "Lentes e facetas", "t": "Clareamento + facetas em resina", "url": "https://www.instagram.com/p/CzHCpz8upkR/", "ar": 1.0}, {"id": "036", "cat": "Rosto e lábios (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/reel/DHvRcBaxFy3/", "ar": 1.0}, {"id": "038", "cat": "Rosto e lábios (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/reel/DHgR0RZs6aj/", "ar": 0.996}, {"id": "042", "cat": "Rosto e lábios (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/reel/DHTbcWosIC0/", "ar": 1.0}, {"id": "043", "cat": "Rosto e lábios (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/reel/DHJc0v9psZ-/", "ar": 0.997}, {"id": "124", "cat": "Rosto e lábios (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/p/CnfYKsEpyNY/", "ar": 1.0}, {"id": "080", "cat": "Rosto e lábios (HOF)", "t": "Rinomodelação", "url": "https://www.instagram.com/reel/C0zGQmdr9OM/", "ar": 0.805}, {"id": "018", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/p/DRsajBIkvmd/", "ar": 1.0}, {"id": "019", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/DRml95UDZAp/", "ar": 0.991}, {"id": "047", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/DC4dPjlpBWj/", "ar": 1.0}, {"id": "055", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/C_N6FZ6p79x/", "ar": 1.0}, {"id": "074", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/C2Io50fpk30/", "ar": 0.999}, {"id": "103", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/Cv3NZGhpo4R/", "ar": 1.0}, {"id": "122", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/CpyQjYepDda/", "ar": 0.62}, {"id": "128", "cat": "Clareamento", "t": "Clareamento dental", "url": "https://www.instagram.com/reel/Cl0-V15sgMJ/", "ar": 0.62}, {"id": "053", "cat": "Reabilitação", "t": "Reabilitação oral", "url": "https://www.instagram.com/reel/C_3eUFJpJ6u/", "ar": 0.62}, {"id": "021", "cat": "Reabilitação", "t": "Reabilitação oral", "url": "https://www.instagram.com/reel/DQFjzh7DfDr/", "ar": 0.62}, {"id": "032", "cat": "Reabilitação", "t": "Protocolo imediato", "url": "https://www.instagram.com/reel/DJTxtutxyuQ/", "ar": 1.006}, {"id": "076", "cat": "Reabilitação", "t": "Clareamento + prótese", "url": "https://www.instagram.com/reel/C12YcW8pYvE/", "ar": 1.0}, {"id": "077", "cat": "Reabilitação", "t": "Clareamento + prótese", "url": "https://www.instagram.com/reel/C1uiVA7J_KG/", "ar": 1.0}, {"id": "b237", "cat": "Rosto e lábios (HOF)", "t": "Alectomia", "url": "https://www.instagram.com/p/B9SspUKJnwo/", "ar": 1.0}, {"id": "b258", "cat": "Rosto e lábios (HOF)", "t": "Botox", "url": "https://www.instagram.com/p/B1E5IUbppDJ/", "ar": 1.0}, {"id": "b206", "cat": "Rosto e lábios (HOF)", "t": "Preenchimento de malar", "url": "https://www.instagram.com/p/CFUpV-_pCMt/", "ar": 1.0}, {"id": "b263", "cat": "Rosto e lábios (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/p/B0TN7mPFdLZ/", "ar": 1.004}, {"id": "b241", "cat": "Rosto e lábios (HOF)", "t": "Alectomia", "url": "https://www.instagram.com/p/B6Oa2UjpsQ9/", "ar": 1.0}, {"id": "b260", "cat": "Rosto e lábios (HOF)", "t": "Botox", "url": "https://www.instagram.com/p/B0nvyeyFRfx/", "ar": 1.0}, {"id": "b187", "cat": "Rosto e lábios (HOF)", "t": "Preenchimento de malar", "url": "https://www.instagram.com/p/CKUvzRCp4MP/", "ar": 1.0}, {"id": "b266", "cat": "Rosto e lábios (HOF)", "t": "Rinomodelação", "url": "https://www.instagram.com/p/B0BTPuuFSWm/", "ar": 1.0}, {"id": "b180", "cat": "Rosto e lábios (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/p/CNpp3HKJnDe/", "ar": 1.0}, {"id": "b250", "cat": "Rosto e lábios (HOF)", "t": "Alectomia", "url": "https://www.instagram.com/p/B3HsXx9Jd_a/", "ar": 1.0}, {"id": "b223", "cat": "Rosto e lábios (HOF)", "t": "Botox", "url": "https://www.instagram.com/p/CBwgsBqJ9b0/", "ar": 1.0}, {"id": "b271", "cat": "Rosto e lábios (HOF)", "t": "Rinomodelação", "url": "https://www.instagram.com/p/Bzs3cb8lzFq/", "ar": 1.0}, {"id": "b186", "cat": "Rosto e lábios (HOF)", "t": "Redução das asas do nariz", "url": "https://www.instagram.com/p/CLAhZHjJAEL/", "ar": 1.0}, {"id": "b262", "cat": "Rosto e lábios (HOF)", "t": "Preenchimento labial", "url": "https://www.instagram.com/p/B0YZfmxlZvA/", "ar": 1.0}, {"id": "b196", "cat": "Rosto e lábios (HOF)", "t": "Botox", "url": "https://www.instagram.com/p/CIQeoBmp8fr/", "ar": 1.0}, {"id": "b273", "cat": "Rosto e lábios (HOF)", "t": "Lipo de papada enzimática", "url": "https://www.instagram.com/p/Bzq51lxFzOr/", "ar": 1.0}, {"id": "b188", "cat": "Rosto e lábios (HOF)", "t": "Botox", "url": "https://www.instagram.com/reel/CJjvkS8JvfA/", "ar": 1.0}, {"id": "b144", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/p/Cd5vOH2rW7r/", "ar": 1.0}, {"id": "b158", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/p/CXJX_2XLzIW/", "ar": 1.021}, {"id": "b159", "cat": "Lentes e facetas", "t": "Clareamento + facetas em resina", "url": "https://www.instagram.com/p/CW9ISMhJrpe/", "ar": 1.012}, {"id": "b145", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/p/CcydxzjJ9Vr/", "ar": 1.012}, {"id": "b156", "cat": "Lentes e facetas", "t": "Facetas em resina composta", "url": "https://www.instagram.com/p/CXjN7f0LoJx/", "ar": 1.01}, {"id": "b166", "cat": "Lentes e facetas", "t": "Transformação do sorriso", "url": "https://www.instagram.com/reel/CTNo2CxJ-4Y/", "ar": 0.62}, {"id": "b155", "cat": "Lentes e facetas", "t": "Transformação do sorriso", "url": "https://www.instagram.com/reel/CZsKmwUJKsO/", "ar": 0.996}, {"id": "b173", "cat": "Lentes e facetas", "t": "Gengivoplastia", "url": "https://www.instagram.com/p/CPbnR6Dpw66/", "ar": 1.009}];
+  var CAT_TREAT = {'Lentes e facetas':'Faceta em resina', 'Clareamento':'Clareamento', 'Bichectomia':'Bichectomia', 'Rosto e lábios (HOF)':'Harmonização (HOF)', 'Reabilitação':'Implante e prótese'};
+  var cats = ['Todos', 'Lentes e facetas', 'Bichectomia', 'Rosto e lábios (HOF)', 'Clareamento', 'Reabilitação'];
+  var lb = $('lb'), stage = $('stage'), range = $('st-range'), curCat = 'Todos', list = PAIRS, idx = 0, sweepRaf = 0;
   function pad(n){ return (n < 10 ? '0' : '') + n; }
   function setX(v){ stage.style.setProperty('--x', v + '%'); range.value = v; }
   function sweep(){
@@ -422,27 +431,54 @@ footer a{color:var(--ice-2)}
     document.querySelectorAll('#thumbs button').forEach(function(t){ var on = t.getAttribute('data-id') === c.id; t.classList.toggle('on', on); if(on && animate !== false) t.scrollIntoView({block:'nearest', inline:'center', behavior:'smooth'}); });
   }
   $('thumbs').innerHTML = PAIRS.map(function(c){ return '<button type="button" data-id="' + c.id + '" data-cat="' + esc(c.cat) + '" aria-label="' + esc(c.t) + '"><img src="assets/ba/' + c.id + '-depois.jpg" alt="" loading="lazy"></button>'; }).join('');
-  $('thumbs').addEventListener('click', function(e){ var t = e.target.closest('button'); if(!t) return; var id = t.getAttribute('data-id'); list.forEach(function(c, k){ if(c.id === id) show(k); }); });
-  $('st-prev').addEventListener('click', function(){ show(idx - 1); });
-  $('st-next').addEventListener('click', function(){ show(idx + 1); });
+  $('thumbs').addEventListener('click', function(e){ var t = e.target.closest('button'); if(!t) return; userTouch(); var id = t.getAttribute('data-id'); list.forEach(function(c, k){ if(c.id === id) show(k); }); });
+  $('st-prev').addEventListener('click', function(){ userTouch(); show(idx - 1); });
+  $('st-next').addEventListener('click', function(){ userTouch(); show(idx + 1); });
   range.addEventListener('input', function(){ cancelAnimationFrame(sweepRaf); stage.style.setProperty('--x', range.value + '%'); });
-  new IntersectionObserver(function(es, ob){ if(es[0].isIntersecting){ ob.disconnect(); sweep(); } }, {threshold:.5}).observe(stage);
+  /* autoplay: every case sweeps, then the next one comes in; any touch pauses it for a few seconds and it resumes on its own */
+  var AUTO_MS = 5200, inView = false, pausedUntil = 0, t0 = 0, prog = $('st-prog');
+  function userTouch(){ pausedUntil = performance.now() + 7000; t0 = 0; prog.style.width = '0'; }
+  (function tick(now){
+    requestAnimationFrame(tick);
+    if(reduced || !inView || document.hidden || lb.classList.contains('open') || sheet.classList.contains('open') || list.length < 2) { t0 = 0; return; }
+    if(now < pausedUntil){ return; }
+    if(!t0) t0 = now;
+    var p = (now - t0) / AUTO_MS; prog.style.width = Math.min(p, 1) * 100 + '%';
+    if(p >= 1){ t0 = 0; show(idx + 1); }
+  })(performance.now());
+  new IntersectionObserver(function(es){ var was = inView; inView = es[0].isIntersecting; if(inView && !was) sweep(); }, {threshold:.5}).observe(stage);
+  range.addEventListener('pointerdown', userTouch);
+  range.addEventListener('input', userTouch);
 
-  $('gal').innerHTML = GAL.map(function(c, k){ return '<button type="button" data-k="' + k + '" data-cat="' + esc(c.cat) + '"><img src="assets/casos/' + c.id + '.jpg" alt="Antes e depois · ' + esc(c.t) + '" loading="lazy" decoding="async"><span>' + esc(c.t) + '</span></button>'; }).join('');
+  /* "Mais resultados": two rows looping in opposite directions (pause on hover / touch, then resume) */
+  function renderGal(){
+    var ks = GAL.map(function(c, k){ return k; }).filter(function(k){ return curCat === 'Todos' || GAL[k].cat === curCat; });
+    var rows = ks.length > 7 ? [ks.filter(function(k, i){ return i % 2 === 0; }), ks.filter(function(k, i){ return i % 2 === 1; })] : [ks];
+    $('gal').innerHTML = rows.map(function(r, ri){
+      var items = r.map(function(k){ var c = GAL[k]; return '<button type="button" data-k="' + k + '" style="--ar:' + (c.ar || .8) + '"><img src="assets/casos/' + c.id + '.jpg" alt="Antes e depois · ' + esc(c.t) + '" decoding="async"><span>' + esc(c.t) + '</span></button>'; }).join('');
+      while(r.length && r.length < 6){ items += items; r = r.concat(r); }
+      return '<div class="track' + (ri ? ' rev' : '') + '" style="--dur:' + Math.max(28, r.length * 5) + 's">' + items + items + '</div>';
+    }).join('');
+  }
+  renderGal();
+  var gal = $('gal'), holdT = 0;
+  gal.addEventListener('touchstart', function(){ clearTimeout(holdT); gal.classList.add('hold'); }, {passive:true});
+  gal.addEventListener('touchend', function(){ holdT = setTimeout(function(){ gal.classList.remove('hold'); }, 1500); }, {passive:true});
   $('ba-filter').innerHTML = cats.map(function(c, i){ return '<button type="button"' + (i === 0 ? ' class="on"' : '') + ' data-cat="' + esc(c) + '">' + esc(c) + '</button>'; }).join('');
   $('ba-filter').addEventListener('click', function(e){
     var b = e.target.closest('button'); if(!b) return;
     curCat = b.getAttribute('data-cat');
     this.querySelectorAll('button').forEach(function(o){ o.classList.toggle('on', o === b); });
     list = PAIRS.filter(function(c){ return curCat === 'Todos' || c.cat === curCat; });
-    document.querySelectorAll('#thumbs button, #gal button').forEach(function(t){ t.hidden = curCat !== 'Todos' && t.getAttribute('data-cat') !== curCat; });
+    document.querySelectorAll('#thumbs button').forEach(function(t){ t.hidden = curCat !== 'Todos' && t.getAttribute('data-cat') !== curCat; });
+    renderGal(); userTouch();
     $('stage-wrap').hidden = !list.length;
     if(list.length) show(0);
   });
   show(0, false);
 
   /* lightbox for the gallery, with prev/next inside the current filter */
-  var lb = $('lb'), lbK = 0;
+  var lbK = 0;
   function visibleGal(){ return GAL.map(function(c, k){ return k; }).filter(function(k){ return curCat === 'Todos' || GAL[k].cat === curCat; }); }
   function lbShow(k){ lbK = k; var c = GAL[k]; $('lb-img').src = 'assets/casos/' + c.id + '.jpg'; $('lb-img').alt = c.t; $('lb-t').textContent = c.t; $('lb-v').href = c.url; }
   function lbStep(d){ var v = visibleGal(), p = v.indexOf(lbK); lbShow(v[(p + d + v.length) % v.length]); }
