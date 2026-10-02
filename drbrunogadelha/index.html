@@ -167,6 +167,7 @@ h1.name{margin-top:24px;font-size:2.15rem;line-height:1.05}
 .treat:hover{border-color:var(--ice);transform:translateY(-2px)}
 .treat .ic{width:40px;height:40px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;background:#7fd3f21a;color:var(--ice)}
 .treat .ic svg{width:20px;height:20px}
+.treat .tg{display:block;margin-bottom:3px;font-size:.56rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ice)}
 .treat b{display:block;font-size:.92rem}
 .treat p{margin-top:3px;font-size:.76rem;color:var(--text-2);line-height:1.45}
 .treat .go{display:inline-block;margin-top:8px;font-size:.68rem;font-weight:800;color:var(--ice);letter-spacing:.04em}
@@ -378,18 +379,16 @@ footer a{color:var(--ice-2)}
   var TREATS = [
     {key:'Lente de contato', group:'Estética do sorriso', desc:'Lâminas finas que corrigem cor, forma e tamanho dos dentes.'},
     {key:'Faceta em resina', group:'Estética do sorriso', desc:'Sorriso renovado com resina composta, em menos sessões.'},
+    {key:'Clareamento', group:'Estética do sorriso', desc:'Dentes mais brancos com clareamento profissional e acompanhamento.'},
     {key:'Harmonização (HOF)', group:'Estética facial', desc:'Harmonização orofacial para equilíbrio e proporção do rosto.'},
     {key:'Bichectomia', group:'Estética facial', desc:'Procedimento que afina o contorno do rosto.'},
-    {key:'Clareamento', group:'Estética do sorriso', desc:'Dentes mais brancos com clareamento profissional e acompanhamento.'},
     {key:'Ortodontia', group:'Ortodontia', desc:'Aparelho e alinhamento para corrigir a posição dos dentes.'},
     {key:'Implante e prótese', group:'Reabilitação', desc:'Implantes, protocolos e próteses para devolver função e estética.'},
     {key:'Avaliação geral', group:'Avaliação', desc:'Check-up completo e plano de tratamento para o seu caso.'}
   ];
-  var lastGroup = '';
+  /* one continuous 2-column grid (no gaps); the group shows as a small label inside each card */
   $('treats').innerHTML = TREATS.map(function(t){
-    var head = t.group !== lastGroup ? '<div class="tgroup">' + esc(t.group) + '</div>' : '';
-    lastGroup = t.group;
-    return head + '<button type="button" class="treat" data-filter data-treat="' + esc(t.key) + '"><span class="ic">' + TOOTH + '</span><span><b>' + esc(t.key) + '</b><p>' + esc(t.desc) + '</p><span class="go">Agendar avaliação →</span></span></button>';
+    return '<button type="button" class="treat" data-filter data-treat="' + esc(t.key) + '"><span class="ic">' + TOOTH + '</span><span><small class="tg">' + esc(t.group) + '</small><b>' + esc(t.key) + '</b><p>' + esc(t.desc) + '</p><span class="go">Agendar avaliação →</span></span></button>';
   }).join('');
 
   /* ---------- save contact (vCard) ---------- */
