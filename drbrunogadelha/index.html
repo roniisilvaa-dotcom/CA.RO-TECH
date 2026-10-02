@@ -340,7 +340,7 @@ footer a{color:var(--ice-2)}
       <div class="clinic">
         <div class="logo-plate"><img src="assets/bg-logo.jpg" alt="BG Odontologia"></div>
         <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span><b>São Paulo · SP</b></span></div>
-        <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg><span>(11) 93072-3036 · (11) 99794-0202</span></div>
+        <div class="row"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg><span>(11) 93072-3036</span></div>
         <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg><span><a href="https://www.instagram.com/drbrunoamaral/" target="_blank" rel="noopener">@drbrunoamaral</a> · <a href="https://www.instagram.com/bgodontologia_/" target="_blank" rel="noopener">@bgodontologia_</a></span></div>
         <button class="btn btn-main" type="button" data-filter style="margin-top:18px;width:100%">Agendar minha avaliação</button>
         <button class="btn btn-line" type="button" id="save-contact" style="margin-top:10px;width:100%">Salvar contato da clínica</button>
@@ -394,7 +394,7 @@ footer a{color:var(--ice-2)}
   /* ---------- save contact (vCard) ---------- */
   $('save-contact').addEventListener('click', function(){
     var v = ['BEGIN:VCARD','VERSION:3.0','N:Odontologia;BG;;;','FN:BG Odontologia · Dr. Bruno Gadelha','ORG:BG Odontologia','TITLE:Cirurgião-dentista · CRO-SP 133718',
-      'TEL;TYPE=CELL:+5511930723036','TEL;TYPE=WORK:+5511997940202','URL:https://www.instagram.com/bgodontologia_/','ADR;TYPE=WORK:;;;São Paulo;SP;;Brasil','END:VCARD'].join('\r\n');
+      'TEL;TYPE=CELL:+5511930723036','URL:https://www.instagram.com/bgodontologia_/','ADR;TYPE=WORK:;;;São Paulo;SP;;Brasil','END:VCARD'].join('\r\n');
     var a = document.createElement('a');
     a.href = URL.createObjectURL(new Blob([v], {type:'text/vcard'}));
     a.download = 'BG-Odontologia.vcf';
