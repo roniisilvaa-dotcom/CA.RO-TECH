@@ -435,9 +435,9 @@ footer{margin-top:34px;text-align:center;font-size:.68rem;color:var(--text-3);li
 (function(){
   'use strict';
   /* Where each ficha goes:
-     SHEET_URL — Google Apps Script web app that appends a row to the team's spreadsheet (export to Excel/CSV from there).
+     API_URL   — partners panel (Vercel + Neon): POST /api/cadastros saves the ficha; leave empty to use WhatsApp only.
      WA_NUMBER — WhatsApp that receives the summary (Roni). */
-  var SHEET_URL = '';
+  var API_URL = '';
   var WA_NUMBER = '5511942302344';
   var STORE = 'cadastro-parceiro-v1';
 
@@ -554,7 +554,6 @@ footer{margin-top:34px;text-align:center;font-size:.68rem;color:var(--text-3);li
   function asText(){
     return 'CADASTRO DE PARCEIRO — ' + (state.nome || '') + '\n' + sections().map(function(sec){ return '\n*' + sec.t.toUpperCase() + '*\n' + sec.rows.map(function(r){ return '• ' + r[0] + ': ' + String(r[1]).replace(/\n/g, ' / '); }).join('\n'); }).join('\n');
   }
-  function asRow(){ var row = {'Enviado em': new Date().toLocaleString('pt-BR')}; sections().forEach(function(sec){ sec.rows.forEach(function(r){ row[sec.t + ' · ' + r[0]] = r[1]; }); }); return row; }
   function buildPrint(){
     $('print').innerHTML = '<h1>Cadastro de parceiro — ' + esc(state.nome || '') + '</h1><div class="meta">Gerado em ' + new Date().toLocaleString('pt-BR') + '</div>' +
       sections().map(function(sec){ return '<h3>' + esc(sec.t) + '</h3><dl>' + sec.rows.map(function(r){ return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl>'; }).join('');
@@ -592,11 +591,14 @@ footer{margin-top:34px;text-align:center;font-size:.68rem;color:var(--text-3);li
     if(cur < steps.length - 1) return go(cur + 1);
     for(var k = 0; k < CHECKS.length - 1; k++){ if(!CHECKS[k]()){ go(k); toast('Faltou algum dado nesta etapa'); return; } }
     if(form.website.value) return;
-    if(!SHEET_URL){ finish(false); openWA(); return; }
+    if(!API_URL){ finish(false); openWA(); return; }
     var btn = $('next'); btn.disabled = true; btn.textContent = 'Enviando…';
-    fetch(SHEET_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(asRow())})
-      .then(function(){ finish(true); }).catch(function(){ finish(false); })
-      .then(function(){ btn.disabled = false; });
+    var dados = {}; Object.keys(state).forEach(function(k){ dados[k] = state[k]; });
+    /* text/plain keeps it a "simple" request (no CORS preflight); the API parses the JSON body */
+    fetch(API_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({dados:dados})})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); finish(true); })
+      .catch(function(){ finish(false); toast('Não conseguimos salvar agora. Envie pelo WhatsApp.'); })
+      .then(function(){ btn.disabled = false; btn.textContent = 'Enviar cadastro'; });
   });
   $('wa').addEventListener('click', openWA);
   $('pdf').addEventListener('click', function(){ buildPrint(); window.print(); });
