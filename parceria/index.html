@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cadastro de Parceiro</title>
-<meta name="description" content="Ficha com os dados do parceiro para formalizar o contrato.">
+<meta name="description" content="Dados do parceiro para o contrato e o envio do material.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#070b12">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,137 +14,62 @@
 :root{
   --bg:#070b12; --panel:#0e1521; --panel-2:#131c2b; --line:#ffffff1f; --line-soft:#ffffff12;
   --text:#f3f6fb; --text-2:#aab4c4; --text-3:#6f7b8e;
-  --acc:#8fd3ff; --acc-2:#bfe6ff; --acc-dk:#3a8fd0; --ok:#3ddc97; --err:#ff6b7a;
+  --acc:#8fd3ff; --acc-dk:#3a8fd0; --ok:#3ddc97; --err:#ff6b7a;
   --serif:'Playfair Display',Georgia,serif; --sans:'Plus Jakarta Sans',system-ui,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;
   background-image:radial-gradient(900px 500px at 85% -10%,#1d4f7a33,transparent 60%),radial-gradient(700px 500px at -10% 30%,#3a8fd01a,transparent 60%)}
-a{color:var(--acc)}
-.wrap{max-width:760px;margin:0 auto;padding:28px 16px 120px}
-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.wrap{max-width:620px;margin:0 auto;padding:28px 16px 80px}
 .brand{font-size:.66rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--text-2)}
 .brand b{color:var(--acc)}
-.save-state{font-size:.68rem;color:var(--text-3)}
-h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;margin-top:26px}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,6vw,2.4rem);line-height:1.1;margin-top:22px}
 h1 em{color:var(--acc);font-style:italic}
-.intro{margin-top:10px;color:var(--text-2);font-size:.92rem;line-height:1.6;max-width:560px}
-
-.steps{display:flex;gap:6px;margin-top:26px}
-.steps button{flex:1;border:0;background:none;cursor:pointer;text-align:left;padding:0;color:var(--text-3);font:inherit;min-width:0}
-.steps i{display:block;height:4px;border-radius:4px;background:#ffffff14;overflow:hidden}
-.steps i::after{content:'';display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc-dk),var(--acc));transition:width .4s ease}
-.steps button.done i::after,.steps button.on i::after{width:100%}
-.steps span{display:block;margin-top:7px;font-size:.58rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.steps button.on span{color:var(--acc)}
-.steps button:disabled{cursor:default}
-@media (max-width:600px){ .steps span{visibility:hidden} }
-
+.intro{margin-top:10px;color:var(--text-2);font-size:.9rem;line-height:1.6}
 .card{margin-top:22px;padding:24px 20px;border-radius:22px;background:linear-gradient(160deg,var(--panel-2),var(--panel));border:1px solid var(--line);box-shadow:0 30px 60px -40px #000}
-@media (min-width:640px){ .card{padding:30px} }
-.k{font-size:.62rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
-.card h2{font-family:var(--serif);font-weight:500;font-size:1.55rem;margin-top:6px}
-.card .sub{margin-top:6px;color:var(--text-2);font-size:.84rem;line-height:1.55}
-.step{display:none}.step.on{display:block;animation:in .35s ease}
-@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.grid{display:grid;gap:14px;margin-top:20px}
-@media (min-width:640px){ .grid.two{grid-template-columns:1fr 1fr} .full{grid-column:1/-1} }
-.f[hidden]{display:none}
-.f label,.f .lbl{display:block;font-size:.74rem;font-weight:700;color:var(--text-2);margin-bottom:7px}
-.f label small,.f .lbl small{font-weight:500;color:var(--text-3)}
-.f input,.f select,.f textarea{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:#0a111c;color:var(--text);font:inherit;font-size:.92rem;outline:none;transition:border-color .2s}
-.f input[type=date]{color-scheme:dark}
-.f textarea{min-height:88px;resize:vertical;line-height:1.5}
-.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--acc)}
-.f.bad input,.f.bad textarea{border-color:var(--err)}
+@media (min-width:600px){ .card{padding:28px} }
+.grid{display:grid;gap:14px}
+@media (min-width:600px){ .two{grid-template-columns:1fr 1fr} .full{grid-column:1/-1} }
+.k{font-size:.62rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--acc);margin:6px 0 -2px}
+.f label{display:block;font-size:.74rem;font-weight:700;color:var(--text-2);margin-bottom:7px}
+.f label small{font-weight:500;color:var(--text-3)}
+.f input{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:#0a111c;color:var(--text);font:inherit;font-size:.92rem;outline:none;transition:border-color .2s}
+.f input:focus{border-color:var(--acc)}
+.f.bad input{border-color:var(--err)}
 .f .msg{display:none;margin-top:6px;font-size:.72rem;color:var(--err)}
 .f.bad .msg{display:block}
 .f .hint{margin-top:6px;font-size:.72rem;color:var(--text-3)}
 .f .hint.ok{color:var(--ok)}
-.row-btn{display:flex;gap:8px}
-.row-btn input{flex:1;min-width:0}
-.mini{flex:none;padding:0 14px;border-radius:12px;border:1.5px solid var(--line);background:#ffffff0a;color:var(--text);font:inherit;font-size:.78rem;font-weight:700;cursor:pointer}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chips button{padding:10px 14px;border-radius:100px;border:1.5px solid var(--line);background:#ffffff08;color:var(--text-2);font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s}
-.chips button:hover{border-color:var(--acc-dk);color:#fff}
-.chips button.on{background:var(--acc);border-color:var(--acc);color:#04121f}
-.f.bad .chips button{border-color:#ff6b7a66}
-.check{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--text-2);line-height:1.5;cursor:pointer}
-.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--acc);flex:none}
-.sep{height:1px;background:var(--line-soft);margin:4px 0}
-.net{display:grid;grid-template-columns:110px 1fr 120px;gap:8px;align-items:center}
+.net{display:grid;grid-template-columns:96px 1fr;gap:8px;align-items:center}
 .net b{font-size:.8rem;display:flex;align-items:center;gap:8px}
 .net b i{width:10px;height:10px;border-radius:3px;display:inline-block}
-@media (max-width:520px){ .net{grid-template-columns:1fr 1fr} .net b{grid-column:1/-1} }
-
-.nav{display:flex;gap:10px;margin-top:26px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 20px;border-radius:14px;border:0;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;transition:transform .15s}
-.btn:active{transform:scale(.98)}
-.btn-main{flex:1;background:linear-gradient(135deg,var(--acc),#56b6f0);color:#04121f;box-shadow:0 14px 30px #3a8fd040}
-.btn-line{background:#ffffff0a;border:1px solid var(--line);color:#fff}
-.btn-wa{flex:1;background:#25d366;color:#05210f}
-.btn svg{width:18px;height:18px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:.8rem;color:var(--text-2);line-height:1.5;cursor:pointer}
+.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--acc);flex:none}
+.btn{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;margin-top:20px;padding:16px 20px;border-radius:14px;border:0;font:inherit;font-weight:800;font-size:.95rem;cursor:pointer;background:linear-gradient(135deg,var(--acc),#56b6f0);color:#04121f;box-shadow:0 14px 30px #3a8fd040}
 .btn[disabled]{opacity:.6;pointer-events:none}
-
-.rev{margin-top:18px;display:grid;gap:12px}
-.rev section{border:1px solid var(--line-soft);border-radius:16px;padding:14px 16px;background:#ffffff05}
-.rev h3{display:flex;justify-content:space-between;align-items:center;font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
-.rev h3 button{border:0;background:none;color:var(--text-2);font:inherit;font-size:.72rem;font-weight:700;letter-spacing:0;text-transform:none;cursor:pointer;text-decoration:underline}
-.rev dl{display:grid;grid-template-columns:minmax(110px,38%) 1fr;gap:6px 12px;margin-top:10px;font-size:.82rem}
-.rev dt{color:var(--text-3)}
-.rev dd{word-break:break-word;white-space:pre-line}
-.done-box{text-align:center;padding:10px 0}
-.done-box .ic{width:64px;height:64px;margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#3ddc9722;color:var(--ok)}
-.done-box .ic svg{width:30px;height:30px}
-.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.actions .btn{flex:1;min-width:180px}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;padding:12px 18px;border-radius:12px;background:#fff;color:#06111d;font-weight:700;font-size:.84rem;transition:all .3s;pointer-events:none;z-index:9}
-.toast.show{opacity:1;transform:translateX(-50%)}
-footer{margin-top:34px;text-align:center;font-size:.68rem;color:var(--text-3);line-height:1.7}
+.btn-wa{background:#25d366;color:#05210f;box-shadow:none}
+.done{display:none;text-align:center;padding:12px 0}
+.done .ic{width:64px;height:64px;margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#3ddc9722;color:var(--ok)}
+.done .ic svg{width:30px;height:30px}
+.done h2{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin-top:14px}
+.done p{margin-top:8px;color:var(--text-2);font-size:.86rem;line-height:1.55}
+.sent .done{display:block}.sent form{display:none}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
-#print{display:none}
-@media print{
-  body{background:#fff;color:#000}
-  .wrap,.toast{display:none}
-  #print{display:block;padding:24px;font-family:Arial,sans-serif;color:#000}
-  #print h1{font-family:Georgia,serif;font-size:20px;margin:0 0 4px}
-  #print .meta{font-size:11px;color:#444;margin-bottom:14px}
-  #print h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid #000;margin:14px 0 6px;padding-bottom:3px}
-  #print dl{display:grid;grid-template-columns:200px 1fr;gap:3px 10px;font-size:12px}
-  #print dt{color:#444}
-  #print dd{white-space:pre-line}
-}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;padding:12px 18px;border-radius:12px;background:#fff;color:#06111d;font-weight:700;font-size:.84rem;transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%)}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <div class="brand">Cadastro de <b>parceiro</b></div>
-    <div class="save-state" id="save-state" aria-live="polite"></div>
-  </header>
-
+  <div class="brand">Cadastro de <b>parceiro</b></div>
   <h1>Seus dados para o <em>contrato</em></h1>
-  <p class="intro">Parabéns pela parceria! Preencha com atenção: estes dados vão para o contrato e para o envio do material. Leva cerca de 5 minutos e fica salvo neste aparelho até você enviar.</p>
+  <p class="intro">Preencha com atenção: usamos estes dados no contrato e para enviar o material.</p>
 
-  <nav class="steps" id="steps" aria-label="Etapas"></nav>
-
-  <form class="card" id="form" novalidate autocomplete="on">
-    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-    <!-- 1 · Dados pessoais -->
-    <div class="step" data-title="Seus dados">
-      <div class="k">Etapa 1 de 6</div>
-      <h2>Dados pessoais</h2>
-      <p class="sub">Exatamente como estão no seu documento.</p>
+  <div class="card" id="card">
+    <form id="form" novalidate autocomplete="on">
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="grid two">
-        <div class="f full" data-req="pessoa">
-          <span class="lbl">O contrato será em nome de</span>
-          <div class="chips" data-chips="pessoa" data-single>
-            <button type="button">Pessoa física (CPF)</button><button type="button">Empresa / MEI (CNPJ)</button>
-          </div>
-          <div class="msg">Escolha uma opção.</div>
-        </div>
         <div class="f full">
           <label for="nome">Nome completo</label>
           <input id="nome" name="nome" type="text" maxlength="140" autocomplete="name">
@@ -156,45 +81,10 @@ footer{margin-top:34px;text-align:center;font-size:.68rem;color:var(--text-3);li
           <div class="msg">CPF inválido.</div>
         </div>
         <div class="f">
-          <label for="rg">RG <small>(opcional)</small></label>
-          <input id="rg" name="rg" type="text" maxlength="20">
-        </div>
-        <div class="f">
-          <label for="nascimento">Data de nascimento</label>
-          <input id="nascimento" name="nascimento" type="date">
-          <div class="msg">Informe a data de nascimento.</div>
-        </div>
-        <div class="f">
-          <label for="tel">WhatsApp</label>
+          <label for="tel">Telefone / WhatsApp</label>
           <input id="tel" name="tel" type="tel" inputmode="tel" placeholder="(11) 90000-0000" autocomplete="tel">
-          <div class="msg">WhatsApp inválido, inclua o DDD.</div>
+          <div class="msg">Telefone inválido, inclua o DDD.</div>
         </div>
-        <div class="f full">
-          <label for="email">E-mail <small>(recebe o contrato para assinar)</small></label>
-          <input id="email" name="email" type="email" maxlength="120" autocomplete="email">
-          <div class="msg">E-mail inválido.</div>
-        </div>
-        <div class="sep full" data-show="pessoa=Empresa / MEI (CNPJ)"></div>
-        <div class="f full" data-show="pessoa=Empresa / MEI (CNPJ)">
-          <label for="cnpj">CNPJ</label>
-          <div class="row-btn"><input id="cnpj" name="cnpj" type="text" inputmode="numeric" placeholder="00.000.000/0000-00" autocomplete="off"><button class="mini" type="button" id="cnpj-go">Buscar</button></div>
-          <div class="msg">CNPJ inválido.</div>
-          <div class="hint" id="cnpj-hint">Preenchemos a razão social automaticamente.</div>
-        </div>
-        <div class="f full" data-show="pessoa=Empresa / MEI (CNPJ)">
-          <label for="razao">Razão social</label>
-          <input id="razao" name="razao" type="text" maxlength="160">
-          <div class="msg">Informe a razão social.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2 · Endereço -->
-    <div class="step" data-title="Endereço">
-      <div class="k">Etapa 2 de 6</div>
-      <h2>Endereço de entrega</h2>
-      <p class="sub">Para onde enviamos o material. Digite o CEP e completamos o resto.</p>
-      <div class="grid two">
         <div class="f">
           <label for="cep">CEP</label>
           <input id="cep" name="cep" type="text" inputmode="numeric" placeholder="00000-000" autocomplete="postal-code">
@@ -202,411 +92,115 @@ footer{margin-top:34px;text-align:center;font-size:.68rem;color:var(--text-3);li
           <div class="hint" id="cep-hint"></div>
         </div>
         <div class="f">
-          <label for="numero">Número</label>
-          <input id="numero" name="numero" type="text" maxlength="20">
-          <div class="msg">Informe o número (ou "s/n").</div>
+          <label for="complemento">Complemento <small>(casa, apto…)</small></label>
+          <input id="complemento" name="complemento" type="text" maxlength="80" placeholder="Ex.: Apto 12, bloco B">
         </div>
         <div class="f full">
-          <label for="rua">Rua / avenida</label>
-          <input id="rua" name="rua" type="text" maxlength="160" autocomplete="address-line1">
-          <div class="msg">Informe a rua.</div>
+          <label for="rua">Endereço <small>(rua e número)</small></label>
+          <input id="rua" name="rua" type="text" maxlength="180" autocomplete="street-address" placeholder="Ex.: Rua das Flores, 120">
+          <div class="msg">Informe a rua e o número.</div>
         </div>
-        <div class="f">
-          <label for="complemento">Complemento <small>(opcional)</small></label>
-          <input id="complemento" name="complemento" type="text" maxlength="80" placeholder="Apto, bloco, casa 2…">
-        </div>
-        <div class="f">
-          <label for="bairro">Bairro</label>
-          <input id="bairro" name="bairro" type="text" maxlength="80">
-          <div class="msg">Informe o bairro.</div>
-        </div>
-        <div class="f">
-          <label for="cidade">Cidade</label>
-          <input id="cidade" name="cidade" type="text" maxlength="80" autocomplete="address-level2">
-          <div class="msg">Informe a cidade.</div>
-        </div>
-        <div class="f">
-          <label for="uf">Estado (UF)</label>
-          <input id="uf" name="uf" type="text" maxlength="2" autocomplete="address-level1" style="text-transform:uppercase" placeholder="SP">
-          <div class="msg">UF inválida.</div>
-        </div>
-        <div class="f full">
-          <label for="referencia">Ponto de referência <small>(opcional)</small></label>
-          <input id="referencia" name="referencia" type="text" maxlength="160">
-        </div>
-        <div class="f full">
-          <label class="check"><input type="checkbox" id="recebeEu" name="recebeEu" checked> Eu mesmo recebo as entregas neste endereço</label>
-        </div>
-        <div class="f" data-show="recebeEu=0">
-          <label for="recebedor">Quem recebe</label>
-          <input id="recebedor" name="recebedor" type="text" maxlength="120">
-          <div class="msg">Informe quem recebe.</div>
-        </div>
-        <div class="f" data-show="recebeEu=0">
-          <label for="recebedorTel">Telefone de quem recebe</label>
-          <input id="recebedorTel" name="recebedorTel" type="tel" inputmode="tel" placeholder="(11) 90000-0000">
-          <div class="msg">Telefone inválido.</div>
-        </div>
-      </div>
-    </div>
 
-    <!-- 3 · Redes -->
-    <div class="step" data-title="Redes">
-      <div class="k">Etapa 3 de 6</div>
-      <h2>Suas redes sociais</h2>
-      <p class="sub">Informe o @ de cada rede onde vai divulgar. Os seguidores são aproximados.</p>
-      <div class="grid">
-        <div class="f" data-req="redes">
-          <div class="msg" style="margin:0 0 8px">Informe pelo menos uma rede.</div>
-          <div class="grid" style="margin-top:0;gap:10px">
-            <div class="net"><b><i style="background:#e1306c"></i>Instagram</b><input name="ig" id="ig" type="text" maxlength="60" placeholder="@usuario"><input name="igSeg" id="igSeg" type="text" inputmode="numeric" maxlength="12" placeholder="Seguidores"></div>
-            <div class="net"><b><i style="background:#fff"></i>TikTok</b><input name="tt" id="tt" type="text" maxlength="60" placeholder="@usuario"><input name="ttSeg" id="ttSeg" type="text" inputmode="numeric" maxlength="12" placeholder="Seguidores"></div>
-            <div class="net"><b><i style="background:#ff0033"></i>YouTube</b><input name="yt" id="yt" type="text" maxlength="80" placeholder="@canal"><input name="ytSeg" id="ytSeg" type="text" inputmode="numeric" maxlength="12" placeholder="Inscritos"></div>
-            <div class="net"><b><i style="background:#1877f2"></i>Facebook</b><input name="fb" id="fb" type="text" maxlength="80" placeholder="Página / perfil"><input name="fbSeg" id="fbSeg" type="text" inputmode="numeric" maxlength="12" placeholder="Seguidores"></div>
-            <div class="net"><b><i style="background:#ffb000"></i>Kwai / outra</b><input name="outra" id="outra" type="text" maxlength="80" placeholder="@usuario"><input name="outraSeg" id="outraSeg" type="text" inputmode="numeric" maxlength="12" placeholder="Seguidores"></div>
+        <div class="k full">Perfis</div>
+        <div class="f full" id="redes">
+          <label>Seu @ ou link de cada perfil <small>(preencha os que tiver)</small></label>
+          <div class="grid" style="gap:10px">
+            <div class="net"><b><i style="background:#e1306c"></i>Instagram</b><input name="ig" id="ig" type="text" maxlength="120" placeholder="@usuario"></div>
+            <div class="net"><b><i style="background:#fff"></i>TikTok</b><input name="tt" id="tt" type="text" maxlength="120" placeholder="@usuario"></div>
+            <div class="net"><b><i style="background:#ff0033"></i>YouTube</b><input name="yt" id="yt" type="text" maxlength="160" placeholder="@canal ou link"></div>
+            <div class="net"><b><i style="background:#ffb000"></i>Outro</b><input name="outra" id="outra" type="text" maxlength="160" placeholder="Link de outro perfil"></div>
           </div>
+          <div class="msg">Informe pelo menos um perfil.</div>
+        </div>
+
+        <div class="f full" id="lgpd-f">
+          <label class="check"><input type="checkbox" id="lgpd"> Autorizo o uso destes dados apenas para o contrato e o envio do material desta parceria (LGPD).</label>
+          <div class="msg">Precisamos da sua autorização.</div>
         </div>
       </div>
-    </div>
+      <button class="btn" type="submit" id="send">Enviar cadastro</button>
+    </form>
 
-    <!-- 4 · Acordo -->
-    <div class="step" data-title="Acordo">
-      <div class="k">Etapa 4 de 6</div>
-      <h2>O que foi acordado</h2>
-      <p class="sub">Material, quantidades e frequência dos envios.</p>
-      <div class="grid two">
-        <div class="f full" data-req="tipo">
-          <span class="lbl">Tipo de acordo</span>
-          <div class="chips" data-chips="tipo" data-single>
-            <button type="button">Fornecimento de material</button><button type="button">Pagamento em dinheiro</button><button type="button">Material + pagamento</button><button type="button">Comissão por vendas</button>
-          </div>
-          <div class="msg">Escolha o tipo de acordo.</div>
-        </div>
-        <div class="f full" data-hide="tipo=Pagamento em dinheiro|Comissão por vendas">
-          <label for="material">Material acordado</label>
-          <input id="material" name="material" type="text" maxlength="200" placeholder="Ex.: bolas de campo/society">
-          <div class="msg">Descreva o material.</div>
-        </div>
-        <div class="f" data-hide="tipo=Pagamento em dinheiro|Comissão por vendas">
-          <label for="qtd">Quantidade por envio</label>
-          <input id="qtd" name="qtd" type="text" maxlength="60" placeholder="Ex.: 6 unidades">
-          <div class="msg">Informe a quantidade.</div>
-        </div>
-        <div class="f" data-hide="tipo=Pagamento em dinheiro|Comissão por vendas">
-          <label for="caixas">Caixas / volumes por envio <small>(opcional)</small></label>
-          <input id="caixas" name="caixas" type="text" maxlength="60" placeholder="Ex.: 1 caixa com 6">
-        </div>
-        <div class="f full" data-hide="tipo=Pagamento em dinheiro|Comissão por vendas" data-req="freqEnvio">
-          <span class="lbl">Frequência dos envios</span>
-          <div class="chips" data-chips="freqEnvio" data-single>
-            <button type="button">Envio único</button><button type="button">Mensal</button><button type="button">A cada 60 dias</button><button type="button">A cada 90 dias</button><button type="button">Outra</button>
-          </div>
-          <div class="msg">Escolha a frequência.</div>
-        </div>
-        <div class="f full" data-show="freqEnvio=Outra">
-          <label for="freqEnvioOutra">Qual frequência?</label>
-          <input id="freqEnvioOutra" name="freqEnvioOutra" type="text" maxlength="80">
-          <div class="msg">Informe a frequência.</div>
-        </div>
-        <div class="f full" data-hide="tipo=Pagamento em dinheiro|Comissão por vendas">
-          <label for="mix">Divisão do mix <small>(modelos, tipos, tamanhos, cores)</small></label>
-          <textarea id="mix" name="mix" maxlength="600" placeholder="Ex.: 3 bolas de campo + 3 de society"></textarea>
-          <div class="msg">Informe como o material é dividido.</div>
-        </div>
-        <div class="f" data-hide="tipo=Pagamento em dinheiro|Comissão por vendas">
-          <label for="tamanho">Tamanho de roupa / calçado <small>(se houver)</small></label>
-          <input id="tamanho" name="tamanho" type="text" maxlength="40" placeholder="Ex.: camisa G, chuteira 41">
-        </div>
-        <div class="f" data-show="tipo=Pagamento em dinheiro|Material + pagamento">
-          <label for="valor">Valor combinado (R$)</label>
-          <input id="valor" name="valor" type="text" inputmode="numeric" placeholder="R$ 0,00">
-          <div class="msg">Informe o valor.</div>
-        </div>
-        <div class="f" data-show="tipo=Pagamento em dinheiro|Material + pagamento">
-          <label for="valorFreq">Periodicidade do pagamento</label>
-          <input id="valorFreq" name="valorFreq" type="text" maxlength="60" placeholder="Ex.: mensal, por entrega">
-        </div>
-        <div class="f" data-show="tipo=Comissão por vendas">
-          <label for="comissao">Comissão (%)</label>
-          <input id="comissao" name="comissao" type="text" inputmode="decimal" maxlength="6" placeholder="Ex.: 10">
-          <div class="msg">Informe a comissão.</div>
-        </div>
-        <div class="f" data-show="tipo=Comissão por vendas">
-          <label for="cupom">Cupom / link de venda <small>(se já tiver)</small></label>
-          <input id="cupom" name="cupom" type="text" maxlength="120">
-        </div>
-        <div class="sep full" data-show="tipo=Pagamento em dinheiro|Material + pagamento|Comissão por vendas"></div>
-        <div class="f" data-show="tipo=Pagamento em dinheiro|Material + pagamento|Comissão por vendas">
-          <label for="pix">Chave PIX para pagamento</label>
-          <input id="pix" name="pix" type="text" maxlength="120">
-          <div class="msg">Informe a chave PIX.</div>
-        </div>
-        <div class="f" data-show="tipo=Pagamento em dinheiro|Material + pagamento|Comissão por vendas">
-          <label for="pixTitular">Titular da conta</label>
-          <input id="pixTitular" name="pixTitular" type="text" maxlength="140">
-          <div class="msg">Informe o titular.</div>
-        </div>
-      </div>
+    <div class="done">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+      <h2>Cadastro enviado!</h2>
+      <p id="done-msg">Recebemos seus dados. Obrigado!</p>
+      <button class="btn btn-wa" type="button" id="wa" hidden>Enviar pelo WhatsApp</button>
     </div>
-
-    <!-- 5 · Conteúdo e vigência -->
-    <div class="step" data-title="Conteúdo">
-      <div class="k">Etapa 5 de 6</div>
-      <h2>Conteúdos e duração</h2>
-      <p class="sub">Quantos conteúdos, com que frequência, e por quanto tempo vale o contrato.</p>
-      <div class="grid two">
-        <div class="f full" data-req="divulga">
-          <span class="lbl">Onde vai divulgar <small>(marque todas)</small></span>
-          <div class="chips" data-chips="divulga">
-            <button type="button">Instagram</button><button type="button">TikTok</button><button type="button">YouTube</button><button type="button">Facebook</button><button type="button">Kwai</button>
-          </div>
-          <div class="msg">Marque ao menos uma rede.</div>
-        </div>
-        <div class="f full">
-          <label for="conteudos">Quantidade e frequência dos conteúdos</label>
-          <textarea id="conteudos" name="conteudos" maxlength="900" placeholder="Ex.: Instagram: 2 Reels + 4 Stories por mês&#10;TikTok: 2 vídeos por mês&#10;YouTube: 1 vídeo a cada envio"></textarea>
-          <div class="msg">Descreva a quantidade e a frequência dos conteúdos.</div>
-        </div>
-        <div class="f full">
-          <label for="marcacoes">Marcações obrigatórias <small>(@ da marca, hashtag, cupom — opcional)</small></label>
-          <input id="marcacoes" name="marcacoes" type="text" maxlength="200">
-        </div>
-        <div class="f">
-          <label for="inicio">Início do contrato</label>
-          <input id="inicio" name="inicio" type="date">
-          <div class="msg">Informe a data de início.</div>
-        </div>
-        <div class="f" data-req="duracao">
-          <span class="lbl">Duração</span>
-          <div class="chips" data-chips="duracao" data-single>
-            <button type="button">3 meses</button><button type="button">6 meses</button><button type="button">12 meses</button><button type="button">Outra</button>
-          </div>
-          <div class="msg">Escolha a duração.</div>
-        </div>
-        <div class="f full" data-show="duracao=Outra">
-          <label for="duracaoOutra">Qual duração?</label>
-          <input id="duracaoOutra" name="duracaoOutra" type="text" maxlength="60">
-          <div class="msg">Informe a duração.</div>
-        </div>
-        <div class="f full">
-          <label for="obs">Observações <small>(opcional)</small></label>
-          <textarea id="obs" name="obs" maxlength="1200" placeholder="Algo mais que precisa constar no contrato?"></textarea>
-        </div>
-      </div>
-    </div>
-
-    <!-- 6 · Revisão -->
-    <div class="step" data-title="Revisão">
-      <div class="k">Etapa 6 de 6</div>
-      <h2>Confira e envie</h2>
-      <p class="sub">Revise tudo. Toque em <b>Editar</b> para corrigir qualquer bloco.</p>
-      <div class="rev" id="rev"></div>
-      <div class="f" style="margin-top:18px" data-req="lgpd">
-        <label class="check"><input type="checkbox" id="lgpd" name="lgpd"> Confirmo que os dados estão corretos e autorizo o uso deles exclusivamente para a elaboração e a gestão do contrato desta parceria, conforme a LGPD.</label>
-        <div class="msg">Precisamos da sua confirmação para seguir.</div>
-      </div>
-    </div>
-
-    <div class="step" id="sent" data-title="Enviado">
-      <div class="done-box">
-        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
-        <h2 style="margin-top:14px">Cadastro enviado!</h2>
-        <p class="sub" id="sent-msg" style="max-width:460px;margin:8px auto 0">Recebemos seus dados. Em breve você recebe o contrato no e-mail informado.</p>
-      </div>
-      <div class="actions">
-        <button class="btn btn-wa" type="button" id="wa"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg>Avisar no WhatsApp</button>
-        <button class="btn btn-line" type="button" id="pdf">Baixar PDF</button>
-      </div>
-    </div>
-
-    <div class="nav" id="nav">
-      <button class="btn btn-line" type="button" id="back">Voltar</button>
-      <button class="btn btn-main" type="button" id="next">Continuar</button>
-    </div>
-  </form>
-
-  <footer>Seus dados são usados apenas para o contrato desta parceria.</footer>
+  </div>
 </div>
-
-<div id="print"></div>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
 (function(){
   'use strict';
-  /* Where each ficha goes:
-     API_URL   — partners panel (Vercel + Neon): POST /api/cadastros saves the ficha; leave empty to use WhatsApp only.
-     WA_NUMBER — WhatsApp that receives the summary (Roni). */
+  /* API_URL: partners panel (Vercel + Neon). WA_NUMBER: fallback if saving fails (Roni). */
   var API_URL = 'https://parceiros-caro.vercel.app/api/cadastros';
   var WA_NUMBER = '5511942302344';
-  var STORE = 'cadastro-parceiro-v1';
 
   var $ = function(id){ return document.getElementById(id); };
-  var form = $('form'), steps = [].slice.call(form.querySelectorAll('.step')).filter(function(s){ return s.id !== 'sent'; });
-  var cur = 0, maxReached = 0, state = {recebeEu:'1'};
-
+  var form = $('form'), extra = {};
   function digits(v){ return String(v || '').replace(/\D/g, ''); }
-  function esc(v){ return String(v).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   function toast(t){ var e = $('toast'); e.textContent = t; e.classList.add('show'); clearTimeout(e._t); e._t = setTimeout(function(){ e.classList.remove('show'); }, 2400); }
-  function fmtDate(v){ if(!v) return ''; var p = v.split('-'); return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : v; }
   function validCPF(c){ c = digits(c); if(c.length !== 11 || /^(\d)\1+$/.test(c)) return false; for(var t = 9; t < 11; t++){ var s = 0; for(var i = 0; i < t; i++) s += +c[i] * (t + 1 - i); if(((s * 10) % 11) % 10 !== +c[t]) return false; } return true; }
-  function validCNPJ(c){ c = digits(c); if(c.length !== 14 || /^(\d)\1+$/.test(c)) return false; var calc = function(n){ var w = n === 12 ? [5,4,3,2,9,8,7,6,5,4,3,2] : [6,5,4,3,2,9,8,7,6,5,4,3,2], s = 0; for(var i = 0; i < n; i++) s += +c[i] * w[i]; var r = s % 11; return r < 2 ? 0 : 11 - r; }; return calc(12) === +c[12] && calc(13) === +c[13]; }
-  var validEmail = function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); };
-  var validPhone = function(v){ var d = digits(v); return d.length >= 10 && d.length <= 13; };
-  var filled = function(v){ return v.length > 0; };
 
-  /* masks */
   function mask(el, fn){ el.addEventListener('input', function(){ el.value = fn(el.value); }); }
   mask($('cpf'), function(v){ var d = digits(v).slice(0, 11); return d.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'); });
-  mask($('cnpj'), function(v){ var d = digits(v).slice(0, 14); return d.replace(/^(\d{2})(\d)/, '$1.$2').replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3').replace(/\.(\d{3})(\d)/, '.$1/$2').replace(/(\d{4})(\d)/, '$1-$2'); });
   mask($('cep'), function(v){ var d = digits(v).slice(0, 8); return d.replace(/^(\d{5})(\d)/, '$1-$2'); });
-  ['tel', 'recebedorTel'].forEach(function(id){ mask($(id), function(v){ var d = digits(v).slice(0, 11); if(d.length <= 2) return d.length ? '(' + d : ''; if(d.length <= 6) return '(' + d.slice(0,2) + ') ' + d.slice(2); if(d.length <= 10) return '(' + d.slice(0,2) + ') ' + d.slice(2,6) + '-' + d.slice(6); return '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7); }); });
-  mask($('valor'), function(v){ var d = digits(v).slice(0, 12); return d ? 'R$ ' + (parseInt(d, 10) / 100).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}) : ''; });
-  ['igSeg','ttSeg','ytSeg','fbSeg','outraSeg'].forEach(function(id){ mask($(id), function(v){ var d = digits(v).slice(0, 10); return d ? (+d).toLocaleString('pt-BR') : ''; }); });
-  ['ig','tt','yt','outra'].forEach(function(id){ $(id).addEventListener('blur', function(){ var v = this.value.trim(); if(v && !/^@|^https?:/i.test(v)) this.value = '@' + v.replace(/^@+/, ''); read(); save(); }); });
+  mask($('tel'), function(v){ var d = digits(v).slice(0, 11); if(d.length <= 2) return d.length ? '(' + d : ''; if(d.length <= 6) return '(' + d.slice(0,2) + ') ' + d.slice(2); if(d.length <= 10) return '(' + d.slice(0,2) + ') ' + d.slice(2,6) + '-' + d.slice(6); return '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7); });
+  ['ig','tt'].forEach(function(id){ $(id).addEventListener('blur', function(){ var v = this.value.trim(); if(v && !/^@|^https?:|\./i.test(v)) this.value = '@' + v; }); });
+  form.addEventListener('input', function(e){ var f = e.target.closest('.f'); if(f) f.classList.remove('bad'); });
 
-  /* chips */
-  form.querySelectorAll('[data-chips]').forEach(function(g){
-    var key = g.getAttribute('data-chips'), single = g.hasAttribute('data-single');
-    g.addEventListener('click', function(e){
-      var b = e.target.closest('button'); if(!b) return;
-      var v = b.textContent;
-      if(single) state[key] = state[key] === v ? '' : v;
-      else { var arr = (state[key] || []).slice(), i = arr.indexOf(v); if(i > -1) arr.splice(i, 1); else arr.push(v); state[key] = arr; }
-      paintChips(); applyLogic(); save(); g.closest('.f').classList.remove('bad');
-    });
-  });
-  function paintChips(){ form.querySelectorAll('[data-chips]').forEach(function(g){ var v = state[g.getAttribute('data-chips')]; g.querySelectorAll('button').forEach(function(b){ b.classList.toggle('on', Array.isArray(v) ? v.indexOf(b.textContent) > -1 : v === b.textContent); }); }); }
-
-  function fields(){ return form.querySelectorAll('input[name]:not([name=website]), textarea[name]'); }
-  function read(){ fields().forEach(function(el){ state[el.name] = el.type === 'checkbox' ? (el.checked ? '1' : '0') : el.value; }); }
-  function write(){ fields().forEach(function(el){ if(!(el.name in state)) return; if(el.type === 'checkbox') el.checked = state[el.name] === '1'; else el.value = state[el.name]; }); paintChips(); }
-  function val(k){ var v = state[k]; return v == null ? '' : v; }
-  function applyLogic(){
-    form.querySelectorAll('[data-show],[data-hide]').forEach(function(el){
-      var show = el.hasAttribute('data-show'), kv = (el.getAttribute('data-show') || el.getAttribute('data-hide')).split('=');
-      var ok = kv[1].split('|').indexOf(val(kv[0])) > -1;
-      el.hidden = show ? !ok : ok;
-    });
-  }
-  var saveT;
-  function save(){ clearTimeout(saveT); saveT = setTimeout(function(){ try{ localStorage.setItem(STORE, JSON.stringify({state:state, step:maxReached})); $('save-state').textContent = 'Rascunho salvo'; }catch(e){} }, 250); }
-  form.addEventListener('input', function(e){ read(); applyLogic(); save(); var f = e.target.closest('.f'); if(f) f.classList.remove('bad'); });
-  form.addEventListener('change', function(){ read(); applyLogic(); save(); });
-
-  /* lookups */
-  function setIfEmpty(id, v){ var el = $(id); if(v && !el.value.trim()) el.value = v; }
-  function lookupCNPJ(){
-    var c = digits($('cnpj').value), hint = $('cnpj-hint'), f = $('cnpj').closest('.f');
-    if(!validCNPJ(c)){ f.classList.add('bad'); return; }
-    f.classList.remove('bad'); hint.className = 'hint'; hint.textContent = 'Buscando…';
-    fetch('https://brasilapi.com.br/api/cnpj/v1/' + c).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(d){
-      setIfEmpty('razao', d.razao_social); read(); save();
-      hint.className = 'hint ok'; hint.textContent = '✓ ' + (d.razao_social || 'Empresa encontrada') + (d.descricao_situacao_cadastral ? ' · ' + d.descricao_situacao_cadastral : '');
-    }).catch(function(){ hint.className = 'hint'; hint.textContent = 'Não conseguimos buscar agora. Preencha a razão social.'; });
-  }
-  $('cnpj-go').addEventListener('click', lookupCNPJ);
-  $('cnpj').addEventListener('input', function(){ if(digits(this.value).length === 14) lookupCNPJ(); });
+  /* CEP fills the street and keeps bairro/cidade/UF for the shipping label */
   $('cep').addEventListener('input', function(){
     var c = digits(this.value), hint = $('cep-hint'); if(c.length !== 8) return;
     hint.className = 'hint'; hint.textContent = 'Buscando endereço…';
     fetch('https://viacep.com.br/ws/' + c + '/json/').then(function(r){ return r.json(); }).then(function(d){
       if(d.erro) throw 0;
-      setIfEmpty('rua', d.logradouro); setIfEmpty('bairro', d.bairro); setIfEmpty('cidade', d.localidade); setIfEmpty('uf', d.uf);
-      read(); save(); hint.className = 'hint ok'; hint.textContent = '✓ ' + [d.bairro, d.localidade, d.uf].filter(Boolean).join(' · ');
-      if(!$('numero').value) $('numero').focus();
+      extra = {bairro:d.bairro || '', cidade:d.localidade || '', uf:d.uf || ''};
+      if(d.logradouro && !$('rua').value.trim()){ $('rua').value = d.logradouro + ', '; $('rua').focus(); }
+      hint.className = 'hint ok'; hint.textContent = '✓ ' + [d.bairro, d.localidade, d.uf].filter(Boolean).join(' · ');
     }).catch(function(){ hint.className = 'hint'; hint.textContent = 'CEP não encontrado, preencha o endereço.'; });
   });
 
-  /* validation */
-  function need(id, test){ var el = $(id), f = el.closest('.f'); if(f.hidden) return true; var ok = test(el.value.trim()); f.classList.toggle('bad', !ok); return ok; }
-  function needChip(key, multi){ var f = form.querySelector('[data-req="' + key + '"]'); if(f.hidden) return true; var v = state[key], ok = multi ? !!(v && v.length) : !!v; f.classList.toggle('bad', !ok); return ok; }
-  var CHECKS = [
-    function(){ return [needChip('pessoa'), need('nome', function(v){ return v.split(/\s+/).length >= 2; }), need('cpf', validCPF), need('nascimento', filled), need('tel', validPhone), need('email', validEmail), need('cnpj', validCNPJ), need('razao', filled)].every(Boolean); },
-    function(){ return [need('cep', function(v){ return digits(v).length === 8; }), need('numero', filled), need('rua', filled), need('bairro', filled), need('cidade', filled), need('uf', function(v){ return /^[a-zA-Z]{2}$/.test(v); }), need('recebedor', filled), need('recebedorTel', validPhone)].every(Boolean); },
-    function(){ var f = form.querySelector('[data-req="redes"]'), ok = ['ig','tt','yt','fb','outra'].some(function(k){ return val(k).trim(); }); f.classList.toggle('bad', !ok); return ok; },
-    function(){ return [needChip('tipo'), need('material', filled), need('qtd', filled), needChip('freqEnvio'), need('freqEnvioOutra', filled), need('mix', filled), need('valor', function(v){ return +digits(v) > 0; }), need('comissao', filled), need('pix', filled), need('pixTitular', filled)].every(Boolean); },
-    function(){ return [needChip('divulga', true), need('conteudos', filled), need('inicio', filled), needChip('duracao'), need('duracaoOutra', filled)].every(Boolean); },
-    function(){ var f = form.querySelector('[data-req="lgpd"]'), ok = $('lgpd').checked; f.classList.toggle('bad', !ok); return ok; }
-  ];
+  function check(id, ok){ var f = $(id).closest('.f'); f.classList.toggle('bad', !ok); return ok; }
+  function data(){
+    var d = {nome:$('nome').value.trim(), cpf:$('cpf').value.trim(), tel:$('tel').value.trim(), cep:$('cep').value.trim(),
+      rua:$('rua').value.trim(), complemento:$('complemento').value.trim(),
+      ig:$('ig').value.trim(), tt:$('tt').value.trim(), yt:$('yt').value.trim(), outra:$('outra').value.trim(), lgpd:'1'};
+    Object.keys(extra).forEach(function(k){ d[k] = extra[k]; });
+    return d;
+  }
+  function asText(d){
+    var cidade = [d.bairro, d.cidade, d.uf].filter(Boolean).join(' · ');
+    return ['CADASTRO DE PARCEIRO', 'Nome: ' + d.nome, 'CPF: ' + d.cpf, 'Telefone: ' + d.tel, 'Endereço: ' + d.rua + (d.complemento ? ' — ' + d.complemento : ''), 'CEP: ' + d.cep + (cidade ? ' (' + cidade + ')' : ''),
+      d.ig && 'Instagram: ' + d.ig, d.tt && 'TikTok: ' + d.tt, d.yt && 'YouTube: ' + d.yt, d.outra && 'Outro: ' + d.outra].filter(Boolean).join('\n');
+  }
+  function openWA(d){ var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(asText(d)); var w = window.open(url, '_blank'); if(w) w.opener = null; else location.href = url; }
 
-  /* summary (also used for WhatsApp, PDF and the spreadsheet row) */
-  function sections(){
-    var s = state, pj = s.pessoa === 'Empresa / MEI (CNPJ)', tipo = s.tipo || '';
-    var mat = !/^(Pagamento em dinheiro|Comissão por vendas)$/.test(tipo), pay = /Pagamento|pagamento/.test(tipo), com = tipo === 'Comissão por vendas';
-    var net = function(h, n){ return h ? h + (n ? ' · ' + n : '') : ''; };
-    var fim = '';
-    if(s.inicio && /^\d+ meses$/.test(s.duracao || '')){ var d = new Date(s.inicio + 'T12:00:00'); d.setMonth(d.getMonth() + parseInt(s.duracao, 10)); d.setDate(d.getDate() - 1); fim = d.toLocaleDateString('pt-BR'); }
-    return [
-      {step:0, t:'Dados pessoais', rows:[['Contrato em nome de', pj ? 'Empresa / MEI' : 'Pessoa física'], ['Nome completo', s.nome], ['CPF', s.cpf], ['RG', s.rg], ['Nascimento', fmtDate(s.nascimento)], ['WhatsApp', s.tel], ['E-mail', s.email], ['CNPJ', pj ? s.cnpj : ''], ['Razão social', pj ? s.razao : '']]},
-      {step:1, t:'Endereço de entrega', rows:[['Rua', [s.rua, s.numero].filter(Boolean).join(', ')], ['Complemento', s.complemento], ['Bairro', s.bairro], ['Cidade / UF', [s.cidade, (s.uf || '').toUpperCase()].filter(Boolean).join(' / ')], ['CEP', s.cep], ['Referência', s.referencia], ['Quem recebe', s.recebeEu === '0' ? [s.recebedor, s.recebedorTel].filter(Boolean).join(' · ') : 'O próprio parceiro']]},
-      {step:2, t:'Redes sociais', rows:[['Instagram', net(s.ig, s.igSeg)], ['TikTok', net(s.tt, s.ttSeg)], ['YouTube', net(s.yt, s.ytSeg)], ['Facebook', net(s.fb, s.fbSeg)], ['Outra', net(s.outra, s.outraSeg)]]},
-      {step:3, t:'Acordo', rows:[['Tipo', tipo], ['Material', mat ? s.material : ''], ['Quantidade por envio', mat ? s.qtd : ''], ['Caixas por envio', mat ? s.caixas : ''], ['Frequência dos envios', mat ? (s.freqEnvio === 'Outra' ? s.freqEnvioOutra : s.freqEnvio) : ''], ['Divisão do mix', mat ? s.mix : ''], ['Tamanhos', mat ? s.tamanho : ''], ['Valor', pay ? [s.valor, s.valorFreq].filter(Boolean).join(' · ') : ''], ['Comissão', com && s.comissao ? s.comissao + '%' : ''], ['Cupom / link', com ? s.cupom : ''], ['Chave PIX', (pay || com) ? s.pix : ''], ['Titular', (pay || com) ? s.pixTitular : '']]},
-      {step:4, t:'Conteúdos e vigência', rows:[['Divulgação', (s.divulga || []).join(', ')], ['Quantidade e frequência', s.conteudos], ['Marcações obrigatórias', s.marcacoes], ['Início', fmtDate(s.inicio)], ['Duração', s.duracao === 'Outra' ? s.duracaoOutra : s.duracao], ['Término previsto', fim], ['Observações', s.obs]]}
-    ].map(function(sec){ sec.rows = sec.rows.filter(function(r){ return r[1] && String(r[1]).trim(); }); return sec; });
-  }
-  function renderReview(){
-    $('rev').innerHTML = sections().map(function(sec){
-      return '<section><h3>' + esc(sec.t) + '<button type="button" data-go="' + sec.step + '">Editar</button></h3><dl>' + sec.rows.map(function(r){ return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl></section>';
-    }).join('');
-  }
-  $('rev').addEventListener('click', function(e){ var b = e.target.closest('[data-go]'); if(b) go(+b.getAttribute('data-go')); });
-  function asText(){
-    return 'CADASTRO DE PARCEIRO — ' + (state.nome || '') + '\n' + sections().map(function(sec){ return '\n*' + sec.t.toUpperCase() + '*\n' + sec.rows.map(function(r){ return '• ' + r[0] + ': ' + String(r[1]).replace(/\n/g, ' / '); }).join('\n'); }).join('\n');
-  }
-  function buildPrint(){
-    $('print').innerHTML = '<h1>Cadastro de parceiro — ' + esc(state.nome || '') + '</h1><div class="meta">Gerado em ' + new Date().toLocaleString('pt-BR') + '</div>' +
-      sections().map(function(sec){ return '<h3>' + esc(sec.t) + '</h3><dl>' + sec.rows.map(function(r){ return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl>'; }).join('');
-  }
-
-  /* navigation */
-  var nav = $('steps');
-  nav.innerHTML = steps.map(function(s, i){ return '<button type="button" data-i="' + i + '"><i></i><span>' + s.getAttribute('data-title') + '</span></button>'; }).join('');
-  nav.addEventListener('click', function(e){ var b = e.target.closest('button'); if(b && +b.getAttribute('data-i') <= maxReached) go(+b.getAttribute('data-i')); });
-  function go(i, quiet){
-    cur = Math.max(0, Math.min(steps.length - 1, i)); maxReached = Math.max(maxReached, cur);
-    steps.forEach(function(s, k){ s.classList.toggle('on', k === cur); });
-    $('sent').classList.remove('on'); $('nav').hidden = false;
-    nav.querySelectorAll('button').forEach(function(b, k){ b.classList.toggle('on', k === cur); b.classList.toggle('done', k < cur); b.disabled = k > maxReached; });
-    $('back').style.visibility = cur ? 'visible' : 'hidden';
-    $('next').textContent = cur === steps.length - 1 ? 'Enviar cadastro' : 'Continuar';
-    if(cur === steps.length - 1) renderReview();
-    save();
-    if(!quiet) form.scrollIntoView({behavior:'smooth', block:'start'});
-  }
-  function openWA(){ var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(asText()); var w = window.open(url, '_blank'); if(w) w.opener = null; else location.href = url; }
-  function finish(sheetOk){
-    steps.forEach(function(s){ s.classList.remove('on'); });
-    $('sent').classList.add('on'); $('nav').hidden = true;
-    nav.querySelectorAll('button').forEach(function(b){ b.classList.add('done'); b.classList.remove('on'); });
-    if(!sheetOk) $('sent-msg').innerHTML = 'Falta só um passo: toque em <b>Avisar no WhatsApp</b> e depois em <b>enviar</b> para os dados chegarem até nós.';
-    try{ localStorage.removeItem(STORE); }catch(e){}
-    $('save-state').textContent = '';
-    form.scrollIntoView({behavior:'smooth', block:'start'});
-  }
-  $('back').addEventListener('click', function(){ go(cur - 1); });
-  $('next').addEventListener('click', function(){
-    read();
-    if(!CHECKS[cur]()){ var bad = form.querySelector('.step.on .f.bad'); if(bad) bad.scrollIntoView({behavior:'smooth', block:'center'}); toast('Confira os campos destacados'); return; }
-    if(cur < steps.length - 1) return go(cur + 1);
-    for(var k = 0; k < CHECKS.length - 1; k++){ if(!CHECKS[k]()){ go(k); toast('Faltou algum dado nesta etapa'); return; } }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var ok = [
+      check('nome', $('nome').value.trim().split(/\s+/).length >= 2),
+      check('cpf', validCPF($('cpf').value)),
+      check('tel', digits($('tel').value).length >= 10),
+      check('cep', digits($('cep').value).length === 8),
+      check('rua', $('rua').value.trim().length > 3),
+      (function(){ var f = $('redes'), v = ['ig','tt','yt','outra'].some(function(k){ return $(k).value.trim(); }); f.classList.toggle('bad', !v); return v; })(),
+      (function(){ var f = $('lgpd-f'), v = $('lgpd').checked; f.classList.toggle('bad', !v); return v; })()
+    ].every(Boolean);
+    if(!ok){ var bad = form.querySelector('.f.bad'); if(bad) bad.scrollIntoView({behavior:'smooth', block:'center'}); toast('Confira os campos destacados'); return; }
     if(form.website.value) return;
-    if(!API_URL){ finish(false); openWA(); return; }
-    var btn = $('next'); btn.disabled = true; btn.textContent = 'Enviando…';
-    var dados = {}; Object.keys(state).forEach(function(k){ dados[k] = state[k]; });
-    /* text/plain keeps it a "simple" request (no CORS preflight); the API parses the JSON body */
-    fetch(API_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({dados:dados})})
-      .then(function(r){ if(!r.ok) throw new Error(r.status); finish(true); })
-      .catch(function(){ finish(false); toast('Não conseguimos salvar agora. Envie pelo WhatsApp.'); })
-      .then(function(){ btn.disabled = false; btn.textContent = 'Enviar cadastro'; });
+    var d = data(), btn = $('send'); btn.disabled = true; btn.textContent = 'Enviando…';
+    fetch(API_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify({dados:d})})
+      .then(function(r){ if(!r.ok) throw 0; $('card').classList.add('sent'); })
+      .catch(function(){
+        $('card').classList.add('sent');
+        $('done-msg').innerHTML = 'Falta só um passo: toque no botão abaixo e depois em <b>enviar</b> no WhatsApp.';
+        $('wa').hidden = false; $('wa').onclick = function(){ openWA(d); };
+      })
+      .then(function(){ btn.disabled = false; btn.textContent = 'Enviar cadastro'; window.scrollTo({top:0, behavior:'smooth'}); });
   });
-  $('wa').addEventListener('click', openWA);
-  $('pdf').addEventListener('click', function(){ buildPrint(); window.print(); });
-
-  /* restore draft */
-  try{ var saved = JSON.parse(localStorage.getItem(STORE) || 'null'); if(saved && saved.state){ state = saved.state; maxReached = saved.step || 0; write(); $('save-state').textContent = 'Rascunho recuperado'; } }catch(e){}
-  write(); read(); applyLogic();
-  go(Math.min(maxReached, steps.length - 1), true);
 })();
 </script>
 </body>
