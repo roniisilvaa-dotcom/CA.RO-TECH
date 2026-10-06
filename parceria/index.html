@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cadastro de Parceria</title>
+<meta name="description" content="Ficha de dados da marca para formalizar a parceria e o contrato.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#070b12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#070b12; --panel:#0e1521; --panel-2:#131c2b; --line:#ffffff1f; --line-soft:#ffffff12;
+  --text:#f3f6fb; --text-2:#aab4c4; --text-3:#6f7b8e;
+  --acc:#8fd3ff; --acc-2:#bfe6ff; --acc-dk:#3a8fd0; --ok:#3ddc97; --err:#ff6b7a;
+  --serif:'Playfair Display',Georgia,serif; --sans:'Plus Jakarta Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;
+  background-image:radial-gradient(900px 500px at 85% -10%,#1d4f7a33,transparent 60%),radial-gradient(700px 500px at -10% 30%,#3a8fd01a,transparent 60%)}
+a{color:var(--acc)}
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 120px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:.66rem;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--text-2)}
+.brand b{color:var(--acc)}
+.save-state{font-size:.68rem;color:var(--text-3)}
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,6vw,2.6rem);line-height:1.1;margin-top:26px}
+h1 em{color:var(--acc);font-style:italic}
+.intro{margin-top:10px;color:var(--text-2);font-size:.92rem;line-height:1.6;max-width:560px}
+
+/* progress */
+.steps{display:flex;gap:6px;margin-top:26px}
+.steps button{flex:1;border:0;background:none;cursor:pointer;text-align:left;padding:0;color:var(--text-3);font:inherit}
+.steps i{display:block;height:4px;border-radius:4px;background:#ffffff14;overflow:hidden}
+.steps i::after{content:'';display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc-dk),var(--acc));transition:width .4s ease}
+.steps button.done i::after,.steps button.on i::after{width:100%}
+.steps span{display:block;margin-top:7px;font-size:.6rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.steps button.on span{color:var(--acc)}
+.steps button:disabled{cursor:default}
+@media (max-width:560px){ .steps span{display:none} .steps button.on span{display:block;position:absolute} .steps{position:relative;margin-bottom:18px} }
+
+/* card */
+.card{margin-top:22px;padding:24px 20px;border-radius:22px;background:linear-gradient(160deg,var(--panel-2),var(--panel));border:1px solid var(--line);box-shadow:0 30px 60px -40px #000}
+@media (min-width:640px){ .card{padding:30px 30px} }
+.k{font-size:.62rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--acc)}
+.card h2{font-family:var(--serif);font-weight:500;font-size:1.55rem;margin-top:6px}
+.card .sub{margin-top:6px;color:var(--text-2);font-size:.84rem;line-height:1.55}
+.step{display:none}.step.on{display:block;animation:in .35s ease}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.grid{display:grid;gap:14px;margin-top:20px}
+@media (min-width:640px){ .grid.two{grid-template-columns:1fr 1fr} .full{grid-column:1/-1} }
+.f label,.f .lbl{display:block;font-size:.74rem;font-weight:700;color:var(--text-2);margin-bottom:7px}
+.f label small{font-weight:500;color:var(--text-3)}
+.f input,.f select,.f textarea{width:100%;padding:13px 14px;border-radius:12px;border:1.5px solid var(--line);background:#0a111c;color:var(--text);font:inherit;font-size:.92rem;outline:none;transition:border-color .2s}
+.f textarea{min-height:92px;resize:vertical;line-height:1.5}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--acc)}
+.f.bad input,.f.bad select,.f.bad textarea{border-color:var(--err)}
+.f .msg{display:none;margin-top:6px;font-size:.72rem;color:var(--err)}
+.f.bad .msg{display:block}
+.f .hint{margin-top:6px;font-size:.72rem;color:var(--text-3)}
+.f .hint.ok{color:var(--ok)}
+.row-btn{display:flex;gap:8px}
+.row-btn input{flex:1}
+.mini{flex:none;padding:0 14px;border-radius:12px;border:1.5px solid var(--line);background:#ffffff0a;color:var(--text);font:inherit;font-size:.78rem;font-weight:700;cursor:pointer}
+.mini:hover{border-color:var(--acc)}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{padding:10px 14px;border-radius:100px;border:1.5px solid var(--line);background:#ffffff08;color:var(--text-2);font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .15s}
+.chips button:hover{border-color:var(--acc-dk);color:#fff}
+.chips button.on{background:var(--acc);border-color:var(--acc);color:#04121f}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:.82rem;color:var(--text-2);line-height:1.5;cursor:pointer}
+.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--acc);flex:none}
+.sep{height:1px;background:var(--line-soft);margin:6px 0}
+
+/* nav */
+.nav{display:flex;gap:10px;margin-top:26px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 20px;border-radius:14px;border:0;font:inherit;font-weight:800;font-size:.9rem;cursor:pointer;transition:transform .15s,box-shadow .2s}
+.btn:active{transform:scale(.98)}
+.btn-main{flex:1;background:linear-gradient(135deg,var(--acc),#56b6f0);color:#04121f;box-shadow:0 14px 30px #3a8fd040}
+.btn-line{background:#ffffff0a;border:1px solid var(--line);color:#fff}
+.btn-wa{flex:1;background:#25d366;color:#05210f;box-shadow:0 14px 30px #25d36633}
+.btn svg{width:18px;height:18px}
+
+/* review */
+.rev{margin-top:18px;display:grid;gap:12px}
+.rev section{border:1px solid var(--line-soft);border-radius:16px;padding:14px 16px;background:#ffffff05}
+.rev h3{display:flex;justify-content:space-between;align-items:center;font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--acc)}
+.rev h3 button{border:0;background:none;color:var(--text-2);font:inherit;font-size:.7rem;font-weight:700;letter-spacing:0;text-transform:none;cursor:pointer;text-decoration:underline}
+.rev dl{display:grid;grid-template-columns:minmax(110px,38%) 1fr;gap:6px 12px;margin-top:10px;font-size:.82rem}
+.rev dt{color:var(--text-3)}
+.rev dd{color:var(--text);word-break:break-word;white-space:pre-line}
+.done-box{text-align:center;padding:10px 0}
+.done-box .ic{width:64px;height:64px;margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#3ddc9722;color:var(--ok)}
+.done-box .ic svg{width:30px;height:30px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.actions .btn{flex:1;min-width:180px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);opacity:0;padding:12px 18px;border-radius:12px;background:#fff;color:#06111d;font-weight:700;font-size:.84rem;transition:all .3s;pointer-events:none;z-index:9}
+.toast.show{opacity:1;transform:translateX(-50%)}
+footer{margin-top:34px;text-align:center;font-size:.68rem;color:var(--text-3);line-height:1.7}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+/* print: only the summary */
+@media print{
+  body{background:#fff;color:#000}
+  body *{visibility:hidden}
+  #print, #print *{visibility:visible}
+  #print{position:absolute;inset:0;padding:24px;font-family:Arial,sans-serif;color:#000}
+  #print h1{font-family:Georgia,serif;font-size:20px;color:#000;margin:0 0 4px}
+  #print .meta{font-size:11px;color:#444;margin-bottom:14px}
+  #print h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;border-bottom:1px solid #000;margin:14px 0 6px;padding-bottom:3px}
+  #print dl{display:grid;grid-template-columns:200px 1fr;gap:3px 10px;font-size:12px}
+  #print dt{color:#444}
+  #print dd{white-space:pre-line}
+}
+#print{display:none}
+@media print{ #print{display:block} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Intermediação <b>CA.RO</b></div>
+    <div class="save-state" id="save-state" aria-live="polite"></div>
+  </header>
+
+  <h1>Cadastro de <em>parceria</em></h1>
+  <p class="intro">Parabéns pela parceria! Preencha os dados abaixo para prepararmos o contrato. Leva cerca de 5 minutos, e o que você digitar fica salvo neste aparelho até o envio.</p>
+
+  <nav class="steps" id="steps" aria-label="Etapas"></nav>
+
+  <form class="card" id="form" novalidate autocomplete="on">
+    <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <!-- 1 · Parceria -->
+    <div class="step" data-title="Parceria">
+      <div class="k">Etapa 1 de 6</div>
+      <h2>Sobre a parceria</h2>
+      <p class="sub">Com quem a sua marca fechou e o que foi combinado.</p>
+      <div class="grid two">
+        <div class="f full" data-req="cliente">
+          <span class="lbl">Parceria com</span>
+          <div class="chips" data-chips="cliente" data-single>
+            <button type="button">TodaVidaFutsal</button><button type="button">Outro</button>
+          </div>
+          <div class="msg">Escolha com quem é a parceria.</div>
+        </div>
+        <div class="f full" data-show="cliente=Outro">
+          <label for="clienteOutro">Nome do criador / projeto</label>
+          <input id="clienteOutro" name="clienteOutro" type="text" maxlength="120">
+          <div class="msg">Informe o nome.</div>
+        </div>
+        <div class="f full">
+          <label for="campanha">Nome da campanha ou ação <small>(opcional)</small></label>
+          <input id="campanha" name="campanha" type="text" maxlength="120" placeholder="Ex.: Lançamento chuteira 2027">
+        </div>
+        <div class="f full" data-req="tipo">
+          <span class="lbl">Tipo de acordo</span>
+          <div class="chips" data-chips="tipo" data-single>
+            <button type="button">Pagamento em dinheiro</button><button type="button">Permuta de produtos</button><button type="button">Misto (dinheiro + permuta)</button><button type="button">Comissão / royalties</button>
+          </div>
+          <div class="msg">Escolha o tipo de acordo.</div>
+        </div>
+        <div class="f" data-hide="tipo=Permuta de produtos">
+          <label for="valor">Valor total (R$)</label>
+          <input id="valor" name="valor" type="text" inputmode="numeric" placeholder="R$ 0,00">
+          <div class="msg">Informe o valor combinado.</div>
+        </div>
+        <div class="f" data-show="tipo=Permuta de produtos|Misto (dinheiro + permuta)">
+          <label for="permuta">Produtos da permuta</label>
+          <input id="permuta" name="permuta" type="text" maxlength="200" placeholder="Ex.: 5 pares de chuteira + 10 camisas">
+          <div class="msg">Descreva os produtos.</div>
+        </div>
+        <div class="f" data-show="tipo=Comissão / royalties">
+          <label for="comissao">Comissão (%)</label>
+          <input id="comissao" name="comissao" type="text" inputmode="decimal" maxlength="6" placeholder="Ex.: 10">
+        </div>
+        <div class="f full" data-hide="tipo=Permuta de produtos">
+          <span class="lbl">Forma de pagamento</span>
+          <div class="chips" data-chips="pagamento" data-single>
+            <button type="button">PIX</button><button type="button">Boleto</button><button type="button">Transferência</button><button type="button">Cartão</button>
+          </div>
+        </div>
+        <div class="f full" data-hide="tipo=Permuta de produtos">
+          <span class="lbl">Condição</span>
+          <div class="chips" data-chips="condicao" data-single>
+            <button type="button">À vista</button><button type="button">50% + 50%</button><button type="button">Parcelado</button><button type="button">Mensal</button>
+          </div>
+        </div>
+        <div class="f" data-show="condicao=Parcelado|Mensal">
+          <label for="parcelas">Nº de parcelas / meses</label>
+          <input id="parcelas" name="parcelas" type="text" inputmode="numeric" maxlength="3">
+        </div>
+        <div class="f" data-hide="tipo=Permuta de produtos">
+          <label for="vencimento">1º vencimento <small>(opcional)</small></label>
+          <input id="vencimento" name="vencimento" type="date">
+        </div>
+        <div class="f">
+          <label for="inicio">Início da vigência</label>
+          <input id="inicio" name="inicio" type="date">
+          <div class="msg">Informe a data de início.</div>
+        </div>
+        <div class="f">
+          <label for="fim">Fim da vigência</label>
+          <input id="fim" name="fim" type="date">
+          <div class="msg">A data final precisa ser depois do início.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 · Empresa -->
+    <div class="step" data-title="Empresa">
+      <div class="k">Etapa 2 de 6</div>
+      <h2>Dados da empresa</h2>
+      <p class="sub">Digite o CNPJ e toque em <b>Buscar</b>: preenchemos razão social e endereço para você.</p>
+      <div class="grid two">
+        <div class="f full">
+          <label for="cnpj">CNPJ</label>
+          <div class="row-btn"><input id="cnpj" name="cnpj" type="text" inputmode="numeric" placeholder="00.000.000/0000-00" autocomplete="off"><button class="mini" type="button" id="cnpj-go">Buscar</button></div>
+          <div class="msg">CNPJ inválido.</div>
+          <div class="hint" id="cnpj-hint"></div>
+        </div>
+        <div class="f full">
+          <label for="razao">Razão social</label>
+          <input id="razao" name="razao" type="text" maxlength="160" autocomplete="organization">
+          <div class="msg">Informe a razão social.</div>
+        </div>
+        <div class="f">
+          <label for="fantasia">Nome fantasia / marca</label>
+          <input id="fantasia" name="fantasia" type="text" maxlength="120">
+          <div class="msg">Informe o nome da marca.</div>
+        </div>
+        <div class="f">
+          <label for="ie">Inscrição estadual <small>(ou "Isento")</small></label>
+          <input id="ie" name="ie" type="text" maxlength="30">
+        </div>
+        <div class="f">
+          <label for="cep">CEP</label>
+          <input id="cep" name="cep" type="text" inputmode="numeric" placeholder="00000-000" autocomplete="postal-code">
+          <div class="msg">CEP inválido.</div>
+          <div class="hint" id="cep-hint"></div>
+        </div>
+        <div class="f">
+          <label for="numero">Número</label>
+          <input id="numero" name="numero" type="text" maxlength="20">
+          <div class="msg">Informe o número.</div>
+        </div>
+        <div class="f full">
+          <label for="logradouro">Endereço</label>
+          <input id="logradouro" name="logradouro" type="text" maxlength="160" autocomplete="address-line1">
+          <div class="msg">Informe o endereço.</div>
+        </div>
+        <div class="f">
+          <label for="complemento">Complemento <small>(opcional)</small></label>
+          <input id="complemento" name="complemento" type="text" maxlength="80">
+        </div>
+        <div class="f">
+          <label for="bairro">Bairro</label>
+          <input id="bairro" name="bairro" type="text" maxlength="80">
+        </div>
+        <div class="f">
+          <label for="cidade">Cidade</label>
+          <input id="cidade" name="cidade" type="text" maxlength="80" autocomplete="address-level2">
+          <div class="msg">Informe a cidade.</div>
+        </div>
+        <div class="f">
+          <label for="uf">UF</label>
+          <input id="uf" name="uf" type="text" maxlength="2" autocomplete="address-level1" style="text-transform:uppercase">
+          <div class="msg">UF inválida.</div>
+        </div>
+        <div class="f full">
+          <label for="siteMarca">Site ou Instagram da marca <small>(opcional)</small></label>
+          <input id="siteMarca" name="siteMarca" type="text" maxlength="160" placeholder="@suamarca">
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 · Responsável -->
+    <div class="step" data-title="Assinatura">
+      <div class="k">Etapa 3 de 6</div>
+      <h2>Quem assina o contrato</h2>
+      <p class="sub">Representante legal da empresa, que vai receber o contrato para assinatura.</p>
+      <div class="grid two">
+        <div class="f full">
+          <label for="repNome">Nome completo</label>
+          <input id="repNome" name="repNome" type="text" maxlength="120" autocomplete="name">
+          <div class="msg">Informe o nome completo.</div>
+        </div>
+        <div class="f">
+          <label for="repCpf">CPF</label>
+          <input id="repCpf" name="repCpf" type="text" inputmode="numeric" placeholder="000.000.000-00" autocomplete="off">
+          <div class="msg">CPF inválido.</div>
+        </div>
+        <div class="f">
+          <label for="repCargo">Cargo</label>
+          <input id="repCargo" name="repCargo" type="text" maxlength="80" placeholder="Ex.: Sócio, Diretor de marketing">
+          <div class="msg">Informe o cargo.</div>
+        </div>
+        <div class="f">
+          <label for="repEmail">E-mail <small>(recebe o contrato)</small></label>
+          <input id="repEmail" name="repEmail" type="email" maxlength="120" autocomplete="email">
+          <div class="msg">E-mail inválido.</div>
+        </div>
+        <div class="f">
+          <label for="repTel">WhatsApp</label>
+          <input id="repTel" name="repTel" type="tel" inputmode="tel" placeholder="(11) 90000-0000" autocomplete="tel">
+          <div class="msg">WhatsApp inválido, inclua o DDD.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 · Financeiro -->
+    <div class="step" data-title="Financeiro">
+      <div class="k">Etapa 4 de 6</div>
+      <h2>Financeiro e nota fiscal</h2>
+      <p class="sub">Para quem enviamos a nota fiscal e as cobranças.</p>
+      <div class="grid two">
+        <div class="f full">
+          <label class="check"><input type="checkbox" id="finSame" name="finSame"> O contato financeiro é a mesma pessoa que assina</label>
+        </div>
+        <div class="f" data-show="finSame=0">
+          <label for="finNome">Nome do financeiro</label>
+          <input id="finNome" name="finNome" type="text" maxlength="120">
+          <div class="msg">Informe o nome.</div>
+        </div>
+        <div class="f" data-show="finSame=0">
+          <label for="finTel">Telefone / WhatsApp</label>
+          <input id="finTel" name="finTel" type="tel" inputmode="tel" placeholder="(11) 90000-0000">
+          <div class="msg">Telefone inválido.</div>
+        </div>
+        <div class="f full">
+          <label for="finEmail">E-mail para nota fiscal e boletos</label>
+          <input id="finEmail" name="finEmail" type="email" maxlength="120">
+          <div class="msg">E-mail inválido.</div>
+        </div>
+        <div class="f full">
+          <label for="finObs">Exigências para faturamento <small>(opcional)</small></label>
+          <textarea id="finObs" name="finObs" maxlength="600" placeholder="Ex.: precisa de pedido de compra (PO), prazo de 30 dias após NF, retenção de ISS…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 · Entregas -->
+    <div class="step" data-title="Entregas">
+      <div class="k">Etapa 5 de 6</div>
+      <h2>Entregas e briefing</h2>
+      <p class="sub">O que será feito e com quem falamos para aprovar o conteúdo.</p>
+      <div class="grid two">
+        <div class="f full" data-req="formatos">
+          <span class="lbl">Formatos combinados <small>(pode marcar vários)</small></span>
+          <div class="chips" data-chips="formatos">
+            <button type="button">Reels</button><button type="button">Stories</button><button type="button">Post no feed</button><button type="button">TikTok</button><button type="button">YouTube</button><button type="button">Facebook</button><button type="button">Link / cupom de venda</button><button type="button">Presença em evento</button><button type="button">Uso de imagem</button><button type="button">Outro</button>
+          </div>
+          <div class="msg">Marque ao menos um formato.</div>
+        </div>
+        <div class="f full">
+          <label for="entregas">Detalhe das entregas</label>
+          <textarea id="entregas" name="entregas" maxlength="1200" placeholder="Ex.: 2 Reels + 6 Stories por mês, 1 presença no evento X…"></textarea>
+          <div class="msg">Descreva as entregas combinadas.</div>
+        </div>
+        <div class="f">
+          <label for="cupom">Cupom ou link de venda <small>(opcional)</small></label>
+          <input id="cupom" name="cupom" type="text" maxlength="160" placeholder="Ex.: TF10 ou link">
+        </div>
+        <div class="f">
+          <label for="materiais">Link de materiais <small>(logo, briefing — opcional)</small></label>
+          <input id="materiais" name="materiais" type="url" maxlength="300" placeholder="https://drive…">
+        </div>
+        <div class="sep full"></div>
+        <div class="f full">
+          <label class="check"><input type="checkbox" id="aprovSame" name="aprovSame"> Quem aprova o conteúdo é a mesma pessoa que assina</label>
+        </div>
+        <div class="f" data-show="aprovSame=0">
+          <label for="aprovNome">Nome de quem aprova o conteúdo</label>
+          <input id="aprovNome" name="aprovNome" type="text" maxlength="120">
+          <div class="msg">Informe o nome.</div>
+        </div>
+        <div class="f" data-show="aprovSame=0">
+          <label for="aprovTel">WhatsApp de quem aprova</label>
+          <input id="aprovTel" name="aprovTel" type="tel" inputmode="tel" placeholder="(11) 90000-0000">
+          <div class="msg">WhatsApp inválido.</div>
+        </div>
+        <div class="f full">
+          <label for="obs">Observações <small>(opcional)</small></label>
+          <textarea id="obs" name="obs" maxlength="1200" placeholder="Algo que o contrato precisa prever? Exclusividade, prazos, multas…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 · Revisão -->
+    <div class="step" data-title="Revisão">
+      <div class="k">Etapa 6 de 6</div>
+      <h2>Confira e envie</h2>
+      <p class="sub">Revise os dados. Toque em <b>Editar</b> para corrigir qualquer bloco.</p>
+      <div class="rev" id="rev"></div>
+      <div class="f" style="margin-top:18px" data-req="lgpd">
+        <label class="check"><input type="checkbox" id="lgpd" name="lgpd"> Autorizo o uso destes dados exclusivamente para a elaboração e a gestão do contrato desta parceria, conforme a LGPD.</label>
+        <div class="msg">Precisamos da sua autorização para seguir.</div>
+      </div>
+    </div>
+
+    <!-- enviado -->
+    <div class="step" id="sent" data-title="Enviado">
+      <div class="done-box">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></div>
+        <h2 style="margin-top:14px">Dados prontos!</h2>
+        <p class="sub" style="max-width:440px;margin:8px auto 0">O WhatsApp abriu com tudo preenchido. <b>Toque em enviar lá</b> para os dados chegarem até nós. Se não abriu, use o botão abaixo.</p>
+      </div>
+      <div class="actions">
+        <button class="btn btn-wa" type="button" id="wa-again"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg>Enviar no WhatsApp</button>
+        <button class="btn btn-line" type="button" id="pdf">Baixar PDF do resumo</button>
+        <button class="btn btn-line" type="button" id="copy">Copiar dados</button>
+      </div>
+    </div>
+
+    <div class="nav" id="nav">
+      <button class="btn btn-line" type="button" id="back">Voltar</button>
+      <button class="btn btn-main" type="button" id="next">Continuar</button>
+    </div>
+  </form>
+
+  <footer>Os dados ficam salvos apenas neste aparelho até o envio.<br>Intermediação de parcerias · CA.RO Tech Group</footer>
+</div>
+
+<div id="print"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+  'use strict';
+  /* WhatsApp que recebe as fichas (Roni) */
+  var WA_NUMBER = '5511942302344';
+  var STORE = 'caro-parceria-v1';
+
+  var $ = function(id){ return document.getElementById(id); };
+  var form = $('form'), steps = [].slice.call(document.querySelectorAll('.step')).filter(function(s){ return s.id !== 'sent'; });
+  var cur = 0, state = {};
+
+  /* ---------- helpers ---------- */
+  function digits(v){ return String(v || '').replace(/\D/g, ''); }
+  function toast(t){ var e = $('toast'); e.textContent = t; e.classList.add('show'); clearTimeout(e._t); e._t = setTimeout(function(){ e.classList.remove('show'); }, 2200); }
+  function fmtDate(v){ if(!v) return ''; var p = v.split('-'); return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : v; }
+  function validCPF(c){
+    c = digits(c); if(c.length !== 11 || /^(\d)\1+$/.test(c)) return false;
+    for(var t = 9; t < 11; t++){ var s = 0; for(var i = 0; i < t; i++) s += +c[i] * (t + 1 - i); if(((s * 10) % 11) % 10 !== +c[t]) return false; }
+    return true;
+  }
+  function validCNPJ(c){
+    c = digits(c); if(c.length !== 14 || /^(\d)\1+$/.test(c)) return false;
+    var calc = function(n){ var w = n === 12 ? [5,4,3,2,9,8,7,6,5,4,3,2] : [6,5,4,3,2,9,8,7,6,5,4,3,2], s = 0; for(var i = 0; i < n; i++) s += +c[i] * w[i]; var r = s % 11; return r < 2 ? 0 : 11 - r; };
+    return calc(12) === +c[12] && calc(13) === +c[13];
+  }
+  var validEmail = function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); };
+  var validPhone = function(v){ var d = digits(v); return d.length >= 10 && d.length <= 13; };
+
+  /* ---------- masks ---------- */
+  function mask(el, fn){ el.addEventListener('input', function(){ var p = el.value.length - el.selectionStart; el.value = fn(el.value); try{ el.setSelectionRange(el.value.length - p, el.value.length - p); }catch(e){} }); }
+  mask($('cnpj'), function(v){ var d = digits(v).slice(0, 14); return d.replace(/^(\d{2})(\d)/, '$1.$2').replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3').replace(/\.(\d{3})(\d)/, '.$1/$2').replace(/(\d{4})(\d)/, '$1-$2'); });
+  mask($('repCpf'), function(v){ var d = digits(v).slice(0, 11); return d.replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2'); });
+  mask($('cep'), function(v){ var d = digits(v).slice(0, 8); return d.replace(/^(\d{5})(\d)/, '$1-$2'); });
+  ['repTel', 'finTel', 'aprovTel'].forEach(function(id){ mask($(id), function(v){ var d = digits(v).slice(0, 11); if(d.length <= 2) return d.length ? '(' + d : ''; if(d.length <= 6) return '(' + d.slice(0,2) + ') ' + d.slice(2); if(d.length <= 10) return '(' + d.slice(0,2) + ') ' + d.slice(2,6) + '-' + d.slice(6); return '(' + d.slice(0,2) + ') ' + d.slice(2,7) + '-' + d.slice(7); }); });
+  mask($('valor'), function(v){ var d = digits(v).slice(0, 12); if(!d) return ''; return 'R$ ' + (parseInt(d, 10) / 100).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}); });
+
+  /* ---------- chips ---------- */
+  document.querySelectorAll('[data-chips]').forEach(function(g){
+    var key = g.getAttribute('data-chips'), single = g.hasAttribute('data-single');
+    g.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if(!b) return;
+      var v = b.textContent;
+      if(single){ state[key] = state[key] === v ? '' : v; }
+      else { var arr = state[key] || []; var i = arr.indexOf(v); if(i > -1) arr.splice(i, 1); else arr.push(v); state[key] = arr; }
+      paintChips(); applyLogic(); save();
+      var f = g.closest('.f'); if(f) f.classList.remove('bad');
+    });
+  });
+  function paintChips(){
+    document.querySelectorAll('[data-chips]').forEach(function(g){
+      var key = g.getAttribute('data-chips'), v = state[key];
+      g.querySelectorAll('button').forEach(function(b){ b.classList.toggle('on', Array.isArray(v) ? v.indexOf(b.textContent) > -1 : v === b.textContent); });
+    });
+  }
+
+  /* ---------- state <-> inputs ---------- */
+  function read(){
+    form.querySelectorAll('input[name], textarea[name], select[name]').forEach(function(el){
+      if(el.name === 'website') return;
+      state[el.name] = el.type === 'checkbox' ? (el.checked ? '1' : '0') : el.value;
+    });
+  }
+  function write(){
+    form.querySelectorAll('input[name], textarea[name], select[name]').forEach(function(el){
+      if(!(el.name in state)) return;
+      if(el.type === 'checkbox') el.checked = state[el.name] === '1'; else el.value = state[el.name];
+    });
+    paintChips();
+  }
+  /* conditional fields: data-show="key=a|b" shows when the value matches; data-hide hides when it matches */
+  function val(key){ var v = state[key]; if(v === undefined || v === null) return key === 'finSame' || key === 'aprovSame' ? '0' : ''; return v; }
+  function applyLogic(){
+    form.querySelectorAll('[data-show],[data-hide]').forEach(function(el){
+      var rule = el.getAttribute('data-show') || el.getAttribute('data-hide'), show = el.hasAttribute('data-show');
+      var kv = rule.split('='), ok = kv[1].split('|').indexOf(val(kv[0])) > -1;
+      el.hidden = show ? !ok : ok;
+    });
+  }
+  var saveT;
+  function save(){
+    clearTimeout(saveT);
+    saveT = setTimeout(function(){
+      try{ localStorage.setItem(STORE, JSON.stringify({state:state, step:cur})); $('save-state').textContent = 'Rascunho salvo'; }catch(e){}
+    }, 250);
+  }
+  form.addEventListener('input', function(e){ read(); applyLogic(); save(); var f = e.target.closest('.f'); if(f) f.classList.remove('bad'); });
+  form.addEventListener('change', function(){ read(); applyLogic(); save(); });
+
+  /* ---------- lookups: CNPJ (BrasilAPI) and CEP (ViaCEP) ---------- */
+  function setIfEmpty(id, v){ var el = $(id); if(v && !el.value.trim()){ el.value = v; } }
+  function lookupCNPJ(){
+    var c = digits($('cnpj').value), hint = $('cnpj-hint'), f = $('cnpj').closest('.f');
+    if(!validCNPJ(c)){ f.classList.add('bad'); return; }
+    f.classList.remove('bad'); hint.className = 'hint'; hint.textContent = 'Buscando dados da empresa…';
+    fetch('https://brasilapi.com.br/api/cnpj/v1/' + c).then(function(r){ if(!r.ok) throw 0; return r.json(); }).then(function(d){
+      setIfEmpty('razao', d.razao_social); setIfEmpty('fantasia', d.nome_fantasia || '');
+      setIfEmpty('cep', d.cep ? String(d.cep).replace(/^(\d{5})(\d{3})$/, '$1-$2') : '');
+      setIfEmpty('logradouro', [d.descricao_tipo_de_logradouro, d.logradouro].filter(Boolean).join(' '));
+      setIfEmpty('numero', d.numero); setIfEmpty('complemento', d.complemento); setIfEmpty('bairro', d.bairro);
+      setIfEmpty('cidade', d.municipio); setIfEmpty('uf', d.uf);
+      read(); save();
+      hint.className = 'hint ok'; hint.textContent = '✓ ' + (d.razao_social || 'Empresa encontrada') + (d.descricao_situacao_cadastral ? ' · ' + d.descricao_situacao_cadastral : '');
+    }).catch(function(){ hint.className = 'hint'; hint.textContent = 'Não conseguimos buscar agora. Preencha os dados abaixo manualmente.'; });
+  }
+  $('cnpj-go').addEventListener('click', lookupCNPJ);
+  $('cnpj').addEventListener('input', function(){ if(digits(this.value).length === 14) lookupCNPJ(); });
+  $('cep').addEventListener('input', function(){
+    var c = digits(this.value), hint = $('cep-hint'); if(c.length !== 8) return;
+    hint.className = 'hint'; hint.textContent = 'Buscando endereço…';
+    fetch('https://viacep.com.br/ws/' + c + '/json/').then(function(r){ return r.json(); }).then(function(d){
+      if(d.erro) throw 0;
+      setIfEmpty('logradouro', d.logradouro); setIfEmpty('bairro', d.bairro); setIfEmpty('cidade', d.localidade); setIfEmpty('uf', d.uf);
+      read(); save(); hint.className = 'hint ok'; hint.textContent = '✓ ' + [d.localidade, d.uf].filter(Boolean).join(' / ');
+      if(!$('numero').value) $('numero').focus();
+    }).catch(function(){ hint.className = 'hint'; hint.textContent = 'CEP não encontrado, preencha o endereço.'; });
+  });
+
+  /* ---------- validation per step ---------- */
+  function need(id, test, msgOk){
+    var el = $(id), f = el.closest('.f'); if(f.hidden || (f.closest('[hidden]'))) return true;
+    var ok = test(el.value.trim()); f.classList.toggle('bad', !ok); return ok;
+  }
+  var filled = function(v){ return v.length > 0; };
+  function needChip(key, multi){
+    var f = document.querySelector('[data-req="' + key + '"]'); var v = state[key];
+    var ok = multi ? (v && v.length) : !!v; f.classList.toggle('bad', !ok); return !!ok;
+  }
+  var CHECKS = [
+    function(){ var a = [needChip('cliente'), needChip('tipo'), need('clienteOutro', filled), (/^(Pagamento|Misto)/.test(state.tipo || '') ? need('valor', function(v){ return +digits(v) > 0; }) : true), need('permuta', filled), need('inicio', filled),
+      need('fim', function(v){ return !v || !$('inicio').value || v >= $('inicio').value; })]; return a.every(Boolean); },
+    function(){ return [need('cnpj', validCNPJ), need('razao', filled), need('fantasia', filled), need('cep', function(v){ return digits(v).length === 8; }), need('logradouro', filled), need('numero', filled), need('cidade', filled), need('uf', function(v){ return /^[a-zA-Z]{2}$/.test(v); })].every(Boolean); },
+    function(){ return [need('repNome', function(v){ return v.split(/\s+/).length >= 2; }), need('repCpf', validCPF), need('repCargo', filled), need('repEmail', validEmail), need('repTel', validPhone)].every(Boolean); },
+    function(){ return [need('finNome', filled), need('finTel', validPhone), need('finEmail', validEmail)].every(Boolean); },
+    function(){ return [needChip('formatos', true), need('entregas', filled), need('aprovNome', filled), need('aprovTel', validPhone)].every(Boolean); },
+    function(){ var f = document.querySelector('[data-req="lgpd"]'), ok = $('lgpd').checked; f.classList.toggle('bad', !ok); return ok; }
+  ];
+
+  /* ---------- summary ---------- */
+  function sections(){
+    var s = state, list = function(v){ return Array.isArray(v) ? v.join(', ') : (v || ''); };
+    var cliente = s.cliente === 'Outro' ? (s.clienteOutro || 'Outro') : s.cliente;
+    var dinheiro = s.tipo && s.tipo !== 'Permuta de produtos';
+    var fin = s.finSame === '1' ? {nome:s.repNome, tel:s.repTel} : {nome:s.finNome, tel:s.finTel};
+    var apr = s.aprovSame === '1' ? {nome:s.repNome, tel:s.repTel} : {nome:s.aprovNome, tel:s.aprovTel};
+    var endereco = [s.logradouro, s.numero, s.complemento].filter(Boolean).join(', ') + (s.bairro ? ' — ' + s.bairro : '') + '\n' + [s.cidade, (s.uf || '').toUpperCase()].filter(Boolean).join(' / ') + (s.cep ? ' · CEP ' + s.cep : '');
+    return [
+      {step:0, t:'Parceria', rows:[['Parceria com', cliente], ['Campanha', s.campanha], ['Tipo de acordo', s.tipo], ['Valor total', dinheiro ? s.valor : ''], ['Permuta', s.tipo && /Permuta|Misto/.test(s.tipo) ? s.permuta : ''], ['Comissão', s.tipo === 'Comissão / royalties' && s.comissao ? s.comissao + '%' : ''], ['Pagamento', dinheiro ? [s.pagamento, s.condicao, (/Parcelado|Mensal/.test(s.condicao || '') && s.parcelas) ? s.parcelas + 'x' : ''].filter(Boolean).join(' · ') : ''], ['1º vencimento', dinheiro ? fmtDate(s.vencimento) : ''], ['Vigência', [fmtDate(s.inicio), fmtDate(s.fim)].filter(Boolean).join(' a ')]]},
+      {step:1, t:'Empresa', rows:[['CNPJ', s.cnpj], ['Razão social', s.razao], ['Nome fantasia', s.fantasia], ['Inscrição estadual', s.ie], ['Endereço', endereco.trim()], ['Site / Instagram', s.siteMarca]]},
+      {step:2, t:'Quem assina', rows:[['Nome', s.repNome], ['CPF', s.repCpf], ['Cargo', s.repCargo], ['E-mail', s.repEmail], ['WhatsApp', s.repTel]]},
+      {step:3, t:'Financeiro', rows:[['Responsável', fin.nome], ['Telefone', fin.tel], ['E-mail NF / boletos', s.finEmail], ['Exigências', s.finObs]]},
+      {step:4, t:'Entregas', rows:[['Formatos', list(s.formatos)], ['Detalhe', s.entregas], ['Cupom / link', s.cupom], ['Materiais', s.materiais], ['Aprovação de conteúdo', [apr.nome, apr.tel].filter(Boolean).join(' · ')], ['Observações', s.obs]]}
+    ].map(function(sec){ sec.rows = sec.rows.filter(function(r){ return r[1] && String(r[1]).trim(); }); return sec; });
+  }
+  function esc(v){ return String(v).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function renderReview(){
+    $('rev').innerHTML = sections().map(function(sec){
+      return '<section><h3>' + esc(sec.t) + '<button type="button" data-go="' + sec.step + '">Editar</button></h3><dl>' +
+        sec.rows.map(function(r){ return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl></section>';
+    }).join('');
+  }
+  $('rev').addEventListener('click', function(e){ var b = e.target.closest('[data-go]'); if(b) go(+b.getAttribute('data-go')); });
+  function asText(){
+    var s = sections(), head = 'NOVA FICHA DE PARCERIA — ' + (state.fantasia || state.razao || 'Marca') + '\n';
+    return head + s.map(function(sec){ return '\n*' + sec.t.toUpperCase() + '*\n' + sec.rows.map(function(r){ return '• ' + r[0] + ': ' + String(r[1]).replace(/\n/g, ' '); }).join('\n'); }).join('\n') + '\n\n✓ Autorizou o uso dos dados (LGPD)';
+  }
+  function buildPrint(){
+    $('print').innerHTML = '<h1>Ficha de parceria — ' + esc(state.fantasia || state.razao || '') + '</h1><div class="meta">Gerada em ' + new Date().toLocaleString('pt-BR') + ' · Intermediação CA.RO</div>' +
+      sections().map(function(sec){ return '<h3>' + esc(sec.t) + '</h3><dl>' + sec.rows.map(function(r){ return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl>'; }).join('');
+  }
+
+  /* ---------- navigation ---------- */
+  var stepsNav = $('steps');
+  stepsNav.innerHTML = steps.map(function(s, i){ return '<button type="button" data-i="' + i + '"><i></i><span>' + s.getAttribute('data-title') + '</span></button>'; }).join('');
+  var maxReached = 0;
+  stepsNav.addEventListener('click', function(e){ var b = e.target.closest('button'); if(!b) return; var i = +b.getAttribute('data-i'); if(i <= maxReached) go(i); });
+  function go(i, quiet){
+    cur = Math.max(0, Math.min(steps.length - 1, i)); maxReached = Math.max(maxReached, cur);
+    steps.forEach(function(s, k){ s.classList.toggle('on', k === cur); });
+    $('sent').classList.remove('on'); $('nav').hidden = false;
+    stepsNav.querySelectorAll('button').forEach(function(b, k){ b.classList.toggle('on', k === cur); b.classList.toggle('done', k < cur); b.disabled = k > maxReached; });
+    $('back').style.visibility = cur ? 'visible' : 'hidden';
+    $('next').textContent = cur === steps.length - 1 ? 'Enviar ficha' : 'Continuar';
+    if(cur === steps.length - 1) renderReview();
+    save();
+    if(!quiet) form.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+  function openWA(){
+    var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(asText());
+    var w = window.open(url, '_blank'); if(w){ w.opener = null; } else { location.href = url; }
+  }
+  $('back').addEventListener('click', function(){ go(cur - 1); });
+  $('next').addEventListener('click', function(){
+    read();
+    if(!CHECKS[cur]()){ var bad = form.querySelector('.step.on .f.bad'); if(bad) bad.scrollIntoView({behavior:'smooth', block:'center'}); toast('Confira os campos destacados'); return; }
+    if(cur < steps.length - 1) return go(cur + 1);
+    if(form.website.value) return; /* bot */
+    for(var k = 0; k < CHECKS.length - 1; k++){ if(!CHECKS[k]()){ go(k); toast('Faltou algum dado nesta etapa'); return; } }
+    openWA();
+    steps.forEach(function(s){ s.classList.remove('on'); });
+    $('sent').classList.add('on'); $('nav').hidden = true;
+    stepsNav.querySelectorAll('button').forEach(function(b){ b.classList.add('done'); b.classList.remove('on'); });
+    try{ localStorage.setItem(STORE + '-sent', new Date().toISOString()); }catch(e){}
+  });
+  $('wa-again').addEventListener('click', openWA);
+  $('copy').addEventListener('click', function(){
+    var t = asText();
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function(){ toast('Dados copiados'); }).catch(function(){
+      var a = document.createElement('textarea'); a.value = t; document.body.appendChild(a); a.select(); try{ document.execCommand('copy'); toast('Dados copiados'); }catch(e){} a.remove();
+    });
+  });
+  $('pdf').addEventListener('click', function(){ buildPrint(); window.print(); });
+
+  /* ---------- restore draft ---------- */
+  try{
+    var saved = JSON.parse(localStorage.getItem(STORE) || 'null');
+    if(saved && saved.state){ state = saved.state; write(); $('save-state').textContent = 'Rascunho recuperado'; maxReached = saved.step || 0; }
+  }catch(e){}
+  read(); applyLogic();
+  go(Math.min(maxReached, steps.length - 1), true);
+})();
+</script>
+</body>
+</html>
