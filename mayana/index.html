@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mayana Moreira · A Mesa, A Essência do Lar e AfetoQabraça</title>
+<meta name="description" content="Temperos, aromas, decoração e presentes com significado. Escolha o que você procura e fale direto com a Mayana.">
+<meta name="theme-color" content="#FFF6E6">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#FFF6E6; --paper:#FFFBF2; --sand:#F1E6CF; --line:#E4D7B8;
+  --green:#5F8450; --green-d:#3E5A33; --green-l:#DDE8D3;
+  --ink:#2A3326; --muted:#6B7260; --gold:#B58E4A;
+  --serif:'EB Garamond',Georgia,serif; --sans:'Jost',system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--sans);line-height:1.5;overflow-x:hidden;min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+.bg{position:fixed;inset:0;z-index:-1;background:
+  radial-gradient(520px 360px at 85% -5%,#dfe9d3 0,transparent 70%),
+  radial-gradient(480px 380px at -10% 105%,#f3e2bd 0,transparent 70%),var(--cream)}
+.leaf{position:fixed;z-index:-1;width:46px;color:var(--green);opacity:.14;pointer-events:none}
+.l1{left:5%;top:12%}.l2{right:6%;top:38%;width:38px}.l3{left:8%;top:68%;width:52px}.l4{right:10%;top:88%;width:34px}
+@media (prefers-reduced-motion:no-preference){
+  .l1{animation:drift 14s ease-in-out infinite}.l2{animation:drift 18s ease-in-out -4s infinite}
+  .l3{animation:drift 16s ease-in-out -8s infinite}.l4{animation:drift 20s ease-in-out -2s infinite}
+}
+@keyframes drift{0%,100%{transform:translateY(0) rotate(-8deg)}50%{transform:translateY(-22px) rotate(10deg)}}
+
+.page{max-width:480px;margin:0 auto;padding:34px 0 70px}
+.in{padding-left:20px;padding-right:20px}
+
+/* header */
+.head{text-align:center}
+.ava{position:relative;width:118px;height:118px;margin:0 auto;border-radius:50%}
+.ava::before{content:'';position:absolute;inset:-7px;border-radius:50%;border:1px solid var(--gold);opacity:.7}
+.ava::after{content:'';position:absolute;inset:-14px;border-radius:50%;border:1px dashed var(--gold);opacity:.35}
+.ava img{width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;box-shadow:0 14px 30px -14px #3e5a33aa}
+@media (prefers-reduced-motion:no-preference){.ava::after{animation:spin 40s linear infinite}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.eyebrow{margin-top:26px;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--green-d);font-weight:500}
+h1{margin-top:6px;font-family:var(--serif);font-weight:500;font-size:2.35rem;line-height:1.05}
+.tag{margin:12px auto 0;max-width:340px;font-family:var(--serif);font-style:italic;font-size:1.12rem;color:var(--muted)}
+.orn{display:flex;align-items:center;justify-content:center;gap:12px;margin:20px 0 0;color:var(--gold)}
+.orn::before,.orn::after{content:'';height:1px;width:60px;background:linear-gradient(90deg,transparent,var(--gold))}
+.orn::after{transform:scaleX(-1)}
+.orn svg{width:16px;height:16px}
+
+/* product marquee */
+.sec{margin-top:30px;text-align:center;font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.sech{margin-top:6px;text-align:center;font-family:var(--serif);font-weight:500;font-size:1.55rem}
+.marq{position:relative;margin-top:14px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+.track{display:flex;gap:12px;width:max-content;padding:6px 0 14px}
+@media (prefers-reduced-motion:no-preference){.track{animation:marq 90s linear infinite}.marq.paused .track{animation-play-state:paused}}
+@keyframes marq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marq{overflow-x:auto}}
+.ph{position:relative;flex:none;height:290px;border-radius:20px;overflow:hidden;background:var(--sand);box-shadow:0 16px 28px -18px #4b3b1a88;border:1px solid #ffffffaa}
+.ph img{height:100%;width:auto;display:block}
+.ph::after{content:'';position:absolute;inset:auto 0 0 0;height:70px;background:linear-gradient(0deg,#1d261acc,transparent)}
+.ph span{position:absolute;z-index:2;left:12px;bottom:11px;font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:#fff;font-weight:600}
+
+/* picker */
+.pick{margin:22px 20px 0;padding:22px 18px;border-radius:26px;background:var(--paper);border:1px solid var(--line);box-shadow:0 22px 44px -30px #5b4a1f66}
+.pick h2{font-family:var(--serif);font-weight:500;font-size:1.45rem;text-align:center}
+.pick p.s{margin-top:4px;text-align:center;font-size:.86rem;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px}
+.chip{padding:10px 15px;border-radius:100px;border:1px solid var(--line);background:#fff;font-size:.88rem;font-weight:500;transition:all .2s}
+.chip:hover{border-color:var(--green)}
+.chip[aria-pressed=true]{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 10px 20px -12px var(--green-d)}
+.res{display:none;margin-top:18px;padding:18px;border-radius:20px;background:linear-gradient(160deg,var(--green-l),#eef3e6);border:1px solid #c9d9bb}
+.res.on{display:block}
+@media (prefers-reduced-motion:no-preference){.res.on{animation:pop .45s cubic-bezier(.2,.9,.2,1)}}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.res small{display:block;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--green-d);font-weight:600}
+.res b{display:block;margin-top:4px;font-family:var(--serif);font-weight:500;font-size:1.5rem;line-height:1.1}
+.res span.d{display:block;margin-top:6px;font-size:.92rem;color:#46513f}
+.btn{display:flex;align-items:center;justify-content:center;gap:9px;margin-top:14px;padding:14px 18px;border-radius:100px;background:var(--green-d);color:#fff;font-weight:500;font-size:.95rem;letter-spacing:.02em;box-shadow:0 14px 24px -14px var(--green-d);transition:transform .15s,filter .2s}
+.btn:hover{filter:brightness(1.08)}.btn:active{transform:scale(.98)}
+.btn svg{width:18px;height:18px}
+.btn.alt{background:transparent;color:var(--green-d);border:1px solid var(--green);box-shadow:none;margin-top:8px}
+.btn.sm{padding:11px 16px;font-size:.86rem;margin-top:10px}
+
+/* brand blocks */
+.brand{margin:40px 20px 0}
+.bh{display:flex;align-items:center;gap:12px}
+.bh .ic{flex:none;width:50px;height:50px;border-radius:50%;background:var(--green-l);display:flex;align-items:center;justify-content:center;color:var(--green-d)}
+.bh .ic svg{width:26px;height:26px}
+.bh h3{font-family:var(--serif);font-weight:500;font-size:1.75rem;line-height:1}
+.bh p{margin-top:3px;font-size:.84rem;color:var(--muted)}
+.badge{display:inline-block;margin-left:8px;padding:2px 9px;border-radius:100px;background:var(--gold);color:#fff;font-size:.62rem;font-family:var(--sans);letter-spacing:.14em;text-transform:uppercase;vertical-align:middle;font-weight:600}
+.lead{margin-top:14px;font-family:var(--serif);font-style:italic;font-size:1.12rem;color:#46513f;line-height:1.35}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.tc{border-radius:20px;background:var(--paper);border:1px solid var(--line);overflow:hidden}
+.tc img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.tc div{padding:11px 12px 13px}
+.tc b{display:block;font-family:var(--serif);font-weight:500;font-size:1.25rem;line-height:1}
+.tc span{display:block;margin-top:5px;font-size:.78rem;color:var(--muted);line-height:1.38}
+.price{margin-top:12px;padding:14px 16px;border-radius:18px;background:var(--green-d);color:#f4efe0;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline;justify-content:center;text-align:center}
+.price b{font-family:var(--serif);font-weight:500;font-size:1.5rem;color:#fff}
+.price small{font-size:.74rem;letter-spacing:.06em;color:#cfe0c2}
+.cb{margin-top:14px;display:grid;gap:12px}
+.cc{border-radius:22px;background:var(--paper);border:1px solid var(--line);overflow:hidden}
+.cc img{display:block;width:100%;aspect-ratio:1/.62;object-fit:cover}
+.cc div{padding:14px 16px 16px}
+.cc h4{font-family:var(--serif);font-weight:500;font-size:1.35rem}
+.cc p{margin-top:3px;font-size:.84rem;color:var(--muted)}
+.cc .pr{margin-top:8px;font-size:.9rem;font-weight:500;color:var(--green-d)}
+.cc.you{padding:18px 16px;background:linear-gradient(160deg,var(--green-l),#eef3e6);border-color:#c9d9bb}
+.cc.you div{padding:0}
+.list{margin-top:14px;display:grid;gap:10px}
+.li{display:flex;gap:12px;padding:14px 16px;border-radius:18px;background:var(--paper);border:1px solid var(--line)}
+.li i{flex:none;width:8px;height:8px;margin-top:8px;border-radius:50%;background:var(--gold)}
+.li b{display:block;font-family:var(--serif);font-weight:500;font-size:1.2rem;line-height:1.1}
+.li span{display:block;margin-top:3px;font-size:.84rem;color:var(--muted);line-height:1.4}
+.note{margin-top:10px;text-align:center;font-size:.8rem;color:var(--muted)}
+
+/* videos */
+.vg{display:grid;gap:10px;margin-top:14px}
+.vc{display:flex;gap:12px;align-items:center;padding:10px;border-radius:18px;background:var(--paper);border:1px solid var(--line);transition:border-color .2s}
+.vc:hover{border-color:var(--green)}
+.vc img{flex:none;width:118px;aspect-ratio:16/9;object-fit:cover;border-radius:12px}
+.vc b{display:block;font-family:var(--serif);font-weight:500;font-size:1.1rem;line-height:1.15}
+.vc span{display:block;margin-top:3px;font-size:.74rem;color:var(--muted)}
+
+/* contact */
+.ct{margin:40px 20px 0;padding:22px 18px;border-radius:26px;background:var(--paper);border:1px solid var(--line)}
+.ct h3{font-family:var(--serif);font-weight:500;font-size:1.5rem;text-align:center}
+.ct ul{list-style:none;margin-top:12px;display:grid;gap:8px}
+.ct li a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:#fff;border:1px solid var(--line);font-size:.92rem;font-weight:500}
+.ct li svg{flex:none;width:20px;height:20px;color:var(--green-d)}
+.ct .note{margin-top:12px}
+
+.quote{margin:34px 20px 0;padding:22px 20px;text-align:center;border-radius:24px;background:var(--green-d);color:#f4efe0;position:relative;overflow:hidden}
+.quote::before{content:'“';position:absolute;left:14px;top:-8px;font-family:var(--serif);font-size:6rem;color:#ffffff1f;line-height:1}
+.quote p{position:relative;font-family:var(--serif);font-style:italic;font-size:1.25rem;line-height:1.32}
+.quote small{display:block;margin-top:10px;font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:#cfe0c2}
+footer{margin-top:30px;text-align:center;font-size:.76rem;color:var(--muted);line-height:1.8;padding:0 20px}
+footer a{color:var(--green-d);text-decoration:underline;text-underline-offset:3px}
+
+
+/* trust strip + sticky nav */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 20px 0}
+.trust div{padding:12px 6px;border-radius:16px;background:var(--paper);border:1px solid var(--line);text-align:center;font-size:.72rem;line-height:1.3;color:var(--muted)}
+.trust b{display:block;font-family:var(--serif);font-weight:500;font-size:.98rem;color:var(--ink)}
+.trust svg{display:block;margin:0 auto 4px;width:22px;height:22px;color:var(--green-d)}
+.nav{position:sticky;top:0;z-index:30;margin-top:22px;padding:10px 0;background:#fff6e6ee;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav div{display:flex;gap:8px;overflow-x:auto;padding:0 20px;scrollbar-width:none}
+.nav div::-webkit-scrollbar{display:none}
+.nav a{flex:none;padding:8px 14px;border-radius:100px;border:1px solid var(--line);background:#fff;font-size:.8rem;font-weight:500;transition:all .2s}
+.nav a.on{background:var(--green-d);color:#fff;border-color:var(--green-d)}
+section[id]{scroll-margin-top:70px}
+/* fact sheet */
+.facts{margin-top:14px;border-radius:18px;background:var(--paper);border:1px solid var(--line);overflow:hidden}
+.facts div{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:11px 14px;border-bottom:1px solid var(--line);font-size:.84rem;line-height:1.4}
+.facts div:last-child{border-bottom:0}
+.facts dt{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--green-d);font-weight:600;padding-top:3px}
+.facts dd{color:#46513f}
+/* about + steps + faq */
+.about{margin:34px 20px 0;padding:20px 18px;border-radius:24px;background:var(--paper);border:1px solid var(--line);text-align:center}
+.about p{font-family:var(--serif);font-size:1.08rem;line-height:1.4;color:#46513f}
+.about small{display:block;margin-top:10px;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green-d);font-weight:600}
+.steps{margin-top:14px;display:grid;gap:10px;counter-reset:s}
+.st{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:18px;background:var(--paper);border:1px solid var(--line)}
+.st::before{counter-increment:s;content:counter(s);flex:none;width:34px;height:34px;border-radius:50%;background:var(--green-d);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.2rem}
+.st b{display:block;font-family:var(--serif);font-weight:500;font-size:1.2rem;line-height:1.1}
+.st span{display:block;margin-top:3px;font-size:.84rem;color:var(--muted);line-height:1.4}
+.faq{margin-top:14px;display:grid;gap:8px}
+.faq details{border-radius:16px;background:var(--paper);border:1px solid var(--line);overflow:hidden}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px;padding:14px 16px;font-weight:500;font-size:.92rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';color:var(--green-d);font-size:1.3rem;line-height:1;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 16px 14px;font-size:.86rem;color:var(--muted);line-height:1.5}
+
+
+/* ---- self-service assistant ---- */
+.pk-badge{display:block;text-align:center;font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--green-d);font-weight:600;margin-bottom:6px}
+.pick .btn{margin-top:16px}
+.fab{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;align-items:center;gap:8px;padding:13px 18px 13px 14px;border-radius:100px;background:var(--green-d);color:#fff;font-weight:500;font-size:.9rem;box-shadow:0 14px 28px -10px #1d2e18cc}
+.fab svg{width:22px;height:22px}
+@media (prefers-reduced-motion:no-preference){.fab{animation:fabp 2.8s ease-in-out infinite}}
+@keyframes fabp{0%,100%{box-shadow:0 14px 28px -10px #1d2e18cc,0 0 0 0 #3e5a3355}50%{box-shadow:0 14px 28px -10px #1d2e18cc,0 0 0 10px #3e5a3300}}
+.as{position:fixed;inset:0;z-index:100;display:none;align-items:flex-end;justify-content:center;background:#1d261a99}
+.as.open{display:flex}
+.as-m{width:100%;max-width:480px;height:88vh;max-height:760px;background:var(--cream);border-radius:24px 24px 0 0;display:flex;flex-direction:column;overflow:hidden}
+@media (prefers-reduced-motion:no-preference){.as.open .as-m{animation:up .34s ease}}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+.as-h{flex:none;display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--green-d);color:#fff}
+.as-h img{width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid #ffffff55}
+.as-h b{display:block;font-family:var(--serif);font-weight:500;font-size:1.15rem;line-height:1.1}
+.as-h span{display:block;font-size:.72rem;color:#cfe0c2}
+.as-h .t{flex:1;min-width:0}
+.as-x{flex:none;width:34px;height:34px;border-radius:50%;background:#ffffff22;display:flex;align-items:center;justify-content:center;color:#fff}
+.as-x svg{width:15px;height:15px}
+.as-b{flex:1;overflow-y:auto;padding:16px 14px 22px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
+.bb{max-width:84%;padding:11px 14px;border-radius:18px;font-size:.92rem;line-height:1.42;white-space:pre-line}
+.bb.bot{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:5px}
+.bb.me{align-self:flex-end;background:var(--green);color:#fff;border-bottom-right-radius:5px}
+.dots{display:inline-flex;gap:4px;align-items:center;height:14px}
+.dots i{width:6px;height:6px;border-radius:50%;background:var(--green);opacity:.4;animation:dt 1s infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes dt{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.ops{align-self:stretch;display:flex;flex-wrap:wrap;gap:8px}
+.op{padding:10px 15px;border-radius:100px;border:1px solid var(--green);background:#fff;color:var(--green-d);font-size:.88rem;font-weight:500;text-align:left;transition:all .15s}
+.op:hover{background:var(--green-l)}
+.op[aria-pressed=true]{background:var(--green-d);color:#fff;border-color:var(--green-d)}
+.op.go{background:var(--green-d);color:#fff;width:100%;text-align:center;border-radius:100px;padding:13px}
+.op.go[disabled]{opacity:.45;cursor:not-allowed}
+.hint{width:100%;font-size:.78rem;color:var(--muted)}
+.fm{align-self:stretch;display:grid;gap:8px}
+.fm input,.fm textarea{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:#fff;font-family:inherit;font-size:.92rem;color:var(--ink)}
+.fm textarea{min-height:84px;resize:vertical}
+.fm input:focus,.fm textarea:focus{outline:none;border-color:var(--green)}
+.err{font-size:.78rem;color:#b3402f;font-weight:500}
+.sum{align-self:stretch;padding:14px 16px;border-radius:18px;background:var(--paper);border:1px solid var(--line);font-size:.86rem;line-height:1.55}
+.sum h5{font-family:var(--serif);font-weight:500;font-size:1.15rem;margin-bottom:6px}
+.sum div{display:flex;gap:8px}
+.sum div b{flex:none;min-width:84px;color:var(--green-d);font-weight:600;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;padding-top:2px}
+.sum .tot{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);font-family:var(--serif);font-size:1.2rem}
+.wa-go{align-self:stretch;display:flex;align-items:center;justify-content:center;gap:9px;padding:15px;border-radius:100px;background:#25a85a;color:#fff;font-weight:600;font-size:.98rem;box-shadow:0 14px 24px -14px #1b6e3a}
+.wa-go svg{width:20px;height:20px}
+.re{align-self:center;font-size:.84rem;color:var(--green-d);text-decoration:underline;text-underline-offset:3px;padding:6px}
+
+.rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}.rv.vis{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<svg class="leaf l1" viewBox="0 0 48 90" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M24 88V8M24 22c-8-2-12-8-12-14 8 0 12 6 12 14Zm0 14c8-2 12-8 12-14-8 0-12 6-12 14Zm0 14c-8-2-12-8-12-14 8 0 12 6 12 14Zm0 14c8-2 12-8 12-14-8 0-12 6-12 14Z"/></svg>
+<svg class="leaf l2" viewBox="0 0 48 90" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M24 88V10M24 10c-4 6-4 12 0 18m0-18c4 6 4 12 0 18m0 0c-4 6-4 12 0 18m0-18c4 6 4 12 0 18m0 0c-4 6-4 12 0 18m0-18c4 6 4 12 0 18"/></svg>
+<svg class="leaf l3" viewBox="0 0 48 90" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M24 88V8M24 28c-8-2-12-8-12-14 8 0 12 6 12 14Zm0 16c8-2 12-8 12-14-8 0-12 6-12 14Zm0 16c-8-2-12-8-12-14 8 0 12 6 12 14Z"/></svg>
+<svg class="leaf l4" viewBox="0 0 48 90" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M24 88V10M24 10c-4 6-4 12 0 18m0-18c4 6 4 12 0 18m0 0c-4 6-4 12 0 18m0-18c4 6 4 12 0 18"/></svg>
+
+<main class="page">
+
+  <header class="head in">
+    <div class="ava rv"><img src="logo.jpg" alt="A Mesa, o retorno à essência"></div>
+    <div class="eyebrow rv">A Mesa · A Essência do Lar · AfetoQabraça</div>
+    <h1 class="rv">Mayana Moreira</h1>
+    <p class="tag rv">Temperos, aromas e presentes com significado, para a sua mesa e a sua casa.</p>
+    <div class="orn rv"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1.2 4.4 4.6 7.8 9 9-4.4 1.2-7.8 4.6-9 9-1.2-4.4-4.6-7.8-9-9 4.4-1.2 7.8-4.6 9-9Z"/></svg></div>
+  </header>
+
+  <div class="trust rv">
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><b>Todo o Brasil</b>enviamos para o seu endereço</div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg><b>Pix ou cartão</b>você escolhe como pagar</div>
+    <div><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg><b>WhatsApp</b>atendimento direto</div>
+  </div>
+
+  <nav class="nav" id="nav" aria-label="Seções"><div>
+    <a href="#produtos">Produtos</a><a href="#mesa">A Mesa</a><a href="#lar">Essência do Lar</a><a href="#afeto">AfetoQabraça</a><a href="#oficina">Oficina</a><a href="#pedir">Como pedir</a><a href="#contato">Contato</a>
+  </div></nav>
+
+  <!-- product carousel, all brands -->
+  <div class="sec rv" id="produtos">Nossos produtos</div>
+  <div class="marq rv" id="marq" aria-label="Produtos da A Mesa, A Essência do Lar e AfetoQabraça"><div class="track" id="track"></div></div>
+
+  <!-- self-service entry -->
+  <section class="pick rv" aria-labelledby="pk-h">
+    <span class="pk-badge">Auto atendimento</span>
+    <h2 id="pk-h">Monte o seu pedido em 1 minuto</h2>
+    <p class="s">Responda algumas perguntas e eu deixo tudo pronto no WhatsApp da May.</p>
+    <div class="chips" id="chips" role="group" aria-label="Escolha o que procura">
+      <button class="chip" type="button" data-assist="mesa">Temperos para a mesa</button>
+      <button class="chip" type="button" data-assist="lar">Aromas e decoração</button>
+      <button class="chip" type="button" data-assist="afeto">Presente com significado</button>
+      <button class="chip" type="button" data-assist="oficina">Oficina de pintura na taça</button>
+    </div>
+    <a class="btn" href="#" data-assist="inicio">Começar o atendimento</a>
+  </section>
+
+  <!-- A MESA -->
+  <section class="brand" id="mesa">
+    <div class="bh rv">
+      <span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 28V9"/><path d="M16 15c-4 0-6-2.4-6-5.6 4 0 6 2.4 6 5.6Zm0 6c4 0 6-2.4 6-5.6-4 0-6 2.4-6 5.6Z"/><path d="M16 9c-1.6-1.2-2-3-2-5 2 .8 3.6 2.6 2 5Zm0 0c1.6-1.2 2-3 2-5-2 .8-3.6 2.6-2 5Z"/></svg></span>
+      <div><h3>A Mesa</h3><p>O retorno à essência</p></div>
+    </div>
+    <p class="lead rv">O tempero que faltava à sua mesa. Sementes da verdade dentro dos lares, com um tempero essencial para cada dia.</p>
+    <dl class="facts rv">
+      <div><dt>O que é</dt><dd>Temperos em frasco de vidro com tampa de cortiça. Cada frasco tem um tema e traz rolinhos de papel: Palavra, Amor, Identidade, Alegria, Coragem e Paz.</dd></div>
+      <div><dt>Como comprar</dt><dd>Por unidade ou em combo: caixa com 3 temperos. Você pode escolher os seus e montar o combo.</dd></div>
+      <div><dt>Valores</dt><dd>Unidade R$ 32,99 no pix ou R$ 34,99 no cartão. Combo R$ 84,99 no pix ou R$ 88,90 no cartão.</dd></div>
+      <div><dt>Entrega</dt><dd>Enviamos para todo o Brasil. Frete a consultar.</dd></div>
+    </dl>
+
+    <div class="tg">
+      <div class="tc rv"><img src="fotos/t1.jpg" alt="Tempero Palavra" loading="lazy"><div><b>Palavra</b><span>Abrir os olhos para as maravilhas de conhecer a Palavra.</span></div></div>
+      <div class="tc rv"><img src="fotos/t2.jpg" alt="Tempero Amor" loading="lazy"><div><b>Amor</b><span>Descobrir o Amor e entender que a falta já não faz parte da sua vida.</span></div></div>
+      <div class="tc rv"><img src="fotos/t3.jpg" alt="Tempero Identidade" loading="lazy"><div><b>Identidade</b><span>Descobrir quem você é e declarar as verdades sobre sua família.</span></div></div>
+      <div class="tc rv"><img src="fotos/t4.jpg" alt="Tempero Alegria" loading="lazy"><div><b>Alegria</b><span>Um novo olhar: há uma fonte de alegria, não importa o cenário.</span></div></div>
+      <div class="tc rv"><img src="fotos/t5.jpg" alt="Tempero Coragem" loading="lazy"><div><b>Coragem</b><span>Uma força maior que impede de desistir e impulsiona a avançar.</span></div></div>
+      <div class="tc rv"><img src="fotos/t6.jpg" alt="Tempero Paz" loading="lazy"><div><b>Paz</b><span>Paz além de uma mente agitada e preocupada.</span></div></div>
+    </div>
+
+    <div class="price rv"><div><b>R$ 32,99</b> <small>no pix</small></div><div><b>R$ 34,99</b> <small>no cartão</small></div><small style="width:100%">Valor da unidade · frete a consultar</small></div>
+
+    <div class="cb">
+      <div class="cc rv"><img src="fotos/k1.jpg" alt="Combo Minha Jornada" loading="lazy"><div><h4>Minha Jornada</h4><p>Caixa com 3 temperos: Palavra, Amor e Identidade. Conta um pouco do caminho de conhecimento do Pai Celestial.</p><p class="pr">R$ 84,99 no pix · R$ 88,90 no cartão</p><a class="btn sm" data-assist="mesa:minha" href="#">Quero este combo</a></div></div>
+      <div class="cc rv"><img src="fotos/k2.jpg" alt="Combo Essencial" loading="lazy"><div><h4>Essencial</h4><p>Caixa com 3 temperos: Coragem, Paz e Alegria. Para sustentar a missão depois da revelação.</p><p class="pr">R$ 84,99 no pix · R$ 88,90 no cartão</p><a class="btn sm" data-assist="mesa:essencial" href="#">Quero este combo</a></div></div>
+      <div class="cc you rv"><div><h4>Sua Jornada</h4><p>Escolha os seus temperos preferidos e monte o seu combo, conforme a sua necessidade e o desejo do seu coração. Caixa com 3 temperos.</p><p class="pr">R$ 84,99 no pix · R$ 88,90 no cartão</p><a class="btn sm" data-assist="mesa:sua" href="#">Quero montar o meu</a></div></div>
+    </div>
+    <a class="btn alt rv" href="https://drive.google.com/file/d/11G36T6jzzzPa3Hr1Cj8chbbQ3oyxst73/view?usp=sharing" target="_blank" rel="noopener">Ver o catálogo completo</a>
+    <p class="note rv">Enviamos para todo o Brasil.</p>
+  </section>
+
+  <!-- A ESSÊNCIA DO LAR -->
+  <section class="brand" id="lar">
+    <div class="bh rv">
+      <span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15 16 5l12 10"/><path d="M7 13v13h18V13"/><path d="M16 24c-3 0-4.6-1.8-4.6-4.2 0-2.2 2-3.6 3-5.2.4-.7.8-1.4 1.6-2 .8.6 1.2 1.3 1.6 2 1 1.6 3 3 3 5.2 0 2.4-1.6 4.2-4.6 4.2Z"/></svg></span>
+      <div><h3>A Essência do Lar</h3><p>Aromas e itens de decoração · @aessencia_dolar</p></div>
+    </div>
+    <p class="lead rv">Toda casa conta uma história. Transformando cada canto com aromas e detalhes que acolhem.</p>
+    <dl class="facts rv">
+      <div><dt>O que é</dt><dd>Aromas e itens de decoração para a casa.</dd></div>
+      <div><dt>Produtos</dt><dd>Linha de aromas, Home Spray, difusores de varetas, abajures e arranjos.</dd></div>
+      <div><dt>Como comprar</dt><dd>Consulte valores e disponibilidade pelo WhatsApp ou pelo Instagram.</dd></div>
+    </dl>
+    <div class="list">
+      <div class="li rv"><i></i><div><b>Linha de aromas</b><span>Aromas para a casa, com a linha Home Spray em destaque.</span></div></div>
+      <div class="li rv"><i></i><div><b>Difusores e aromas para acolher</b><span>Difusores de varetas para deixar cada ambiente com a sua história.</span></div></div>
+      <div class="li rv"><i></i><div><b>Decoração e luz âmbar</b><span>Abajures, arranjos e detalhes que aquecem o lar.</span></div></div>
+    </div>
+    <a class="btn rv" href="https://www.instagram.com/aessencia_dolar/" target="_blank" rel="noopener">Ver no Instagram @aessencia_dolar</a>
+    <a class="btn alt rv" data-assist="lar" href="#">Pedir ou tirar dúvidas</a>
+    <p class="note rv">Fundadoras: @may_smore e @iranetecristiano</p>
+  </section>
+
+  <!-- AFETOQABRAÇA -->
+  <section class="brand" id="afeto">
+    <div class="bh rv">
+      <span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="12" width="22" height="15" rx="2"/><path d="M4 12h24v-3a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v3Z"/><path d="M16 8v19"/><path d="M16 8c-2-4-7-4-7-1.6C9 8.4 12 8 16 8Zm0 0c2-4 7-4 7-1.6C23 8.4 20 8 16 8Z"/></svg></span>
+      <div><h3>AfetoQabraça<span class="badge">Novidade</span></h3><p>Presentes com significado · @afetoqabraca</p></div>
+    </div>
+    <p class="lead rv">Muito mais que um presente, um ato de amor profético. Um novo jeito de abençoar quem você ama.</p>
+    <dl class="facts rv">
+      <div><dt>O que é</dt><dd>Presentes com significado: caixas e kits com mensagens e aromas para cultivar o coração.</dd></div>
+      <div><dt>Linhas</dt><dd>Semeando na vida dos filhos, Cultivando o Jardim e Um aroma para acolher.</dd></div>
+      <div><dt>Como comprar</dt><dd>Consulte valores e disponibilidade pelo WhatsApp ou pelo Instagram.</dd></div>
+    </dl>
+    <div class="list">
+      <div class="li rv"><i></i><div><b>Semeando na vida dos filhos</b><span>Presentes para cultivar fé, amor e propósito desde cedo.</span></div></div>
+      <div class="li rv"><i></i><div><b>Cultivando o Jardim</b><span>Caixa com 180 mensagens para cultivar o seu coração.</span></div></div>
+      <div class="li rv"><i></i><div><b>Um aroma para acolher</b><span>Aroma com 60 mensagens para cultivar o coração.</span></div></div>
+    </div>
+    <a class="btn rv" href="https://www.instagram.com/afetoqabraca/" target="_blank" rel="noopener">Ver no Instagram @afetoqabraca</a>
+    <a class="btn alt rv" data-assist="afeto" href="#">Pedir ou tirar dúvidas</a>
+  </section>
+
+  <!-- OFICINA -->
+  <section class="brand" id="oficina">
+    <div class="bh rv">
+      <span class="ic"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4h14c0 7-2 10-7 10S9 11 9 4Z"/><path d="M16 14v10"/><path d="M11 28h10"/><path d="M12 8c2 1 6 1 8 0"/></svg></span>
+      <div><h3>Oficina de pintura na taça</h3><p>Um encontro para criar e se presentear</p></div>
+    </div>
+    <dl class="facts rv">
+      <div><dt>O que é</dt><dd>Oficina de pintura na taça, feita em encontros.</dd></div>
+      <div><dt>Como participar</dt><dd>Peça as datas e as vagas da próxima turma pelo WhatsApp.</dd></div>
+    </dl>
+    <a class="btn rv" data-assist="oficina" href="#">Quero saber da próxima oficina</a>
+  </section>
+
+  <!-- VIDEOS -->
+  <section class="brand" id="videos">
+    <div class="sec rv" style="margin-top:0">Canal no YouTube</div>
+    <div class="sech rv">Na Mesa com a May</div>
+    <div class="vg">
+      <a class="vc rv" href="https://www.youtube.com/watch?v=YCEdbXWz5OM" target="_blank" rel="noopener"><img src="fotos/y3.jpg" alt="" loading="lazy"><div><b>#3 De volta à sua essência</b><span>Assistir no YouTube</span></div></a>
+      <a class="vc rv" href="https://www.youtube.com/watch?v=lIKp7dEYBaI" target="_blank" rel="noopener"><img src="fotos/y2.jpg" alt="" loading="lazy"><div><b>#2 Reconheça que a presença é suficiente</b><span>Assistir no YouTube</span></div></a>
+    </div>
+    <a class="btn alt rv" href="https://www.youtube.com/@Maynamesa?sub_confirmation=1" target="_blank" rel="noopener">Inscrever-se no canal</a>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about rv">
+    <p>Olá, meu nome é Mayana, mas você pode me chamar de May. Sou idealizadora de uma marca muito especial: A Mesa, o Retorno à Essência.</p>
+    <small>Idealizadora da A Mesa · Fundadora da A Essência do Lar</small>
+  </section>
+
+  <!-- HOW TO ORDER -->
+  <section class="brand" id="pedir">
+    <div class="sec rv" style="margin-top:0">Passo a passo</div>
+    <div class="sech rv">Como pedir</div>
+    <div class="steps">
+      <div class="st rv"><div><b>Escolha</b><span>Veja os temperos e os combos, ou chame para tirar dúvidas sobre qualquer produto.</span></div></div>
+      <div class="st rv"><div><b>Use o atendimento</b><span>Responda as perguntas: o atendimento monta o pedido e leva a mensagem pronta para o WhatsApp da May.</span></div></div>
+      <div class="st rv"><div><b>Confirme valor e frete</b><span>Pagamento por pix ou cartão. O frete é combinado conforme o seu endereço.</span></div></div>
+      <div class="st rv"><div><b>Receba em casa</b><span>Enviamos para todo o Brasil.</span></div></div>
+    </div>
+    <a class="btn rv" data-assist="inicio" href="#">Fazer meu pedido agora</a>
+  </section>
+
+  <!-- FAQ -->
+  <section class="brand" id="faq">
+    <div class="sec rv" style="margin-top:0">Dúvidas</div>
+    <div class="sech rv">Perguntas frequentes</div>
+    <div class="faq rv">
+      <details><summary>Como faço o pedido?</summary><p>Pelo atendimento desta página, que deixa o pedido pronto no WhatsApp (11) 94352-5384. Você também pode chamar a May direto.</p></details>
+      <details><summary>Quais as formas de pagamento?</summary><p>Pix e cartão. Unidade: R$ 32,99 no pix ou R$ 34,99 no cartão. Combo de 3 temperos: R$ 84,99 no pix ou R$ 88,90 no cartão.</p></details>
+      <details><summary>Vocês enviam para todo o Brasil?</summary><p>Sim. O valor do frete é consultado conforme o seu endereço.</p></details>
+      <details><summary>Posso montar o meu combo?</summary><p>Pode. No combo Sua Jornada você escolhe os 3 temperos que preferir, conforme a sua necessidade e o desejo do seu coração.</p></details>
+      <details><summary>Quais são os temperos?</summary><p>Palavra, Amor, Identidade, Alegria, Coragem e Paz. Os combos prontos são Minha Jornada (Palavra, Amor e Identidade) e Essencial (Coragem, Paz e Alegria).</p></details>
+      <details><summary>E os aromas, os presentes e a oficina?</summary><p>Fale com a May pelo WhatsApp ou pelo Instagram para saber valores, disponibilidade e as datas da próxima oficina.</p></details>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="ct rv" id="contato">
+    <h3>Fale com a May</h3>
+    <ul>
+      <li><a data-wa="Olá, Mayana! Vim pela sua bio." target="_blank" rel="noopener" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>(11) 94352-5384</a></li>
+      <li><a href="mailto:amesaretornoessencia@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>amesaretornoessencia@gmail.com</a></li>
+      <li><a href="https://www.instagram.com/may_smore/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>@may_smore</a></li>
+    </ul>
+    <p class="note">Enviamos para todo o Brasil.</p>
+  </section>
+
+  <div class="quote rv"><p>Levar sementes da verdade para dentro de lares, trazendo um tempero essencial para as suas mesas.</p><small>A Mesa · Nossa missão</small></div>
+
+  <footer>Mayana Moreira · A Mesa · A Essência do Lar · AfetoQabraça<br>Desenvolvido por <a href="https://caroimage.com/bio" target="_blank" rel="noopener">CA.RO TECH GROUP</a></footer>
+</main>
+
+<button class="fab" id="fab" type="button" data-assist="inicio" aria-label="Abrir o atendimento da May">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg>Atendimento
+</button>
+
+<div class="as" id="as" role="dialog" aria-modal="true" aria-label="Atendimento da May">
+  <div class="as-m">
+    <div class="as-h">
+      <img src="logo.jpg" alt="">
+      <div class="t"><b>Atendimento da May</b><span>Seu pedido pronto no WhatsApp</span></div>
+      <button class="as-x" id="as-x" type="button" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="as-b" id="as-b"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var WA = '5511943525384';
+  var wa = function(t){ return 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t); };
+  var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
+  var WAI = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg>';
+
+  /* every WhatsApp button carries its own ready message */
+  document.querySelectorAll('[data-wa]').forEach(function(a){ a.href = wa(a.getAttribute('data-wa')); });
+
+  /* marquee: all brands interleaved (Mesa, Lar, Afeto), w = image width at 600px height */
+  var BR = {m:['A Mesa','#mesa'], l:['A Essência do Lar','#lar'], a:['AfetoQabraça','#afeto']};
+  var P = [['c01',450,'m'],['c02',338,'l'],['c03',338,'a'],['c04',450,'m'],['c05',480,'l'],['c06',338,'a'],
+           ['c07',450,'m'],['c08',338,'l'],['c09',600,'a'],['c10',450,'m'],['c11',337,'l'],['c12',600,'a'],
+           ['c13',450,'m'],['c14',338,'l'],['c15',480,'a'],['c16',450,'m'],['c17',338,'l'],['c18',600,'a']];
+  var track = document.getElementById('track'), html = '';
+  P.forEach(function(p){
+    html += '<a class="ph" href="' + BR[p[2]][1] + '" style="width:' + Math.round(p[1] * 290 / 600) + 'px"><img src="fotos/' + p[0] + '.jpg" width="' + p[1] + '" height="600" alt="' + BR[p[2]][0] + '" loading="lazy"><span>' + BR[p[2]][0] + '</span></a>';
+  });
+  track.innerHTML = html + html.replace(/ loading="lazy"/g, '').replace(/<a class="ph"/g, '<a aria-hidden="true" tabindex="-1" class="ph"');
+  var marq = document.getElementById('marq');
+  ['touchstart','mouseenter'].forEach(function(e){ marq.addEventListener(e, function(){ marq.classList.add('paused'); }, {passive:true}); });
+  ['touchend','touchcancel','mouseleave'].forEach(function(e){ marq.addEventListener(e, function(){ marq.classList.remove('paused'); }, {passive:true}); });
+
+  /* ================= self-service assistant ================= */
+  var ov = document.getElementById('as'), bd = document.getElementById('as-b');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var money = function(v){ return 'R$ ' + v.toFixed(2).replace('.', ','); };
+  var TEMP = ['Palavra','Amor','Identidade','Alegria','Coragem','Paz'];
+  var PRICE = {u:[32.99, 34.99], c:[84.99, 88.90]};
+  var S = {}, token = 0;
+
+  function scroll(){ bd.scrollTop = bd.scrollHeight; }
+  function el(tag, cls, txt){ var e = document.createElement(tag); if(cls) e.className = cls; if(txt != null) e.textContent = txt; return e; }
+  function say(text, next){
+    var my = token, b = el('div', 'bb bot'); b.innerHTML = '<span class="dots"><i></i><i></i><i></i></span>'; bd.appendChild(b); scroll();
+    setTimeout(function(){ if(my !== token) return; b.textContent = text; scroll(); if(next) next(); }, reduced ? 0 : 480);
+  }
+  function me(text){ bd.appendChild(el('div', 'bb me', text)); scroll(); }
+  function opts(q, list, cb){            /* single choice: list = [[value,label],...] */
+    say(q, function(){
+      var box = el('div', 'ops');
+      list.forEach(function(it){
+        var o = el('button', 'op', it[1]); o.type = 'button';
+        o.onclick = function(){ box.remove(); me(it[1]); cb(it[0], it[1]); };
+        box.appendChild(o);
+      });
+      bd.appendChild(box); scroll();
+    });
+  }
+  function multi(q, list, min, max, cb){ /* multiple choice, list = [labels] */
+    say(q, function(){
+      var box = el('div', 'ops'), chosen = [], go = el('button', 'op go', 'Continuar'); go.type = 'button'; go.disabled = true;
+      var hint = el('div', 'hint', min === max ? 'Escolha ' + min + '.' : 'Pode escolher mais de um.');
+      list.forEach(function(name){
+        var o = el('button', 'op', name); o.type = 'button'; o.setAttribute('aria-pressed', 'false');
+        o.onclick = function(){
+          var i = chosen.indexOf(name);
+          if(i >= 0){ chosen.splice(i, 1); o.setAttribute('aria-pressed', 'false'); }
+          else if(chosen.length < max){ chosen.push(name); o.setAttribute('aria-pressed', 'true'); }
+          go.disabled = chosen.length < min;
+          go.textContent = 'Continuar' + (chosen.length ? ' (' + chosen.length + ')' : '');
+        };
+        box.appendChild(o);
+      });
+      box.appendChild(hint); box.appendChild(go);
+      go.onclick = function(){ if(go.disabled) return; box.remove(); me(chosen.join(', ')); cb(chosen.slice()); };
+      bd.appendChild(box); scroll();
+    });
+  }
+  function ask(q, ph, area, cb){
+    say(q, function(){
+      var f = el('form', 'fm'), inp = el(area ? 'textarea' : 'input'); inp.placeholder = ph; inp.maxLength = 300;
+      if(!area){ inp.type = 'text'; inp.autocomplete = 'off'; }
+      var er = el('div', 'err'); er.hidden = true;
+      var go = el('button', 'op go', 'Continuar'); go.type = 'submit';
+      f.appendChild(inp); f.appendChild(er); f.appendChild(go);
+      f.onsubmit = function(e){ e.preventDefault(); var v = inp.value.trim(); if(v.length < 2){ er.textContent = 'Escreva um pouquinho mais para eu entender.'; er.hidden = false; return; } f.remove(); me(v); cb(v); };
+      bd.appendChild(f); scroll(); if(!reduced) setTimeout(function(){ try{ inp.focus({preventScroll:true}); }catch(e){} }, 60);
+    });
+  }
+
+  /* ---- final: summary + WhatsApp link ---- */
+  function finish(rows, total){
+    var pr = rows[0][1], intro = pr === 'Outro' ? 'Olá, May! Vim pela sua bio e tenho uma dúvida:' : /Oficina/.test(pr) ? 'Olá, May! Vim pela sua bio e quero saber da oficina de pintura na taça:' : 'Olá, May! Vim pela sua bio e quero fazer um pedido:';
+    var lines = [intro];
+    rows.forEach(function(r){ lines.push('• ' + r[0] + ': ' + r[1]); });
+    if(total) lines.push('• Total (sem frete): ' + money(total));
+    lines.push(pr === 'Outro' ? 'Aguardo o seu retorno. Obrigada!' : 'Pode me confirmar? Obrigada!');
+    say('Pronto, ' + (S.name || '') + '! Deixei tudo pronto. Confira e toque no botão para enviar no WhatsApp da May.', function(){
+      var box = el('div', 'sum'), h = el('h5', null, 'Resumo do pedido'); box.appendChild(h);
+      rows.forEach(function(r){ var d = el('div'); d.appendChild(el('b', null, r[0])); d.appendChild(el('span', null, r[1])); box.appendChild(d); });
+      if(total){ var t = el('div', 'tot'); t.appendChild(el('span', null, 'Total sem frete: ' + money(total))); box.appendChild(t); }
+      bd.appendChild(box);
+      var a = el('a', 'wa-go'); a.href = wa(lines.join('\n')); a.target = '_blank'; a.rel = 'noopener';
+      a.innerHTML = WAI + 'Enviar para o WhatsApp da May'; bd.appendChild(a);
+      var r = el('button', 're', 'Recomeçar'); r.type = 'button'; r.onclick = function(){ begin(); }; bd.appendChild(r);
+      scroll();
+    });
+  }
+  function askName(rows, total){ ask('E como posso te chamar?', 'Seu nome', false, function(v){ S.name = v; rows.push(['Nome', v]); finish(rows, total); }); }
+
+  /* ---- A Mesa (temperos) ---- */
+  function mesa(preset){
+    var rows = [['Produto', 'A Mesa · temperos']];
+    function boxes(sel, label){
+      opts('Quantas caixas (cada caixa tem 3 temperos)?', [[1,'1 caixa'],[2,'2 caixas'],[3,'3 caixas'],[4,'4 caixas']], function(n){
+        S.n = n; rows.push(['Combo', label]); rows.push(['Temperos', sel.join(', ')]); rows.push(['Caixas', String(n)]);
+        pay(false, n);
+      });
+    }
+    function pay(unit, qty){
+      opts('Como prefere pagar?', [[0,'Pix'],[1,'Cartão']], function(i, lab){
+        var total = (unit ? PRICE.u[i] : PRICE.c[i]) * qty;
+        rows.push(['Pagamento', lab]);
+        say('Perfeito! No ' + lab.toLowerCase() + ' o total fica ' + money(total) + ', sem o frete. A May confirma o frete para o seu endereço.', function(){
+          opts('É para presente?', [['Sim, é presente','Sim, é presente'],['Não, é para mim','Não, é para mim']], function(v){
+            rows.push(['Presente', v]);
+            ask('Para qual cidade e estado enviamos?', 'Ex.: Campinas, SP', false, function(c){ rows.push(['Entrega', c]); askName(rows, total); });
+          });
+        });
+      });
+    }
+    function tipo(t){
+      if(t === 'u'){
+        multi('Quais temperos você quer?', TEMP, 1, 6, function(sel){
+          opts('Quantas unidades de cada um?', [[1,'1'],[2,'2'],[3,'3'],[4,'4']], function(n){
+            var units = sel.length * n; rows.push(['Tipo', 'Unidade']); rows.push(['Temperos', sel.join(', ') + ' (' + n + ' de cada)']); rows.push(['Unidades', String(units)]);
+            pay(true, units);
+          });
+        });
+      } else if(t === 'sua'){
+        multi('Escolha os 3 temperos do seu combo.', TEMP, 3, 3, function(sel){ boxes(sel, 'Sua Jornada (montado por mim)'); });
+      } else if(t === 'minha'){ boxes(['Palavra','Amor','Identidade'], 'Minha Jornada'); }
+      else { boxes(['Coragem','Paz','Alegria'], 'Essencial'); }
+    }
+    if(preset) return tipo(preset);
+    opts('Como você quer levar os temperos?', [['u','Por unidade (escolho quais)'],['minha','Combo Minha Jornada: Palavra, Amor e Identidade'],['essencial','Combo Essencial: Coragem, Paz e Alegria'],['sua','Montar o meu combo (Sua Jornada)']], tipo);
+  }
+
+  /* ---- A Essência do Lar ---- */
+  function lar(){
+    var rows = [['Produto', 'A Essência do Lar']];
+    multi('O que você procura?', ['Home Spray','Difusor de varetas','Abajur e decoração','Linha de aromas completa','Ainda não sei'], 1, 5, function(sel){
+      rows.push(['Interesse', sel.join(', ')]);
+      opts('Para qual espaço?', [['Sala','Sala'],['Quarto','Quarto'],['Cozinha e jantar','Cozinha e jantar'],['Escritório ou empresa','Escritório ou empresa'],['Presente','É para presente']], function(v){
+        rows.push(['Espaço', v]); askName(rows, 0);
+      });
+    });
+  }
+
+  /* ---- AfetoQabraça ---- */
+  function afeto(){
+    var rows = [['Produto', 'AfetoQabraça · presentes']];
+    opts('Para quem é o presente?', [['Filhos','Filhos'],['Marido ou esposa','Marido ou esposa'],['Amiga','Amiga'],['Família','Família'],['Para mim','Para mim']], function(who){
+      rows.push(['Para', who]);
+      opts('Qual linha te interessa?', [['Semeando na vida dos filhos','Semeando na vida dos filhos'],['Cultivando o Jardim (180 mensagens)','Cultivando o Jardim (180 mensagens)'],['Um aroma para acolher (60 mensagens)','Um aroma para acolher (60 mensagens)'],['Quero uma sugestão','Quero uma sugestão']], function(line){
+        rows.push(['Linha', line]);
+        opts('Tem data marcada?', [['Aniversário','Aniversário'],['Data especial','Outra data especial'],['Sem data','Sem data']], function(d){ rows.push(['Ocasião', d]); askName(rows, 0); });
+      });
+    });
+  }
+
+  /* ---- Oficina ---- */
+  function oficina(){
+    var rows = [['Produto', 'Oficina de pintura na taça']];
+    opts('Quantas pessoas vão?', [['Só eu','Só eu'],['2 pessoas','2 pessoas'],['3 a 5 pessoas','3 a 5 pessoas'],['Grupo maior','Grupo maior']], function(n){
+      rows.push(['Pessoas', n]);
+      opts('Qual período prefere?', [['Dia de semana','Dia de semana'],['Fim de semana','Fim de semana'],['Tanto faz','Tanto faz']], function(per){ rows.push(['Período', per]); askName(rows, 0); });
+    });
+  }
+
+  /* ---- Outro assunto ---- */
+  function outro(){
+    var rows = [['Assunto', 'Outro']];
+    ask('Escreva a sua dúvida ou o que você procura.', 'Digite aqui', true, function(t){ rows.push(['Mensagem', t]); askName(rows, 0); });
+  }
+
+  function route(k, preset){ ({mesa:mesa, lar:lar, afeto:afeto, oficina:oficina, outro:outro})[k](preset); }
+  function begin(branch, preset){
+    token++; S = {}; bd.innerHTML = ''; ov.classList.add('open'); document.body.style.overflow = 'hidden';
+    if(branch && branch !== 'inicio'){
+      say('Oi! Eu sou a assistente da May 🌿 Vou deixar o seu pedido pronto no WhatsApp.', function(){ route(branch, preset); });
+    } else {
+      say('Oi! Eu sou a assistente da May 🌿 Em poucos toques deixo o seu pedido pronto no WhatsApp.', function(){
+        opts('O que você procura hoje?', [['mesa','Temperos para a mesa'],['lar','Aromas e decoração'],['afeto','Presente com significado'],['oficina','Oficina de pintura na taça'],['outro','Outro assunto']], function(k){ route(k); });
+      });
+    }
+  }
+  function close(){ token++; ov.classList.remove('open'); document.body.style.overflow = ''; }
+  document.querySelectorAll('[data-assist]').forEach(function(a){
+    a.addEventListener('click', function(e){ e.preventDefault(); var v = a.getAttribute('data-assist').split(':'); begin(v[0], v[1]); });
+  });
+  document.getElementById('as-x').addEventListener('click', close);
+  ov.addEventListener('click', function(e){ if(e.target === ov) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && ov.classList.contains('open')) close(); });
+
+  /* highlight the current section in the sticky nav */
+  var links = {}; document.querySelectorAll('#nav a').forEach(function(a){ links[a.getAttribute('href').slice(1)] = a; });
+  var sio = new IntersectionObserver(function(es){ es.forEach(function(e){ if(!e.isIntersecting) return;
+    Object.keys(links).forEach(function(k){ links[k].classList.toggle('on', k === e.target.id); });
+    var a = links[e.target.id]; if(a && a.scrollIntoView){ var box = a.parentNode; box.scrollTo({left: a.offsetLeft - 20, behavior:'smooth'}); }
+  }); }, {rootMargin:'-35% 0px -55% 0px'});
+  Object.keys(links).forEach(function(k){ var el = document.getElementById(k); if(el) sio.observe(el); });
+
+  /* reveal on scroll */
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } }); }, {threshold:.1});
+  document.querySelectorAll('.rv').forEach(function(el, i){ el.style.transitionDelay = Math.min((i % 4) * 70, 210) + 'ms'; io.observe(el); });
+})();
+</script>
+</body>
+</html>
