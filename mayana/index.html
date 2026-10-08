@@ -450,6 +450,49 @@ section[id]{scroll-margin-top:70px}
   var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
   var WAI = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Z"/></svg>';
 
+  /* ---------- painel CA.RO (cliente: mayana): visitas, cliques e pedidos do atendimento ---------- */
+  var PAINEL = 'https://caro-painel.vercel.app', CLIENT = 'mayana';
+  function beacon(path, data){
+    var payload = JSON.stringify(data);
+    try{ if(navigator.sendBeacon && navigator.sendBeacon(PAINEL + path, new Blob([payload], {type:'text/plain'}))) return; }catch(e){}
+    fetch(PAINEL + path, {method:'POST', body:payload, mode:'no-cors', keepalive:true}).catch(function(){});
+  }
+  var trackCtx = (function(){
+    var params = new URLSearchParams(location.search), off = false, vid = '';
+    try{
+      if(params.has('naocontar')) localStorage.setItem('caro_notrack', '1');
+      if(params.has('contar')) localStorage.removeItem('caro_notrack');
+      off = localStorage.getItem('caro_notrack') === '1';
+      vid = localStorage.getItem('caro_vid') || '';
+      if(!vid){ vid = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('caro_vid', vid); }
+    }catch(e){ vid = 'anon-' + Math.random().toString(36).slice(2); }
+    var refHost = ''; try{ refHost = document.referrer ? new URL(document.referrer).hostname : ''; }catch(e){}
+    var hint = ((params.get('utm_source') || '') + ' ' + refHost + ' ' + navigator.userAgent).toLowerCase();
+    var source =
+      /instagram/.test(hint) ? 'instagram' :
+      /tiktok|bytedance|musical_ly/.test(hint) ? 'tiktok' :
+      /whatsapp|wa\.me/.test(hint) ? 'whatsapp' :
+      /facebook|fban|fbav|fb_iab|fb\.me/.test(hint) ? 'facebook' :
+      /youtube|youtu\.be/.test(hint) ? 'youtube' :
+      /google\./.test(hint) ? 'google' :
+      /caroimage/.test(refHost) ? 'site' :
+      refHost ? 'outro' : 'direto';
+    return {off:off, visitor:vid, source:source, campaign:(params.get('origem') || params.get('utm_campaign') || '').slice(0, 60), device:/mobi|android|iphone|ipad/i.test(navigator.userAgent) ? 'mobile' : 'desktop'};
+  })();
+  function track(type, target){
+    if(trackCtx.off) return;
+    beacon('/api/track', {client:CLIENT, page:'bio', type:type, target:target || '', visitor:trackCtx.visitor, source:trackCtx.source, campaign:trackCtx.campaign, device:trackCtx.device});
+  }
+  track('view');
+  document.addEventListener('click', function(e){
+    var el = e.target && e.target.closest ? e.target.closest('a, button, [role="button"]') : null;
+    if(!el || el.closest('#as')) return;
+    var head = el.querySelector('b, strong, h2, h3');
+    var label = el.getAttribute('data-track') || el.getAttribute('aria-label') || (head ? head.textContent : el.textContent || '').replace(/\s+/g, ' ').trim();
+    if(!label && el.href) label = el.href;
+    if(label) track('click', label.slice(0, 60));
+  }, true);
+
   /* every WhatsApp button carries its own ready message */
   document.querySelectorAll('[data-wa]').forEach(function(a){ a.href = wa(a.getAttribute('data-wa')); });
 
@@ -532,13 +575,17 @@ section[id]{scroll-margin-top:70px}
     rows.forEach(function(r){ lines.push('• ' + r[0] + ': ' + r[1]); });
     if(total) lines.push('• Total (sem frete): ' + money(total));
     lines.push(pr === 'Outro' ? 'Aguardo o seu retorno. Obrigada!' : 'Pode me confirmar? Obrigada!');
+    /* o pedido é gravado no painel assim que o resumo fica pronto, mesmo que a pessoa não envie a mensagem */
+    var qgoal = ''; rows.forEach(function(r){ if(!qgoal && /^(Combo|Tipo|Interesse|Linha|Pessoas|Assunto)$/.test(r[0])) qgoal = r[1]; });
+    beacon('/api/leads', {origin:'Chat Bio', client:CLIENT, name:S.name || 'Visitante', company:pr, contact:'', message:lines.join('\n'), quiz:{profile:pr, goal:qgoal, timeframe:''}, website:''});
+    track('click', 'Chat dados enviados');
     say('Pronto, ' + (S.name || '') + '! Deixei tudo pronto. Confira e toque no botão para enviar no WhatsApp da May.', function(){
       var box = el('div', 'sum'), h = el('h5', null, 'Resumo do pedido'); box.appendChild(h);
       rows.forEach(function(r){ var d = el('div'); d.appendChild(el('b', null, r[0])); d.appendChild(el('span', null, r[1])); box.appendChild(d); });
       if(total){ var t = el('div', 'tot'); t.appendChild(el('span', null, 'Total sem frete: ' + money(total))); box.appendChild(t); }
       bd.appendChild(box);
       var a = el('a', 'wa-go'); a.href = wa(lines.join('\n')); a.target = '_blank'; a.rel = 'noopener';
-      a.innerHTML = WAI + 'Enviar para o WhatsApp da May'; bd.appendChild(a);
+      a.innerHTML = WAI + 'Enviar para o WhatsApp da May'; a.addEventListener('click', function(){ track('click', 'Chat concluído'); }); bd.appendChild(a);
       var r = el('button', 're', 'Recomeçar'); r.type = 'button'; r.onclick = function(){ begin(); }; bd.appendChild(r);
       scroll();
     });
@@ -624,6 +671,7 @@ section[id]{scroll-margin-top:70px}
   function route(k, preset){ ({mesa:mesa, lar:lar, afeto:afeto, oficina:oficina, outro:outro})[k](preset); }
   function begin(branch, preset){
     token++; S = {}; bd.innerHTML = ''; ov.classList.add('open'); document.body.style.overflow = 'hidden';
+    track('click', 'Chat aberto');
     if(branch && branch !== 'inicio'){
       say('Oi! Eu sou a assistente da May 🌿 Vou deixar o seu pedido pronto no WhatsApp.', function(){ route(branch, preset); });
     } else {

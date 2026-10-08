@@ -371,6 +371,49 @@ footer a{color:var(--ice-2)}
 (function(){
   var WA_NUMBER = '5511930723036'; // WhatsApp oficial da BG Odontologia (mesmo do cartão de agendamento)
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- painel CA.RO (cliente: drbruno): só visitas e cliques anônimos, SEM nome, telefone ou tratamento de pessoas ---------- */
+  var PAINEL = 'https://caro-painel.vercel.app', CLIENT = 'drbruno';
+  function beacon(path, data){
+    var payload = JSON.stringify(data);
+    try{ if(navigator.sendBeacon && navigator.sendBeacon(PAINEL + path, new Blob([payload], {type:'text/plain'}))) return; }catch(e){}
+    fetch(PAINEL + path, {method:'POST', body:payload, mode:'no-cors', keepalive:true}).catch(function(){});
+  }
+  var trackCtx = (function(){
+    var params = new URLSearchParams(location.search), off = false, vid = '';
+    try{
+      if(params.has('naocontar')) localStorage.setItem('caro_notrack', '1');
+      if(params.has('contar')) localStorage.removeItem('caro_notrack');
+      off = localStorage.getItem('caro_notrack') === '1';
+      vid = localStorage.getItem('caro_vid') || '';
+      if(!vid){ vid = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('caro_vid', vid); }
+    }catch(e){ vid = 'anon-' + Math.random().toString(36).slice(2); }
+    var refHost = ''; try{ refHost = document.referrer ? new URL(document.referrer).hostname : ''; }catch(e){}
+    var hint = ((params.get('utm_source') || '') + ' ' + refHost + ' ' + navigator.userAgent).toLowerCase();
+    var source =
+      /instagram/.test(hint) ? 'instagram' :
+      /tiktok|bytedance|musical_ly/.test(hint) ? 'tiktok' :
+      /whatsapp|wa\.me/.test(hint) ? 'whatsapp' :
+      /facebook|fban|fbav|fb_iab|fb\.me/.test(hint) ? 'facebook' :
+      /youtube|youtu\.be/.test(hint) ? 'youtube' :
+      /google\./.test(hint) ? 'google' :
+      /caroimage/.test(refHost) ? 'site' :
+      refHost ? 'outro' : 'direto';
+    return {off:off, visitor:vid, source:source, campaign:(params.get('origem') || params.get('utm_campaign') || '').slice(0, 60), device:/mobi|android|iphone|ipad/i.test(navigator.userAgent) ? 'mobile' : 'desktop'};
+  })();
+  function track(type, target){
+    if(trackCtx.off) return;
+    beacon('/api/track', {client:CLIENT, page:'bio', type:type, target:target || '', visitor:trackCtx.visitor, source:trackCtx.source, campaign:trackCtx.campaign, device:trackCtx.device});
+  }
+  track('view');
+  document.addEventListener('click', function(e){
+    var el = e.target && e.target.closest ? e.target.closest('a, button, [role="button"]') : null;
+    if(!el || el.closest('#sheet')) return;
+    var head = el.querySelector('b, strong, h2, h3');
+    var label = el.getAttribute('data-track') || el.getAttribute('aria-label') || (head ? head.textContent : el.textContent || '').replace(/\s+/g, ' ').trim();
+    if(!label && el.href) label = el.href;
+    if(label) track('click', label.slice(0, 60));
+  }, true);
   function $(id){ return document.getElementById(id); }
   function esc(v){ return String(v).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   var TOOTH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3c-2.2 0-4 1.8-4 4.5 0 3 1.3 4.3 1.8 7 .5 2.9 1 6.5 2.7 6.5 1.6 0 1.6-4.5 4.5-4.5s2.9 4.5 4.5 4.5c1.7 0 2.2-3.6 2.7-6.5.5-2.7 1.8-4 1.8-7C21 4.8 19.2 3 17 3c-1.8 0-3 1-5 1S8.8 3 7 3z"/></svg>';
@@ -578,10 +621,13 @@ footer a{color:var(--ice-2)}
         var m = !n ? 'Informe seu nome.' : w.replace(/\D/g, '').length < 10 ? 'Informe um WhatsApp válido, com DDD.' : '';
         if(m){ err.textContent = m; err.hidden = false; return; }
         progress(STEPS.length + 1);
+        track('click', 'Chat dados enviados');
+        track('click', 'Tratamento: ' + (/^Outro/.test(answers.tratamento || '') ? 'Outro' : String(answers.tratamento || 'não informado').slice(0, 40)));
         var lines = ['Olá! Vim pela bio do Dr. Bruno e quero agendar uma avaliação.', 'Nome: ' + n, 'WhatsApp: ' + w];
         STEPS.forEach(function(s){ if(answers[s.key]) lines.push(s.label + ': ' + answers[s.key]); });
         var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
         f.remove(); bub(n + '\n' + w, 'u'); bub('Tudo certo! Abrindo o WhatsApp da clínica…', 'b');
+        track('click', 'Chat concluído');
         var win = window.open(url, '_blank'); if(win){ win.opener = null; } else { location.href = url; }
       });
       chat.appendChild(f); scroll(); f.nome.focus({preventScroll:true});
@@ -590,6 +636,7 @@ footer a{color:var(--ice-2)}
   function open(treat){
     answers = {}; if(treat) answers.tratamento = treat;
     chat.innerHTML = ''; sheet.classList.add('open'); document.body.style.overflow = 'hidden';
+    track('click', 'Chat aberto');
     if(treat) bub('Tenho interesse em: ' + treat, 'u');
     ask(0);
   }
