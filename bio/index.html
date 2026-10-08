@@ -398,6 +398,50 @@ footer a{color:var(--gold)}
   function esc(v){ return String(v).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
   var ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 
+  /* ---------- painel CA.RO: visitas, cliques e leads (nenhum dado pessoal nas visitas, só um id aleatório) ---------- */
+  var PAINEL = 'https://caro-painel.vercel.app';
+  function beacon(path, data){
+    var payload = JSON.stringify(data);
+    try{ if(navigator.sendBeacon && navigator.sendBeacon(PAINEL + path, new Blob([payload], {type:'text/plain'}))) return; }catch(e){}
+    fetch(PAINEL + path, {method:'POST', body:payload, mode:'no-cors', keepalive:true}).catch(function(){});
+  }
+  /* ?naocontar=1 deixa de contar este aparelho (visitas da própria equipe); ?contar=1 volta a contar */
+  var trackCtx = (function(){
+    var off = false, vid = '';
+    try{
+      if(params.has('naocontar')) localStorage.setItem('caro_notrack', '1');
+      if(params.has('contar')) localStorage.removeItem('caro_notrack');
+      off = localStorage.getItem('caro_notrack') === '1';
+      vid = localStorage.getItem('caro_vid') || '';
+      if(!vid){ vid = Math.random().toString(36).slice(2) + Date.now().toString(36); localStorage.setItem('caro_vid', vid); }
+    }catch(e){ vid = 'anon-' + Math.random().toString(36).slice(2); }
+    var refHost = ''; try{ refHost = document.referrer ? new URL(document.referrer).hostname : ''; }catch(e){}
+    var hint = ((params.get('utm_source') || '') + ' ' + refHost + ' ' + navigator.userAgent).toLowerCase();
+    var source =
+      /instagram/.test(hint) ? 'instagram' :
+      /tiktok|bytedance|musical_ly/.test(hint) ? 'tiktok' :
+      /whatsapp|wa\.me/.test(hint) ? 'whatsapp' :
+      /facebook|fban|fbav|fb_iab|fb\.me/.test(hint) ? 'facebook' :
+      /youtube|youtu\.be/.test(hint) ? 'youtube' :
+      /google\./.test(hint) ? 'google' :
+      /caroimage/.test(refHost) ? 'site' :
+      refHost ? 'outro' : 'direto';
+    return {off:off, visitor:vid, source:source, campaign:(params.get('origem') || params.get('utm_campaign') || '').slice(0, 60), device:/mobi|android|iphone|ipad/i.test(navigator.userAgent) ? 'mobile' : 'desktop'};
+  })();
+  function track(type, target){
+    if(trackCtx.off) return;
+    beacon('/api/track', {page:'bio', type:type, target:target || '', visitor:trackCtx.visitor, source:trackCtx.source, campaign:trackCtx.campaign, device:trackCtx.device});
+  }
+  track('view');
+  document.addEventListener('click', function(e){
+    var el = e.target && e.target.closest ? e.target.closest('a, button, [role="button"]') : null;
+    if(!el || el.closest('#sheet')) return;
+    var head = el.querySelector('b, strong, h2, h3');
+    var label = el.getAttribute('data-track') || el.getAttribute('aria-label') || (head ? head.textContent : el.textContent || '').replace(/\s+/g, ' ').trim();
+    if(!label && el.href) label = el.href;
+    if(label) track('click', label.slice(0, 60));
+  }, true);
+
   /* ---------- content ---------- */
   var SERVICES = [
     ['Arquitetura de marca', 'Identidade, posicionamento e narrativa'],
@@ -535,29 +579,43 @@ footer a{color:var(--gold)}
     bot('Perfeito. Deixa seu contato que já seguimos pelo WhatsApp:', function(){
       var f = document.createElement('form'); f.className = 'brief-form'; f.noValidate = true;
       f.innerHTML =
+        '<input name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">' +
         '<input name="nome" type="text" placeholder="Seu nome *" autocomplete="name" maxlength="120">' +
         '<input name="empresa" type="text" placeholder="Empresa ou @ do Instagram" autocomplete="organization" maxlength="120">' +
         '<input name="wa" type="tel" placeholder="WhatsApp com DDD *" autocomplete="tel" inputmode="tel" maxlength="30">' +
+        '<input name="email" type="email" placeholder="E-mail (opcional)" autocomplete="email" maxlength="160">' +
         '<input name="cupom" type="text" placeholder="Cupom (opcional)" maxlength="20" value="' + esc(couponFromUrl) + '">' +
         '<div class="err" hidden></div>' +
         '<button class="btn btn-wa" type="submit">Enviar e abrir WhatsApp</button>';
       var err = f.querySelector('.err');
       f.addEventListener('submit', function(e){
         e.preventDefault();
-        var nome = f.nome.value.trim(), emp = f.empresa.value.trim(), wa = f.wa.value.trim(), cup = f.cupom.value.trim().toUpperCase();
-        var msg = !nome ? 'Informe seu nome.' : wa.replace(/\D/g, '').length < 10 ? 'Informe um WhatsApp válido, com DDD.' : '';
+        var nome = f.nome.value.trim(), emp = f.empresa.value.trim(), wa = f.wa.value.trim(), mail = f.email.value.trim(), cup = f.cupom.value.trim().toUpperCase();
+        var digits = wa.replace(/\D/g, '');
+        var msg = !nome ? 'Informe seu nome.'
+          : /@/.test(nome) ? 'Aqui vai só o seu nome. O e-mail pode ir no campo abaixo.'
+          : /^[\d\s().+-]+$/.test(nome) ? 'Aqui vai o seu nome, não o número.'
+          : (digits.length < 10 || digits.length > 13) ? 'Informe um WhatsApp válido, com DDD.'
+          : (mail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)) ? 'Esse e-mail parece incompleto. Confira ou deixe em branco.'
+          : '';
         if(msg){ err.textContent = msg; err.hidden = false; return; }
         var lines = ['Olá, CA.RO! Vim pela bio e quero iniciar um projeto.', 'Nome: ' + nome];
         if(emp) lines.push('Empresa: ' + emp);
         lines.push('WhatsApp: ' + wa);
-        if(answers.perfil) lines.push('Perfil: ' + answers.perfil);
-        if(answers.necessidade) lines.push('Preciso de: ' + answers.necessidade);
-        if(answers.prazo) lines.push('Prazo: ' + answers.prazo);
+        if(mail) lines.push('E-mail: ' + mail);
+        lines.push('Segmento: ' + (answers.perfil || 'não informado'));
+        lines.push('Preciso de: ' + (answers.necessidade || 'não informado'));
+        lines.push('Prazo: ' + (answers.prazo || 'não informado'));
         if(cup) lines.push('Cupom: ' + cup);
+        /* o lead é gravado no painel ANTES de abrir o WhatsApp, então nunca se perde mesmo que a pessoa não envie a mensagem */
+        beacon('/api/leads', {origin:'Chat Bio', name:nome, company:emp, contact:wa, email:mail, message:lines.join('\n'),
+          quiz:{profile:answers.perfil || '', goal:answers.necessidade || '', timeframe:answers.prazo || ''}, website:f.website.value});
+        track('click', 'Chat dados enviados');
         var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lines.join('\n'));
         f.remove();
-        bubble([nome, emp, wa].filter(Boolean).join('\n'), 'me');
+        bubble([nome, emp, wa, mail].filter(Boolean).join('\n'), 'me');
         bubble('Tudo certo. Abrindo o WhatsApp…', 'bot');
+        track('click', 'Chat concluído');
         var win = window.open(url, '_blank');
         if(win){ win.opener = null; } else { window.location.href = url; }
       });
@@ -572,6 +630,7 @@ footer a{color:var(--gold)}
       if(/Clinic/.test(need)) answers.perfil = 'Saúde e estética';
     }
     chat.innerHTML = '';
+    track('click', 'Chat aberto');
     sheet.classList.add('open');
     document.body.style.overflow = 'hidden';
     if(need){ bubble('Tenho interesse em: ' + need, 'me'); }
